@@ -2,6 +2,10 @@
 #+author: Miguel Piña, Fernanda Sanchez
 #+date: [2016-08-11 jue 07:52]
 
+Facultad de Ciencias, UNAM.
+Licenciatura: Matemáticas aplicadas
+Materia: Taller de herramientas computacionales
+
 * Instructores
 
 - Profesora :: Fernanda Sanchez Puig
