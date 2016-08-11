@@ -2,6 +2,16 @@
 #+author: Miguel Piña, Fernanda Sanchez
 #+date: [2016-08-11 jue 07:52]
 
+* Instructores
+
+- Profesora :: Fernanda Sanchez Puig
+- Ayudante :: Miguel Angel Piña Avelino
+
+* Introducción
 
 Este repositorio contendrá las presentaciones realizadas en el taller de
 herramientas computacionales.
+
+* Presentaciones
+
+- [[file:introduccion/introduccion.org][Introducción a Python]]
