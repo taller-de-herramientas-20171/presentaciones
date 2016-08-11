@@ -1,0 +1,7 @@
+#+title: Presentaciones del taller de herramientas computacionales
+#+author: Miguel Piña, Fernanda Sanchez
+#+date: [2016-08-11 jue 07:52]
+
+
+Este repositorio contendrá las presentaciones realizadas en el taller de
+herramientas computacionales.
