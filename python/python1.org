@@ -1,1 +1,144 @@
+#-*- mode: org -*-
+
+* Qué es un programa?
+Un *Programa* es una secuencia de instrucciones escrita 
+en un lenguaje de programación que especifica cómo realizar una tarea.
+
+El programa sólo hará exactamente lo que le decimos que haga. 
+Un error en el programa, puede afectar su funcionamiento.
+
+Dos formas de usar un interprete:
+- Línea de comandos
+$ python
+
+>>> print (1 + 1)
+
+2
+
+- Script
+$ python facil.py
+
+2
+
+
+* Un primer programa
+
+Queremos crear un programa que calcule el movimiento vertical de una pelota lanzada en el aire.
+
+La fórmula para calcular el movimiento vertical de una pelota lanzada en el aire es:
+
+\[
+y(t) = v_0 t - \frac{1}{2}gt^2
+\]
+
+donde 
+- v_0 es la velocidad inicial
+
+- g es la gravedad
+
+- t es el tiempo
+
+Si elegimos:
+-  v_0 = 5
+
+- g = 9.81
+
+- t = 0.6
+
+La expresión puede ser evaluada en una fórmula de Python:
+#+BEGIN_SRC python
+print (5*0.6 - 0.5*9.81*0.6**2)
+#+END_SRC 
+
+
+* Usando Variables
+Supongamos que ahora cambiamos los valores de v_0 = 1  y t = 0.1.
+
+Esto es propenso al error, pero es fácil si expresamos 
+el programa en términos de símbolos en lugar de valores numéricos.
+
+Una *Variable* es un nombre que hace referencia a un valor.
+#+BEGIN_SRC python
+message =  "Hola"
+n = 17
+#+END_SRC
+
+
+** Nombrando de variables
+- Descriptivos
+- Arbitrariamente largos
+- Letras, números y guión bajo
+- Case sensitive
+
+#+BEGIN_SRC python
+initial_velocity = 5
+acceleration_of_gravity = 9.81
+TIME = 0.6
+VerticalPositionOfBall = initial_velocity*TIME - 0.5*acceleration_of_gravity*TIME**2
+print (VerticalPositionOfBall)
+#+END_SRC
+
+
+** Comentarios
+Escribir comentarios en lenguaje natural para explicar ideas no obvias detrás de enunciados importantes.
+
+- Qué significan los nombres de variables
+- Qué variables se usan
+- Las ideas generales de la estrategia de resolución de problemas en el código.
+- Los comentarios empiezan con  el caracter #
+
+#+BEGIN_SRC python
+# Program for computing the height of a ball in vertical motion.
+v0 = 5 # initial velocity
+g = 9.81 # acceleration of gravity
+t = 0.6 # time
+y = v0*t - 0.5*g*t**2 # vertical position
+print (y)
+#+END_SRC
+
+
+** Formato de números y texto
+#+BEGIN_SRC python
+print ("At t=%g s, the height of the ball is %.2f m." % (t, y))
+#+END_SRC
+
+- % : slots de variables
+- g : numeros reales
+- .2f : notación decimal, 2 dígitos
+- Comillas triples se usan para poner texto en varios renglones, equivalente a \n.
+
+#+BEGIN_SRC python
+print( """y(t) is
+the position of
+our ball."""
+)
+print ("y(t) is\n the position of\n our ball")
+#+END_SRC
+
+
+* Ejercicio
+Hacer un programa en el dada una determinada longitud en metros, 
+calcular y escribir la longitud correspondiente medido en pulgadas, en pies, en
+yardas, y en millas. 
+
+Una pulgada es 2.54 cm.
+
+Un pie es de 12 pulgadas
+
+Una yarda es 3 pies
+
+Una milla es de 1760 yardas. 
+
+Para la verificación: una longitud de 640 metros corresponde a 25196.85 pulgadas, 2099.74 pies, 699.91 yardas, o 0.3977 millas.
+
+
+* Ejercicio
+Supongamos que p es la tasa de interés de un banco en tanto por ciento por año. 
+Una cantidad inicial A ha crecido a
+
+\[ A (1 + \frac{p}{100})^n \]
+
+después de n años. 
+Hacer un programa para el cálculo de la cantidad de dinero de 1000 euros 
+que ha crecido después de tres años con una tasa de interés del 5 por ciento.
 
