@@ -38,11 +38,12 @@ lanzada en el aire.
 La fórmula para calcular el movimiento vertical de una pelota lanzada en el aire
 es:
 
-#+begin_src latex
+
 \[
 y(t) = v_0 t - \frac{1}{2}gt^2
 \]
-#+end_src
+
+[[file:ltxpng/python1_a93f2d9dedfbbb2a0791a432c4745d1ba851bce7.png]]
 
 donde
 - *v_0* es la velocidad inicial
@@ -145,9 +146,9 @@ pulgadas, 2099.74 pies, 699.91 yardas, o 0.3977 millas.
 Supongamos que p es la tasa de interés de un banco en tanto por ciento por año.
 Una cantidad inicial A ha crecido a
 
-#+begin_src latex
 \[ A (1 + \frac{p}{100})^n \]
-#+end_src
+
+[[file:ltxpng/python1_f29beb39f3e61562cb6477dfc2221aecaa50f9ca.png]]
 
 después de n años.
 Hacer un programa para el cálculo de la cantidad de dinero de 1000 euros
