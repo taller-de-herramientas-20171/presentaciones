@@ -1,63 +1,74 @@
-#-*- mode: org -*-
+#+title: Python
+#+author: Fernanda Sanchez
+#+date: [2016-08-25 jue 11:53]
 
 * Qué es un programa?
-Un *Programa* es una secuencia de instrucciones escrita 
+
+Un *Programa* es una secuencia de instrucciones escrita
 en un lenguaje de programación que especifica cómo realizar una tarea.
 
-El programa sólo hará exactamente lo que le decimos que haga. 
+El programa sólo hará exactamente lo que le decimos que haga.
 Un error en el programa, puede afectar su funcionamiento.
 
 Dos formas de usar un interprete:
-- Línea de comandos
+
+- *Línea de comandos*
+
+#+begin_src bash
 $ python
 
 >>> print (1 + 1)
 
 2
+#+end_src
 
 - Script
+
+#+begin_src bash
 $ python facil.py
 
 2
-
+#+end_src
 
 * Un primer programa
 
-Queremos crear un programa que calcule el movimiento vertical de una pelota lanzada en el aire.
+Queremos crear un programa que calcule el movimiento vertical de una pelota
+lanzada en el aire.
 
-La fórmula para calcular el movimiento vertical de una pelota lanzada en el aire es:
+La fórmula para calcular el movimiento vertical de una pelota lanzada en el aire
+es:
 
+#+BEGIN_LaTeX
 \[
 y(t) = v_0 t - \frac{1}{2}gt^2
 \]
+#+END_LaTeX
 
-donde 
-- v_0 es la velocidad inicial
-
-- g es la gravedad
-
-- t es el tiempo
+donde
+- *v_0* es la velocidad inicial
+- *g* es la gravedad
+- *t* es el tiempo
 
 Si elegimos:
+
 -  v_0 = 5
-
 - g = 9.81
-
 - t = 0.6
 
 La expresión puede ser evaluada en una fórmula de Python:
+
 #+BEGIN_SRC python
 print (5*0.6 - 0.5*9.81*0.6**2)
-#+END_SRC 
-
+#+END_SRC
 
 * Usando Variables
 Supongamos que ahora cambiamos los valores de v_0 = 1  y t = 0.1.
 
-Esto es propenso al error, pero es fácil si expresamos 
+Esto es propenso al error, pero es fácil si expresamos
 el programa en términos de símbolos en lugar de valores numéricos.
 
 Una *Variable* es un nombre que hace referencia a un valor.
+
 #+BEGIN_SRC python
 message =  "Hola"
 n = 17
@@ -117,28 +128,28 @@ print ("y(t) is\n the position of\n our ball")
 
 
 * Ejercicio
-Hacer un programa en el dada una determinada longitud en metros, 
+Hacer un programa en el dada una determinada longitud en metros,
 calcular y escribir la longitud correspondiente medido en pulgadas, en pies, en
-yardas, y en millas. 
+yardas, y en millas.
 
-Una pulgada es 2.54 cm.
+- Una pulgada es 2.54 cm.
+- Un pie es de 12 pulgadas
+- Una yarda es 3 pies
+- Una milla es de 1760 yardas.
 
-Un pie es de 12 pulgadas
-
-Una yarda es 3 pies
-
-Una milla es de 1760 yardas. 
-
-Para la verificación: una longitud de 640 metros corresponde a 25196.85 pulgadas, 2099.74 pies, 699.91 yardas, o 0.3977 millas.
+Para la verificación: una longitud de 640 metros corresponde a 25196.85
+pulgadas, 2099.74 pies, 699.91 yardas, o 0.3977 millas.
 
 
 * Ejercicio
-Supongamos que p es la tasa de interés de un banco en tanto por ciento por año. 
+Supongamos que p es la tasa de interés de un banco en tanto por ciento por año.
 Una cantidad inicial A ha crecido a
 
+
+#+BEGIN_LaTeX
 \[ A (1 + \frac{p}{100})^n \]
+#+END_LaTeX
 
-después de n años. 
-Hacer un programa para el cálculo de la cantidad de dinero de 1000 euros 
+después de n años.
+Hacer un programa para el cálculo de la cantidad de dinero de 1000 euros
 que ha crecido después de tres años con una tasa de interés del 5 por ciento.
-
