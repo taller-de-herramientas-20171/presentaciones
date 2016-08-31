@@ -1,0 +1,265 @@
+#+title: Ciclos y listas
+#+author: Miguel Piña
+#+date: [2016-08-25 jue 15:19]
+#+setupfile: ~/proyectos/org-html-themes/setup/theme-bigblow.setup
+
+* Introducción
+
+Una de las tareas más comunes al desarrollar un
+programa es el trabajar con tareas repetitivas En más
+de una ocasión buscamos generar tareas repetitivas.
+
+Para resolver estos problemas, los lenguajes de
+programación imperativa proveen mecanismos para
+trabajar a través de ciclos.
+
+* Problema
+
+Nuestra tarea ahora es imprimir una tabla de conversión
+con grados Celsius en la primera columna y su
+correspondiente valor Fahrenheit en la segunda.
+
+La tabla debería verse algo como lo siguiente:
+
+|   C |    F |
+|-----+------|
+| -20 | -4.0 |
+| -15 |  5.0 |
+| -10 | 14.0 |
+|  -5 | 23.0 |
+|   0 | 32.0 |
+|   5 | 41.0 |
+|  10 | 50.0 |
+|  15 | 59.0 |
+|  20 | 68.0 |
+|  25 | 77.0 |
+|  30 | 86.0 |
+|  35 | 95.0 |
+|  40 | 1040 |
+
+*¿Cómo lo implementamos en python?*
+
+* Solución ingenua
+
+La formula para transformar grados Celsius en
+Fahrenheit (*F*) es:
+
+$F = 9C/5 + 32$
+
+[[file:ltxpng/introduccion_c425e038b5650e16407e42d893a5f53e2a78d502.png]]
+
+Aplicando esta fórmula, podemos repetir resolver la
+salida para una linea de la siguiente forma:
+
+#+begin_src python
+C = -20; F = 9.0/5*C + 32; print(C, F)
+#+end_src
+
+* Solución ingenua
+
+Usando como ejemplo la sentencia anterior, podemos
+escribir un programa que genere nuestra tabla como
+nosotros queremos, dicho programa puede quedar de la
+siguiente forma:
+
+#+begin_src python
+C = -20; F = 9.0/5*C + 32; print C, F
+C = -15; F = 9.0/5*C + 32; print C, F
+C = -10; F = 9.0/5*C + 32; print C, F
+C =  -5; F = 9.0/5*C + 32; print C, F
+C =   0; F = 9.0/5*C + 32; print C, F
+C =   5; F = 9.0/5*C + 32; print C, F
+C =  10; F = 9.0/5*C + 32; print C, F
+C =  15; F = 9.0/5*C + 32; print C, F
+C =  20; F = 9.0/5*C + 32; print C, F
+C =  25; F = 9.0/5*C + 32; print C, F
+C =  30; F = 9.0/5*C + 32; print C, F
+C =  35; F = 9.0/5*C + 32; print C, F
+C =  40; F = 9.0/5*C + 32; print C, F
+#+end_src
+
+*¿Qué sucede si quiero un rango de valores más largo?*
+
+* Segunda solución
+
+** ¿Qué es un ciclo?
+
+#+begin_center
+En computación se entiende como ciclo a una setencia
+que se realiza repetidas veces en un trozo aislado de
+código, hasta que se cumpla cierta condición que
+indique el término de repetición de la secuencia
+#+end_center
+.
+** Ciclos en python
+
+En python hay dos tipos de ciclos:
+
+- for
+- while
+
+La mayoría de las cosas que vamos a utilizar durante el
+curso hacen uso de ciclos, por lo que es un concepto
+muy importante de aprender.
+
+* Segunda solución
+
+El ciclo =while= es usado para repetir un conjunto de
+sentencias tanto tiempo como dada una condición sea
+verdadera.
+
+Retomando el problema de imprimir una tabla con las
+transformaciones de grados Celsius a grados Fahrenheit,
+vamos a identificar algunas cosas.
+
+- Rango de valores :: Nuestros valores van desde -20
+     hasta 40
+- Incremento de valores :: Cada uno de los valores
+     desplegados en la tabla, tiene un incremento de 5
+
+Tomando en cuenta estas restricciones vamos a escribir
+el pseudocódigo del programa que resuelve nuestro
+problema
+
+* Segunda solución
+
+Pseudocódigo*
+
+- imprimir linea
+- C = -20
+- Mientras $C \leq 40$ hacer
+     - $F = \frac{9}{5} * C + 32$
+     - imprimir *C* y *F*
+     - incrementar C por 5
+- Imprimir linea
+
+Sabiendo lo que queremos hacer, procedemos a escribir
+el código en python.
+
+* Segunda solución
+
+*Implementación en python*
+
+#+BEGIN_SRC python
+print('---------------------------------')
+C  = -20
+dC = 5
+while C <= 50:
+    F = (9.0 / 5) * C + 32
+    print(C, F)
+    C = C + dC
+
+print('---------------------------------')
+#+END_SRC
+
+* Otras formas de asignación
+
+En el ejemplo anterior, vimos la sentencia:
+
+#+BEGIN_SRC python
+C = C + dC
+#+END_SRC
+
+Ese tipo de autosignaciones con alguna operación se
+pueden reescribir de forma más corta. Por ejemplo:
+
+#+BEGIN_SRC python
+C += dC    # equivalente a C = C + dC
+C -= dC    # equivalente a C = C - dC
+C *= dC    # equivalente a C = C * dC
+C /= dC    # equivalente a C = C / dC
+#+END_SRC
+
+* Expresiones booleanas
+
+En el ejemplo anterior, la condición del ciclo while
+era:
+
+#+BEGIN_SRC python
+while C <= 40:
+#+END_SRC
+
+La cuál se evaluaba a verdadero o falso de acuerdo en
+el momento en el que el ciclo se encontrara. Pero
+además de esa comparación, hay otras que son útiles:
+
+#+BEGIN_SRC python
+C == 40     # C igual a 40
+C != 40     # C distinto de 40
+C >= 40     # C mayor o igual a 40
+C > 40      # C mayor estricto que 40
+C < 40      # C es menor estricto que 40
+#+END_SRC
+
+
+* Expresiones booleanas
+
+Además de las expresiones anteriores, vamos a tener
+palabras especiales que van a representar conjunciones
+lógicas, las cuáles son las siguientes:
+
+- not
+- and
+- or
+
+#+BEGIN_SRC python
+x = 0; y = 1.2
+x >= 0 and y < 1
+x >= 0 or y < 1
+x > 0 or y > 1
+x > 0 or not x > 1
+-1 < x <= 0 ; -1 < x and x <= 0
+not (x > 0 or y > 0)
+#+END_SRC
+
+* Evaluación booleana de objetos
+
+Todos los objetos en python pueden ser evaluados en un
+contexto booleano, esto quiere decir que pueden ser
+*verdaderos* o *falsos*.
+Todos los objetos son verdaderos, excepto *False*, el
+número cero y cadenas vacías, listas vacías y
+diccionarios vacíos.
+
+#+begin_src python
+s = 'some string'
+bool(s)
+s = '' ; cadena vacía
+bool(s)
+L = [1, 4, 5]
+bool(L)
+L = []
+bool(L)
+s = 88.0
+bool(s)
+s = 0
+bool(s)
+#+end_src
+
+* Implementación de sumas usando ciclos
+
+Dado:
+
+$sin(x) \approx x - \frac{x^{3}}{3!} + \frac{x^{5}}{!} - \frac{x^{7}}{7!} \ldots + \frac{x^{N}}{N!}$
+
+[[file:ltxpng/introduccion_a9bef005df374fa9af56f417e2ff7027b86d2fc3.png]]
+
+donde 3! = 3*2*1, 5! = 5*4*3*2*, etc, son expresiones
+factoriales y son calculadas por math.factorial(x).
+Vamos a calcular esta aproximación para N = 25 usando el ciclo while.
+
+#+BEGIN_SRC python
+import math
+x = 1.2 # assign some value
+N = 25  # maximum power in sum
+k = 1
+s = x
+sign = 1.0
+while k < N:
+    sign = -sign
+    k = k + 2
+    term = sign * x**k/math.factorial(k)
+    s = s + term
+
+print('sin(%g) = %g (approximation with %d terms)' % (x, s, N))
+#+END_SRC
