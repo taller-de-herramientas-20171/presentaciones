@@ -1,0 +1,284 @@
+#+title: Listas
+#+author: Miguel Piña
+#+date: [2016-08-31 mié 17:29]
+#+setupfile: ~/proyectos/org-html-themes/setup/theme-bigblow.setup
+
+* Listas
+
+*¿Qué es una lista?*
+
+Una lista es una secuencia de objetos arbitrarios dados
+en un orden particular.
+
+En python una lista se escribe como una secuencia de
+objetos separados por comas, poniendo todos los
+elementos entre corchetes cuadrados.
+
+#+begin_src python
+C = [-20, -15, -10, -5, 0, 5, 10, 15, 20, 25, 30, 35, 40]
+#+end_src
+
+
+* Operaciones básicas con listas
+
+#+begin_src python
+C = [-20, -15, -10, -5, 0, 5, 10, 15, 20, 25, 30, 35, 40]
+#+end_src
+
+- Cada uno de los elementos son de tipo entero
+- Todo elemento de una lista está asociado a un índice
+- Los elementos en la lista puede ser eliminados y
+  nuevos elementos pueden ser insertados en cualquier
+  lugar.
+
+* Operaciones básicas con listas
+
+** Append
+
+El agregar un nuevo elemento a una lista se hace
+mediante el método *append*, el cuál inserta al final de
+la lista.
+
+#+begin_src python
+C = [-10, -5, 0, 5, 10, 15, 20, 25, 30]
+C.append(35)
+C
+#+end_src
+
+** Suma de listas
+
+Además dos listas pueden ser "sumadas":
+
+#+begin_src pyton
+C = C + [40, 45]
+C
+#+end_src
+
+* Operaciones básicas con listas
+
+** Inserción de elementos
+
+Nuevos elementos pueden ser insertados en cualquier
+lugar de la lista y no sólo al final de la lista como
+lo hicimos con *C.append*
+
+#+begin_src python
+C.insert(0, -15)
+C
+#+end_src
+
+** Eliminación de elementos
+
+Usando =del C[i]= podemos elimina el elemento asociado al
+índice i desde la lista C.
+
+#+begin_src python
+del C[2]
+C
+del C[2]
+C
+len(C)
+#+end_src
+
+** Investigando el índice de un elemento
+
+El comando C.index(10) regresa el índice
+correspondiente al primer elemento con valor 10 dentro
+de la lista C.
+
+#+begin_src python
+C.index(10)
+#+end_src
+
+* Operaciones básicas con listas
+
+** Verificación de existencia
+
+Además podemos verificar si un objeto dentro de una
+lista usando la sentencia *in*, la cuál puede ser escrita
+como una expresión booleana
+
+#+begin_src python
+10 in C
+#+end_src
+
+** Índices negativos
+
+Python permite usar índices negativos, los cuales van a
+indexar desde el último elemento hacia el primero.
+
+Por ejemplo C[-1] nos devuelve el último elmento,
+mientras que C[-2] nos devuelve el penúltimo
+
+#+begin_src python
+C[-1]
+C[-2]
+#+end_src
+
+* Operaciones básicas con listas
+
+** Construcción de listas usando While
+
+Construir listas largas a mano puede ser un proceso
+tedioso, el cuál puede ser automatizado por un ciclo.
+
+Retomando el ciclo while, vamos a construir una lista
+de grados Celsius desde -50 hasta 200 en incrementos de
+2.5 grados.
+
+#+begin_src python
+C = []
+C_value = -50
+C_max = 200
+while C_value <= C_max:
+    C.append(C_value)
+    C_value += 2.5
+#+end_src
+
+*¡Más adelante vamos a ver como expresar la seis líneas
+de código anteriores en una sóla línea de código!*
+
+* Ciclos For
+
+Cuando los datos son recolectados en una lista,
+necesitamos realizar una misma serie de operaciones
+sobre cada elemento de la lista. Para hacerlo,
+necesitamos recorrer todos los elementos de la lista.
+
+Python y otros lenguajes de programación va a proveer
+una herramienta llamada *ciclo loop*.
+
+Vamos a usar un ciclo for para imprimir todos los
+elementos dentro de una lista de elementos.
+
+#+begin_src python
+degrees = [0, 10, 20, 40, 100]
+for C in degrees:
+    print('list element: ', C)
+
+print('The degree list has ', len(degrees), ' elements')
+#+end_src
+
+* Implementando la tabla de conversión
+
+#+begin_src python
+Cdegrees = [-20, -15, -10, -5, 0, 5, 10, 15, 20, 25, 30, 35, 40]
+print('C\tF')
+for C in Cdegrees:
+    F = (9.0/5)*C + 32
+    print('%g\t%f'%(C, F))
+#+end_src
+
+
+* Implementaciones alternativas con listas y ciclos
+
+En el ejemplo anterior pudimos escribir la tabla de
+conversión usando el *ciclo for*. Nosotros podemos
+resolver un mismo problema con distintas soluciones, en
+las próximas diapositivas veremos otras formas de
+trabajar con listas y ciclos.
+
+* Implementación de un ciclo for usando ciclos while
+
+Cualquier *ciclo for* puede ser implementado como un
+ciclo while y viceversa, el ciclo general
+
+#+begin_src python
+for element in somelist:
+    <process element>
+#+end_src
+
+puede ser transformado en un ciclo while como el
+siguiente:
+
+#+begin_src python
+index = 0
+while index < len(somelist):
+    element = somelist[index]
+    <process element>
+    index += 1
+#+end_src
+
+* Implementación de un ciclo for usando ciclos while
+
+En particular, la implementación de la tabla de conversión que usa listas y el ciclo for puede ser reescrita como:
+
+#+begin_src python
+Cdegrees = [-20, -15, -10, -5, 0, 5, 10, 15, 20, 25, 30, 35, 40]
+index = 0
+print('C\tF')
+while index < len(Cdegrees):
+    C = Cdegrees[index]
+    F = (9.0/5)*C + 32
+    print('%g\t%f'%(C, F))
+    index += 1
+#+end_src
+
+* Construcción de rangos
+
+Es tedioso tener que definir la lista *Cdegrees* cada vez
+que queramos realizar algún programa que lo utilice.
+
+Deberíamos de usar un ciclo para automatizar la
+construcción de dicha lista.
+
+La función range es particularmente útil para esa
+tarea.
+
+- range(n) :: genera enteros 0, 1, 2, ..., n - 1
+- range(start, stop, step) :: genera una secuencia de enteros
+     /start/, /start + step/, /start + 2*step/... pero sin incluir
+     a stop.
+     Por ejemplo, *range(2, 8, 3)*, regresa 2 y 5, pero
+     no 8, mientras que *range(1, 11, 2)* regresa 1, 3,
+     5, 7, 9
+- range(start, stop) :: es igual a *range(start, stop, 1)*
+
+* Construcción de rangos
+
+Con lo anterior, podemos generar nuestra lista de
+grados Celsius de la siguiente forma:
+
+#+begin_src python
+Cdegrees = []
+for C in range(-20, 45, 5):
+    Cdegrees.append(C)
+#+end_src
+
+Otra forma de hacerlo más sencillo es usar:
+
+#+begin_src python
+Cdegrees = list(range(-20, 45, 5))
+#+end_src
+
+* Construcción de rangos
+
+Supongamos que queremos crear una lista Cdegrees como
+[-10, -7.5, -5, ..., 40]. Esta vez no podemos usar
+range directamente, debido a que range sólo opera con
+enteros y nosotros necesitamos numeros flotantes.
+
+En un caso más general, vamos a introducir un contador
+i y generar los valores de Cdegrees usando la formula C
+= -10 + i* 2.5 para i = 0, 1, ..., 20.
+
+El siguiente código en python implementa esta tarea:
+
+#+begin_src python
+Cdegrees = []
+for i in range(0, 21)
+    C = -10 + i * 2.5
+    Cdegrees.append(C)
+#+end_src
+
+* Ejercicio
+
+El proposito de este ejercicio es escribir código para
+imprimir una tabla bien formateada de /t y /g(t)/ donde a
+
+[[file:ltxpng/formula.png]]
+
+Use n + 1 valores de t uniformemente espaciado a través del intervalo [0, 2v0/g]
+
+a) Use un ciclo for para producir la tabla
+b) Use un ciclo while para producir la tabla
