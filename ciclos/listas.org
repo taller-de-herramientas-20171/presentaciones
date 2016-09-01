@@ -280,5 +280,8 @@ imprimir una tabla bien formateada de /t y /g(t)/ donde a
 
 Use n + 1 valores de t uniformemente espaciado a través del intervalo [0, 2v0/g]
 
+V0 = 5
+n = 20
+
 a) Use un ciclo for para producir la tabla
 b) Use un ciclo while para producir la tabla

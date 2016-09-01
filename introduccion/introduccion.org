@@ -3,7 +3,7 @@
 #+title: Introducción
 #+author: Miguel Piña (@MiguelPinia)
 #+date: [2016-05-20 vie 20:27]
-#+setupfile: ~/proyectos/org-html-themes/setup/theme-bigblow.setup
+#+setupfile: ~/proyectos/org-html-themes/setup/theme-readtheorg.setup
 
 * Presentación
 
