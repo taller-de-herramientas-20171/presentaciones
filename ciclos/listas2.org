@@ -1,0 +1,395 @@
+#+title: Listas
+#+author: Miguel Piña
+#+date: [2016-09-05 lun 22:12]
+#+setupfile: ~/proyectos/org-html-themes/setup/theme-bigblow.setup
+
+* Ciclos for con índices
+
+Anteriormente vimos que podríamos iterar directamente
+sobre una lista con la siguiente sintaxis:
+
+#+BEGIN_SRC python
+for element in somelist:
+    ...
+#+END_SRC
+
+La cual podemos iterar usando una lista de índices y un
+índice dentro del ciclo:
+
+#+begin_src python
+for i in range(len(somelist)):
+   element = somelist[i]
+#+end_src
+
+
+* Ciclos for con índices
+
+*Ejemplo:* usando índices, generar dos arreglos con los
+grados Celsius y los grados Fahrenheit y después con un
+sólo ciclo imprimir la tabla de conversión desde -10
+hasta 40 grados Celsius con intervalos de 2.5
+
+#+BEGIN_SRC python
+Cdegrees = []
+n = 21
+C_min = -10
+C_max = 40
+dC = (C_max - C_min) / float(n - 1)
+for i in range(n):
+    C = -10 + i * dC
+    Cdegrees.append(C)
+
+Fdegrees = []
+for C in Cdegrees:
+    F = (9.0/5) * C + 32
+    Fdegrees.append(F)
+
+for i in range(len(Cdegrees)):
+    C = Cdegrees[i]
+    F = Fdegrees[i]
+    print("%5.1f %5.1f"% (C, F))
+
+#+END_SRC
+
+* Ciclos for con índices
+
+Otra forma de construir listas es usando la notación:
+
+#+begin_src python
+lista = [0] * n
+#+end_src
+
+La cuál creará una lista de tamaño n llena de
+ceros. Usando esta construcción, podemos reescribir el
+código anterior de la siguiente forma:
+
+#+begin_src python
+n = 21; C_min = -10; C_max = 40; dC = (C_max - C_min) / float(n - 1)
+
+Cdegrees = [0] * n
+for i in range(len(Cdegrees)):
+    Cdegrees[i] = -10 + i*dC
+
+Fdegrees = [0] * n
+for i in range(len(Cdegrees)):
+    Fdegrees[i] = (9.0/5)*Cdegrees[i] + 32
+
+for i in range(len(Cdegrees)):
+    print("%5.1f %5.1f" % (Cdegrees[i], Fdegrees[i])
+#+end_src
+
+
+* Cambiando elementos de una lista
+
+Tenemos dos formas alternativas de recorrer una lista,
+ya sea sobre elementos o sobre índices. Supongamos que
+queremos cambiar la lista Cdegrees por agregar 5 a cada
+elemento. Podemos intentar:
+
+#+begin_src python
+for c in Cdegrees:
+    c += 5
+#+end_src
+
+Pero también podemos:
+
+#+begin_src python
+for i in range(len(Cdegrees)):
+    Cdegrees[i] += 5
+#+end_src
+
+*¿Qué es lo que sucede con ambas ejecuciones?*
+
+* Cambiando elementos de una lista
+
+Vimos que el último ciclo se encarga de actualizar los
+valores de la lista. Además de esa forma, existe una
+forma de recorrer una lista de tal forma que obtengamos
+el índice y el elemento de la lista. Esta construcción
+la tenemos de la siguiente forma:
+
+
+#+begin_src python
+for i, c in enumerate(Cdegrees):
+    Cdegrees[i] = c + 5
+#+end_src
+
+
+* Comprensión de listas
+
+Debido a que el recorrido dentro de una lista y crear
+elementos dentro de la misma, es una tarea frecuente,
+Python tiene una sintaxis compacta para hacer esto,
+llamado /Comprensión de listas/ (*list comprehension*). La
+sintaxis general es:
+
+#+begin_src python
+newlist = [E(e) for e in list]
+#+end_src
+
+Donde *E(e)* representa una expresión envolviendo al
+elemento *e*. Aquí hay tres ejemplos:
+
+#+begin_src python
+Cdegrees = [-5 + i * 0.5 for i in range(n)]
+Fdegrees = [(9.0/5) * C + 32 for C in Cdegrees]
+C_plus_4 = [C + 5 for C in Cdegrees]
+#+end_src
+
+* Atravesando multiples listas simultáneamente
+
+Anteriormente generamos una tabla de conversión usando
+*Cdegrees* y *Fdegrees*. Para hacerlo necesitamos recorrer
+ambas listas. Usar la sintaxis *for element in list* no
+es útil para nuestro proposito y no queremos usar
+indices. Python va proveer una alternativa a este
+problema usando la siguiente sintaxis:
+
+#+begin_src python
+for e1, e2, e3, ... in zip(list1, list2, list3):
+   <usar e1, e2, e3, etc...>
+#+end_src
+
+La función *zip* transforma las n listas (*list1*, *list2,
+*list3*, ...) en una lista de n-tuplas, donde cada
+n-tupla (*e1*, *e2*, *e3*, ..) tiene su primer elemento (*e1*)
+desde la primera lista (*list1*), el segundo elemnto (*e2*)
+desde la segunda lista (*list2*) y así sucesivamente.
+
+#+begin_src python
+for C, F in zip(Cdegrees, Fdegrees):
+    print("%5.1f %5.1f"%(C,F))
+#+end_src
+
+
+* Listas anidadas
+
+Las listas anidadas son listas cuyos elementos en la
+lista son listas en si mismas.
+
+Por ejemplo, podemos tener una lista con las listas
+Cdegrees y Fdegrees que represente nuestra tabla.
+
+#+begin_src python
+Cdegrees = list(range(-20, 41, 5))
+Fdegrees = [(9.0/5)*C + 32 for C in Cdegrees]
+
+table = [Cdegrees, Fdegrees]
+xo
+>> [[-20, -15, -10, -5, 0, 5, 10, 15, 20, 25, 30, 35, 40]
+  , [-4.0, 5.0, 14.0, 23.0, 32.0, 41.0, 50.0, 59.0, 68.0, 77.0, 86.0, 95.0, 104.0]]
+#+end_src
+
+* Listas anidadas
+
+A pesar de lo anterior, quisieramos tener una lista que
+tuvieras listas de dos elementos que representen
+parejas [C, F] y para tener esto necesitamos la
+siguiente construcción:
+
+#+begin_src python
+table = []
+for C, F in zip(Cdegrees, Fdegrees):
+    table.append([C, F])
+#+end_src
+
+ o de forma más compacta:
+
+#+begin_src python
+table = [[C, F] for C, F in zip(Cdegrees, Fdegrees)]
+#+end_src
+
+
+* Imprimiendo objetos
+
+Python provee un módulo para imprimir objetos de forma
+bonita. Este módulo es pprint:
+
+#+begin_src python
+import pprint
+pprint.print(table)
+#+end_src
+
+Además de que scitools va proveer un módulo para
+proveer total control sobre la impresión de números
+flotantes dentro de listas.
+
+#+begin_src python
+import pprint, scitools.pprint2
+somelist = [15.8, [0.2, 1.7]]
+pprint.pprint(somelist)
+#[15.800000000000001, [0.20000000000000001, 1.7]]
+scitools.pprint2.pprint(somelist)
+# [15.8, [0.2, 1.7]]
+>>> # default output is ’%g’, change this to
+scitools.pprint2.float_format = ’%.2e’
+scitools.pprint2.pprint(somelist)
+# [1.58e+01, [2.00e-01, 1.70e+00]
+#+end_src
+
+
+* Extrayendo sublistas
+
+Python tiene una bonita sintaxis para extraer partes de
+una listas. Estas partes son conocidas como sublistas o
+/slices/.
+
+- A{i:] :: Es la sublista iniciando en el índice i y
+     continuando hasta el final de *A*.
+
+#+begin_src python
+A = [2, 3.5, 8, 10]
+A[2:]
+#+end_src
+
+- A[i:j] :: Es la sublista iniciando en en el índice i
+     y terminando en el índice j - 1.
+
+#+begin_src pytho
+A[1:3]
+#+end_src
+
+- A[:j] :: Es la sublista que inicia en el índice 0 y termina en el índice j-1 de *A*.
+
+#+begin_src python
+A[:3]
+#+end_src
+
+- A[1:-1] :: Extrae todos los elementos excepto el último y el primero.
+- A[:] :: Es toda la lista
+
+* Extrayendo sublistas
+
+También podemos extraer sublistas de listas anidadas:
+
+#+begin_src python
+table[4:]
+table[4:7][0:2]
+#+end_src
+
+Las sublistas son siempre copias de lista de original,
+así que si modificamos las sublistas, la lista original
+se mantiene sin cambios.
+
+#+begin_src python
+l1 = [1, 4, 3]; l2 = l1[:-1]
+l2
+l1[0] = 100
+l1; l2
+#+end_src
+
+El hecho de que crear sublistas son copias, puede ser
+ilustrado con el siguiente código:
+
+#+begin_src python
+B = A[:]
+C = A
+B == A
+B is A
+C is A
+#+end_src
+
+* Recorriendo listas anidadas
+
+
+Vimos anteriormente que recorrer la lista anidada /table/
+puede ser hecho de la siguiente forma:
+
+#+begin_src python
+for C, F in table:
+    <to do something>
+#+end_src
+
+Supongamos ahora que necesitamos una lista anidada de
+puntajes *scores* para llevar el control de puntos de
+varios jugadores. La lista *scores[i]* representa los
+puntajes del jugador *i*.
+
+Cada una de las listas scores[i] tiene distinto tamaño,
+entonces, *¿Cómo recorremos las listas?*
+
+* Recorriendo listas anidadas
+
+#+begin_src python
+scores = []
+scores.append([12, 16, 11, 12])
+scores.append([9])
+scores.append([6, 9, 11, 14, 17, 15, 14, 20])
+#+end_src
+
+Hay dos formas de recorrer esta lista:
+
+#+begin_src python
+for p in range(len(scores)):
+    for g in range(len(scores[p])):
+        print("%4d"%score)
+    print
+
+
+for player in scores:
+    for point in player:
+        print("%4d"%score)
+    print
+#+end_src
+
+
+* Tuplas
+Las tuplas son muy similares a las listas, pero las
+tuplas no permiten cambios. Esto es, las tuplas pueden
+ser vistas como listas constantes.
+
+#+begin_src python
+t = (2, 4, 6, 'temp.pdf')
+t1 = 2, 4, 6, 'temp.pdf'
+for element in 'myfile.txt', 'yourfile.txt', 'herfile.txt':
+    print(element)
+#+end_src
+
+Muchas de las funciones usadas para las listas, también
+se encuentran disponibles para las tuplas. Por ejemplo:
+
+#+begin_src python
+t = t + (-1.0, -2.0)
+t
+t[1]
+t[2:]
+6 in t
+#+end_src
+
+Mientras que las operaciones de modificación no van a funcionar:
+
+#+begin_src python
+>>> t[1] = -1
+...
+TypeError: object does not support item assignment
+>>> t.append(0)
+...
+AttributeError: ’tuple’ object has no attribute ’append’
+>>> del t[1]
+...
+TypeError: object doesn't support item deletion
+#+end_src
+
+* Tuplas
+
+¿Cuándo necesitamos usar tuplas cuando podemos hacer
+más con listas?
+
+- Las tuplas protegen contra cambios accidentales en
+  sus contenidos
+- Código basado en listas es mucho más rápido que en
+  listas
+- Las tuplas son frecuentemente usadas en software
+  hecho en Python que seguramente vas a hacer uso de
+  el, así que necesitas conocer este tipo de datos.
+
+* Ejercicio
+
+Dado un arreglo de números enteros aleatorios,
+encontrar el par de números cuya suma sea más cercana a
+cero. Por ejemplo, en el arreglo [45, -29, -96, -7,
+-17, 72, -60], los dos enteros cuya suma es más cercana
+a cero son -60 y 72.
+
+La tarea es escribir un programa que encuentre la suma
+más cercana a cero.
