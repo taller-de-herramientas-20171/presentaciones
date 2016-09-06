@@ -1,0 +1,195 @@
+#-*- mode: org -*-
+
+* Funciones
+- Similar a funciones matemáticas.
+- Evitan errores 
+- Evita repetir código en varias partes del programa.
+- Facilita cambios en el programa 
+- Divide un programa largo en partes chicas.
+- Podemos usar una función sin preocuparnos por los detalles de implementación.
+
+
+* Funciones en Python
+Hemos visto ejemplos de *llamadas a funciones*:
+#+BEGIN_SRC python
+type("32")
+# <type 'str'>
+#+END_SRC
+
+- El nombre de la función es *type*.
+- El *argumento* de la función son las variables o valores entre paréntesis.
+- El resultado es llamado el *valor de retorno*
+
+Las funciones se pueden componer y anidar entre sí.
+
+Primero se evalua la función más interior hasta la exterior.
+#+BEGIN_SRC python
+x = math.cos(angle + math.pi/2)
+x = math.exp(math.log(10.0))
+#+END_SRC
+
+
+* Creando funciones
+Una *función* es una colección de instrucciones que realizan una operación.
+
+La sintáxis de una función es:
+
+#+BEGIN_SRC python
+*def* NOMBRE (LISTA DE PARAMETROS):
+    INTRUCCIONES
+#+END_SRC
+
+- La lista de parametros especifica *qué* información necesita la función.
+- Puede haber cualquier número de instrucciones dentro de la función.
+- Las instrucciones deben estar indentadas a la izquierda.
+
+** Ejemplo
+Función para convertir de grados celsius a fahrenheit:
+
+\[ F(C)=\frac{9}{5}C+32 \]
+
+#+BEGIN_SRC python
+def F(centigrados):
+  return (9.0/5) * centrigrados + 32
+#+END_SRC
+
+
+La sintaxis para invocar una función es igual que para las funciones inherentes de python.
+
+#+BEGIN_SRC python
+print F(20)
+#+END_SRC
+
+Una función puede recibir o no, uno o más parametros.
+#+BEGIN_SRC python
+def printTwice(bruce, nathan):
+  print(bruce, nathan)
+
+printTwice(5, 4)
+printTwice("hola", "adios")
+#+END_SRC
+
+
+
+* Flujo del programa
+- La ejecución de un programa inicia en la primera línea del programa. 
+- Se ejecuta una instrucción a la vez y de arriba hacia abajo.
+- Un programa no se lee de arriba hacia abajo, se sigue el flujo de ejecución.
+
+
+#+BEGIN_SRC python
+def F(c):
+  F = 9.0/5*c + 32
+  return F
+
+C = -30
+fC = F(C)
+print (C, fC)
+
+C = -20
+fC = F(C)
+print(C, fC)
+#+END_SRC
+
+- Se puede llamar una función varias veces.
+- Primero se define una función antes de ejecutarla.
+- Una función puede llamar a otra dentro de su definición.
+
+
+* Variables y parametros locales y globales
+Las *variable locales*  y los parametros solo existe dentro de una función y no puede ser usada afuera.
+Las *variable globales* pueden ser usadas en cualquier parte del programa.
+
+#+BEGIN_SRC python
+s = "Soy global"
+def printTwice(bruce, nathan):
+  x = "Soy local"
+  print(bruce, nathan)
+
+print(s)
+printTwice(3, 6)
+print(bruce)
+print(x)
+#+END_SRC
+
+** Regla
+Cuando se tienen varias variables con el mismo nombre, Python busca la variable en el siguiente orden: 
+1. Entre las variables locales
+2. Entre las variables globales
+3. Entre las funciones incorporadas de Python
+
+#+BEGIN_SRC python
+print(sum) # sum is a built-in Python function
+sum = 500 # rebind the name sum to an int
+print(sum) # sum is a global variable
+
+def myfunc(n):
+  sum = n + 1
+  print(sum) # sum is a local variable
+  return sum
+
+sum = myfunc(2) + 1 # new value in global variable sum
+print(sum)
+#+END_SRC
+
+
+* Modificando varibales globales dentro de funciones
+Los valores de las variables globales se puede acceder dentro de funciones, 
+pero los valores no se puede cambiar a menos que la variable se declara como *global*:
+
+#+BEGIN_SRC python
+# global variables
+a = 20
+b = -2.5 
+
+def f1(x):
+  a = 21 # this is a new local variable
+  return a * x + b
+
+print(a) # yields 20
+
+def f2(x):
+  global a
+  a = 21 # the global a is changed
+  return a * x + b
+
+f1(3); print(a) # 20 is printed
+f2(3); print(a) # 21 is printed
+#+END_SRC
+
+
+* Multiples valores de retorno
+Podemos regresar más de un valor separando con comas los valores en el enunciado de return.
+
+#+BEGIN_SRC python
+def f(x):
+ return x, x**2, x**4
+
+s = f(2)
+print(s)
+(2, 4, 16)
+
+print(type(s))
+# <type ’tuple’>
+x, x2, x4 = f(2) # store in separate variables
+#+END_SRC
+
+
+* Ejercicios
+** Planea tu viaje
+1. Define una función llamada *hotel_cost* que recibe *noches* como entrada.
+
+2. El hotel cuesta $140 por noche. Por lo tanto, la función hotel-cost debe regresar 140 * noches.
+
+3.Define una función llamada *extras* que recibe un entero como entrada, la cantidad de gastos extras y el número de noches de viaje.
+
+4. Define una función trip-cost que tome dos argumentos, extras y noches. 
+La función debe regresar la suma de llamar a las funciones  hotel-cost(noches), y extras(extra).
+
+
+** Calcula los impuestos y propina de tu comida
+- Dado el costo de tu comida, crea funciones que:
+  - Calcule los impuesto de tu comida. Agrege el 8% a la cuena total.
+  - Calcule la propina de tu comida. 15%
+
+- Imprima el costo total de tu comida con impuestos y el total con propina
