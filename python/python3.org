@@ -1,0 +1,226 @@
+#-*- mode: org -*-
+
+* Tipos
+#+BEGIN_SRC python
+type(’Hello, World!’)
+# <type ’str’>
+
+type(17)
+# <type ’int’>
+
+type(3.2)
+# <type ’float’>
+
+type(’3.2’)
+# <type ’str’>
+
+c = float(17)
+type(c)
+# <type ’float’>
+#+END_SRC
+
+* Números Complejos
+ \[ x = sqrt(-2) \]
+
+La solución es un número complejo.
+Un número complejo es un par de número reales a, b y una parte imaginaria:
+ a + bi
+donde \[ i = sqrt(-1) \]
+
+El número \[2 - 3i \] se escribe en python: (2-3j)
+
+#+BEGIN_SRC python
+u = 2.5 + 3j # create a complex number
+v = 2 # this is an int
+w = u + v # complex + int
+w
+# (4.5+3j)
+
+a = -2
+b = 0.5
+s = a + b*1j # create a complex number from two floats
+s = complex(a, b) # alternative creation
+s
+# (-2+0.5j)
+
+s*w # complex*complex
+# (-10.5-3.75j)
+
+s/w # complex/complex
+# (-0.25641025641025639+0.28205128205128205j)
+ 
+s.real
+# -2.0
+s.imag
+# 0.5
+s.conjugate()
+# (-2-0.5j)
+#+END_SRC
+
+La multiplicación de números complejos:
+(x + yi)(u + vi) = (xu - yv) + (xv + yu)i
+
+
+** Funciones para números complejos
+El seno de un número complejo no esta definido en el modulo math de python.
+
+#+BEGIN_SRC python
+from math import sin
+r = sin(w)
+# Traceback (most recent call last):
+# File "<input>", line 1, in ?
+# TypeError: can’t convert complex to float; use abs(z)
+#+END_SRC
+
+
+Modulo cmath contiene funciones para trabajar con números complejos.
+
+Vamos a demostrar que \[ sin(ai) = i*sinh(a) \]
+
+#+BEGIN_SRC python
+from cmath import sin, sinh
+r1 = sin(8j)
+r1
+# 1490.4788257895502j
+r2 = 1j*sinh(8)
+r2
+# 1490.4788257895502j
+#+END_SRC
+
+Las funciones de cmath solo devuelve valores complejos.
+
+Quisieramos tener funciones que devuelven un objeto flotante si el resultado es un número real y un objeto complejo si el resultado es un número complejo.
+
+#+BEGIN_SRC python
+from math import sqrt
+sqrt(4) # float
+# 2.0
+sqrt(-1) # illegal
+
+from cmath import sqrt
+sqrt(4) # complex
+# (2+0j)
+sqrt(-1) # complex
+# 1j
+
+from numpy.lib.scimath import *
+sqrt(4) # float
+# 2.0
+sqrt(-1) # complex
+# 1j
+#+END_SRC
+
+Calculando las raices de la función cuadrática f(x) = ax^2 + bx + c
+
+#+BEGIN_SRC python
+from numpy.lib.scimath import sqrt
+a = 1; b = 2; c = 100 # polynomial coefficients 
+r1 = (-b + sqrt(b**2 - 4*a*c))/(2*a)
+r2 = (-b - sqrt(b**2 - 4*a*c))/(2*a)
+
+r1
+# (-1+9.94987437107j)
+r2
+# (-1-9.94987437107j
+#+END_SRC
+
+
+
+* Computación Simbólica
+Refiere al estudio y desarrollo de algoritmos y software para la manipulación de expresiones y objetos matemáticos.
+
+Enfatiza el cálculo exacto con expresiones que contengan variables y que no tienen un valor dado,
+
+por lo tanto son manipulados como símbolos (de ahí se debe el nombre de cálculo simbólico).
+
+El paquete *sympy* permite hacer la computación simbólica, como integración,  diferenciación, solución de  ecuaciones, etc.
+
+Vamos a diferenciar la fórmula: \[ y =  v_0t - \frac{1}{2}gt^2 \] con respecto a t y luego integrar la respuesta.
+
+#+BEGIN_SRC python
+from sympy import (
+ symbols, # define mathematical symbols for symbolic math
+ diff, # differentiate expressions
+ integrate, # integrate expressions
+ Rational, # define rational numbers
+ lambdify, # turn symbolic expressions into Python functions
+ )
+
+t, v0, g = symbols("t v0 g")
+y = v0*t - Rational(1,2)*g*t**2
+dydt = diff(y, t)
+dydt
+# -g*t + v0
+print("acceleration:", diff(y, t, t)) # 2nd derivative
+# acceleration: -g
+y2 = integrate(dydt, t)
+print(y2)
+# -g*t**2/2 + t*v0
+#+END_SRC
+
+
+- t es una variable simbolica, no un flotante
+- y es una expresión simbolica.
+
+Las expresiones simbólicas puede convertirse en funciones ordinarias de Python a través de *lambdify*.
+
+#+BEGIN_SRC python
+v = lambdify([t, v0, g], dydt) # regresar a una funcion v(t, v0, g)
+v(0, 5, 9.81)
+# 5
+v(2, 5, 9.81)
+# -14.62
+5 - 9.81*2 # Haciendo el calculo a manita
+# -14.62
+#+END_SRC
+
+
+* Solución de ecuaciones
+Podemos resolver una ecuación lineal definida por una expresión que es 0.
+
+Encontrar las raices cuando y = 0 y t es la variable desconocida.
+
+#+BEGIN_SRC python
+# Find t values such that y=0
+from sympy import solve
+roots = solve(y, t)
+roots
+#[0, 2*v0/g]
+#+END_SRC
+
+Podemos checar el resultado insertando las raices en la ecuación y.
+
+#+BEGIN_SRC python
+y.subs(t, roots[0])
+y.subs(t, roots[1])
+#+END_SRC
+
+
+Hay herramientas para expandir y simplificar una expresión:
+
+#+BEGIN_SRC python
+from sympy import simplify, expand
+x, y = symbols("x y")
+f = -sin(x)*sin(y) + cos(x)*cos(y)
+
+s = simplify(f)
+print(s)
+# cos(x + y)
+
+ex = expand(sin(x+y), trig=True) # requires a trigonometric hint
+print(ex)
+# sin(x)*cos(y) + sin(y)*cos(x)
+#+END_SRC
+
+
+* Ejercicio
+Resuelve la ecuación: 7x + 3 (x + 1) = 2x / 4 - 1
+
+1. Define la ecuación usando sympy.
+
+2. Diferenciar la expresión en 1) una y dos veces.
+Ahora define y_2 que es la expresión integrada de la primera derivada
+
+3. Encuentra las raíces: los valores de la ecuación cuando es igual a 0. Inserta las raíces para verificar los resultados.
+
+Imprime todos los valores.

@@ -1,0 +1,183 @@
+#-*- mode: org -*-
+
+* Enunciados y Expresiones
+Un *Enunciado* es una instrucción que se puede ejecutar.
+
+- Asignación.
+ - x = 2
+- Impresión.
+ - print(x)
+
+Una *Expresión* es una combinación de valores, variables y operadores.
+El interprete evalua una expresión y despliega su resultado.
+
+#+BEGIN_SRC python
+1 + 1 
+# 2
+#+END_SRC
+
+Las computadoras son quisqillosas con la sintaxis!
+
+#+BEGIN_SRC python
+myvar = 5.2
+prinnt Myvar
+#+END_SRC
+
+
+* Operadores y Operandos
+Los *Operadores* son símbolos especiales que representan operaciones.
+Los *Operandos* son los valores que usan los operadores.
+
+20+32   
+
+hour-1   
+
+hour*60+minute   
+
+minute/60   
+
+5**2   
+
+(5+9)*(15-7)
+
+#+BEGIN_SRC python
+minute = 59
+print minute/60
+#+END_SRC
+
+Dos tipos de división:
+- Entera (/)
+
+- Flotante (//)
+
+#+BEGIN_SRC python
+print minute//60
+print float(minute)/60
+print (minute*1.0)/60
+print minute/60.0
+#+END_SRC
+
+* Precedencia de Operadores
+ *PEMDAS* es una forma útil de recordar el orden de los operadores:
+
+- *P*arentesis tiene la mayor precedencia
+- *E*xponenciación
+- *M*ultiplicación y *D*ivisión
+- *A*sociatividad y *S*ustracción
+- Operadores con la misma precedencia son evaluados de izquierda a derecha
+
+5/9+2*a**4/2
+
+5/(9+2)*a**(4/2)
+
+
+* Raíz Cuadrada
+Retomando la fórmula para la altura de una pelota en movimiento vertical:
+
+\[ y_c = v_0t − \frac{1}{2}gt^2 \]
+
+Pregunta: En qué tiempo la pelota alcanza la altura y_c ?
+
+Debemos resolver la ecuación cuadrática respecto a y.
+
+\[ \frac{1}{2} gt^2 − v_0t + y_c = 0 \]
+
+Usando "chicharronero" :
+
+\[ t_1 = (v0 − \sqrt(v_0^2 - 2 g y_c ) ) / g \]
+\[ t_2 = (v0 + \sqrt(v_0^2 - 2 g y_c ) ) / g \]
+
+
+Necesitamos usar la función raíz cuadrada, importando el módulo *math* de python.
+
+Formas de importar un módulo:
+- import math
+ - x = math.sqrt(y)
+- from math import sqrt
+ - x = sqrt(y)
+- import math as m
+ - x = m.sqrt(y)
+
+#+BEGIN_SRC python
+import math
+
+v0 = 5
+g = 9.81
+yc = 0.2
+
+t1 = (v0 - math.sqrt(v0**2 - 2*g*yc))/g
+t2 = (v0 + math.sqrt(v0**2 - 2*g*yc))/g
+print ’At t=%g s and %g s, the height is %g m.’ % (t1, t2, yc) 
+#+END_SRC
+
+
+* Ejemplo: sinh(x)
+
+\[ sinh(x) = \frac{1}{2} (e^x - e^{-x} ) \]
+
+Podemos evaluar sinh(x) de 3 formas:
+- Usando math.sinh
+- Evaluar el lado derecho usando math.exp
+- Evaluar el lado derecho usando math.e**x 
+
+#+BEGIN_SRC python
+from math import sinh, exp, e, pi
+x = 2*pi
+r1 = sinh(x)
+r2 = 0.5*(exp(x) - exp(-x))
+r3 = 0.5*(e**x - e**(-x))
+print r1, r2, r3
+#+END_SRC
+
+
+El resultado con 16 decimales:
+#+BEGIN_SRC python
+print ’%.16f %.16f %.16f’ % (r1,r2,r3)
+# 267.7448940410164369 267.7448940410164369 267.7448940410163232
+#+END_SRC
+
+El programa opera con números reales y los números reales necesitan
+un número infinito de decimales para ser representados exactamente. 
+
+La secuencia de decimales se trunca debido a que el almacenamiento es finito.
+
+La mayoría de las operaciones aritméticas implican números reales inexactos, 
+lo que resulta en cálculos inexactos propagando el error.
+
+
+* Ejercicios
+Cuando se cocina de huevo, las proteínas se desnaturalizan primero y luego se coagulan. 
+Cuando la temperatura excede de un punto crítico, las reacciones comienzan y ocurren más rápido a medida que aumenta la temperatura. 
+En la clara de huevo, las proteínas comienzan a coagular en temperaturas por encima de 63 C, mientras que en la yema las proteínas
+empezar a coagularse en temperaturas superiores a 70 C. 
+
+Para un huevo suave, el blanco tuvo que haber sido calentada lo suficiente para coagular a una temperatura por encima de 63 C, 
+pero la yema no debe calentarse por encima de 70 C.
+Para un huevo duro, el centro de la yema se debe permitir llegar 70 C.
+
+La siguiente fórmula expresa el tiempo t (en segundos) que tarda el centro de la yema para llegar a la temperatura Ty (en grados centígrados):
+
+\[ t = \frac{M^\frac{2}{3}cp^\frac{1}{3}}{K \pi^2 ( 4 \pi /3 )^\frac{2}{3}} ln ( 0.76 \frac{T_0 - T_w}{T_y - T_w} ) \]
+
+Donde M, p, c, K son propiedades del huevo:
+- M : masa
+- p : densidad
+- c : capacidad calorifica
+- K : conductividad termica
+
+
+- M = 47 gr (para un huevo chico)
+- M = 67 gr (para un huevo grande)
+- p = 1.038 gr/cm3
+- c = 3.7 J/(gr * K)
+- K =  5.4 * 10^3  W/(K*cm)
+- Tw es la temperatura en grados centigrados del agua hirviendo.
+- To es la temperatura original en grados centigrados del huevo antes de entrar al agua.
+
+Implementar la fórmula y calcular t para un huevo tomando:
+- Tw = 100
+- Ty = 70
+- To = 4 (huevo en el refrigerador)
+- To = 20 (huevo temperatura ambiente)
+
+
