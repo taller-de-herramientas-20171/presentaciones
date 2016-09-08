@@ -24,3 +24,4 @@ herramientas computacionales.
 - [[file:ciclos/introduccion.org][Introducción a ciclos]]
 - [[file:ciclos/listas.org][Listas y for]]
 - [[file:ciclos/listas2.org][Listas y ciclos]]
+- [[file:Funciones/python3-1.org][Funciones]]
