@@ -1,0 +1,98 @@
+#-*- mode: org -*-
+
+* Condicionales
+El flujo de programas a menudo tiene que dividirse. 
+Es decir, si una condición se cumple, hacemos una cosa, y si no, hacemos otra cosa.
+
+Los *Enunciados Condicionales* permien cambiar el comportamiento del programa de acuerdo a una condición dada.
+
+La estructura general de una condicional es:
+#+BEGIN_SRC python
+if condition:
+  <enunciados ejecutados si la condición es verdadera>
+else:
+  <enunciados ejecutados si la condición es falsa>
+#+END_SRC
+
+La forma más simple del *if* :
+
+#+BEGIN_SRC python
+if x > 0:
+  print("x is positive")
+#+END_SRC
+
+** Ejecución alternativa
+Tenemos dos alternativas de ejecución y una condición determina cuál ejecutar.
+
+#+BEGIN_SRC python
+if x%2 == 0:
+  print(x, "is even")
+else:
+  print(x, "is odd")
+#+END_SRC
+
+** Condicionales encadenadas
+Tenemos más de dos alternativas de ejecucción.
+
+#+BEGIN_SRC python
+if x < y:
+  print(x, "is less than", y)
+elif x > y:
+  print(x, "is greater than", y)
+else:
+  print(x, "and", y, "are equal")
+#+END_SRC
+
+** Condicionales anidadas
+Una condición puede estar anidada dentro de otra.
+
+#+BEGIN_SRC python
+if x == y:
+  print(x, "and", y, "are equal")
+else:
+  if x < y:
+    print(x, "is less than", y)
+  else:
+    print(x, "is greater than", y)
+#+END_SRC
+
+** Condicionales con operadores lógicos
+Los operadores lógicos sirven para simplificar las condicionales anidadas
+
+#+BEGIN_SRC python
+if 0 < x and x < 10:
+  print("x is a positive single digit.")
+#+END_SRC
+
+** Condicionales en linea
+#+BEGIN_SRC python
+if condition:
+  a = value1
+else:
+  a = value2
+#+END_SRC
+
+#+BEGIN_SRC python
+a = (value1 if condition else value2)
+#+END_SRC
+
+
+
+* Ejercicio
+dna.py
+
+
+La cadena de ADN contiene las letras A, C, G, T, que representan
+
+las bases que componen el ADN.
+
+Pregunta: ¿Cuántas veces se produce una cierta base en la cadena de ADN? 
+
+Por ejemplo, si el ADN es ATGGCATTA, entonces cuántas veces la base A ocurre en esta
+
+cadena, la respuesta es 3.
+
+La subcadena AT aparece 2 veces.
+
+1. Genera una cadena aleatoria de ADN, de longitud aleatoria.
+2. Cuenta el número de veces que aparece una cierta subcadena dentro de dicha cadena.
