@@ -1,1 +1,100 @@
+* Lineamientos para la entrega de proyectos
 
+** Lenguaje
+
+Los proyectos solo se aceptarán en Python, se usará el interprete de la /Python
+Software Foundation/ versión 3.*, los programas que no se ejecuten con éste
+interprete no serán calificados y tendrán cero automáticamente.
+
+
+** Equipos de trabajo
+
+Los proyectos se entregarán por equipos de a lo más 2 personas de
+manera exclusiva, es decir, una misma persona *no puede pertenecer
+a dos grupos de trabajo diferentes* en el mismo proyecto.
+
+
+** Forma de Entrega
+
+Deberán entregar:
+
+- Los archivos fuentes de su programa, con extensión *.py*
+- Cuando sea solicitado, un reporte que contendrá la justificación a las
+  decisiones de diseño que tomen, el archivo deberá estar en formato *.pdf*
+
+Estos y solo estos archivos deberán de ser entregados, i.e. no envíen versiones
+anteriores, archivos de respaldo, prácticas retrasadas, etc.
+
+Este archivo deben enviarlo por correo, a la siguiente dirección:
+=fernanda@ciencias.unam.mx=
+
+con el Subject de la siguiente forma:
+
+*Subject: Proyecto n Herramientas Computacionales*
+
+donde /n/ = número de proyecto con dos cifras.
+
+Esto es con el objeto de enviar sus proyectos de manera automática
+a un directorio. Si su correo no esta formado adecuadamente es probable
+que el filtro lo envíe a otro lado, en éste caso no se garantiza que
+se considere la práctica como entregada.
+
+** Fecha Límite
+
+Sólo se calificarán las practicas que sean recibidas hasta las *23:59 hrs*. (hora
+local) del día especificado como fecha de entrega del proyecto.
+
+Los criterios de hora de entrega serán los que marquen los encabezados de la
+recepción del correo en el servidor, los cuales pueden diferir de la hora en la
+que se envió, ya sea por discordancia entre los relojes como por retrasos en la
+entrega de los correos por parte de los servidores.
+
+Las prácticas que se reciban el día siguiente de la fecha marcada como de
+entrega se calificarán sobre 8, las que se reciban el día siguiente de éste
+serán calificadas sobre 6, y finalmente las prácticas recibidas en fechas
+posteriores se considerarán como no entregadas y tendrán 0 de calificación.
+
+
+** Notas Adicionales
+
+Sus programas deben de ser robustos, esperen lo inesperado, sean un poco
+paranoicos al escribir su código y haganse preguntas como ``que tal si recibo un
+X cuando espero un Y'', un programa debe morir dignamente, diciendo la causa de
+su muerte, i.e. no se vale que se rompa sin decir nada.
+
+Si su programa no corre, automáticamente tiene cero. Sin lugar a reclamaciones.
+
+Si se detectan prácticas ``compartidas'' la calificación
+será  de 0.
+
+El código de sus programas deberá:
+
+- Estar comentado, indicando qué hace cada una de las funciones, qué parametros
+  recibe y devuelve.
+- Además, contener comentarios acerca de la práctica y los nombres y correos de
+  los miembros del equipo.
+- El código deberá ser lo más apegado a la guía de estilo para la codificación de
+  Python, el [[https://www.python.org/dev/peps/pep-0008/][PEP 8]].
+
+Es importante que sigan al pie de la letra las especificaciones de cada práctica
+así como estos lineamientos, las prácticas que no cumplan con alguno de los
+puntos especificados tendrás 0 automáticamente.
+
+
+** Reactivos a calificar
+
+La calificación de las practicas estará basada en los siguientes puntos:
+
+- Implementación: La practica deberá implentar correctamente las funciones,
+  estructuras o algoritmos de acuerdo a los objetivos/actividades de la
+  práctica.
+- Limpieza del código: El código debe estar apegado a los principios
+  de programación como son encapsulamiento, modularización, estandares de
+  programación, etc.
+- Documentación: La documentación de la práctica dentro y fuera del código.
+- Justificación: La justifiación de las decisiones de diseño que tomaron
+  en la elaboración del código cuando sea necesario.
+- Robustez: El programa debera reaccionar adecuadamente a
+  situaciones inesperadas, no debe romperse sin decir que fue lo que
+  paso.
+- Apego a estos lineamientos.

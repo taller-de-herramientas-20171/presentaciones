@@ -1,0 +1,34 @@
+* Proyecto 1 Herramientas Computacionales
+
+** Fecha de Entrega:
+   6 de octubre de 2016
+
+** Agenda de Contactos
+Implementar un sistema que ayude a almacenar y administrar una agenda de
+contactos.
+
+La implementación del sistema debe usar como elemento fundamental alguna
+estructura que permita almacenar la información de los contactos.
+
+Los datos que se deberán almacenar de un contacto son:
+
+- Nombre
+- Número telefonico
+- Fecha de nacimiento
+
+
+La agenda deberá proveer las siguientes funcionalidades:
+
+- Obtener el promedio de edad de los contactos en la agenda
+- Obtener el contacto de mayor edad.
+- Obtener el contacto de menor edad.
+- Búsquedas: las cuales recuperan un contacto a partir de su nombre completo o
+  su número telefonico.
+- Inserción de un contacto
+- Borrado de un contacto, dado su número telefonico o su nombre.
+- Mostrar toda la agenda.
+- Actualizar los datos de un contacto.
+- Mostrar un menú con las operaciones posibles
+
+Cada una de las funcionalidades anteriores debe estar implementada usando
+funciones.
