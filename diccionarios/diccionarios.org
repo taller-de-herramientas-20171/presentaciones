@@ -1,0 +1,341 @@
+#+title: Diccionarios y cadenas
+#+author: Miguel Piña
+#+date: [2016-09-21 mié 15:25]
+#+setupfile: ~/proyectos/org-html-themes/setup/theme-bigblow.setup
+
+* Objetivos
+
+- Conocer qué es un diccionario y como usarlo.
+- Formalizar el uso de cadenas y las operaciones que
+  hay en ellas.
+- Lectura y manipulación de páginas web a través de
+  operaciones para cadenas.
+- Manipulación de hojas de cálculo y su procesamiento.
+
+* Requisitos
+
+Durante esta y las siguientes dos sesiones haremos uso
+de los siguientes conceptos:
+
+- Ciclos
+- Listas
+- Arreglos
+- Condicionales
+- Funciones
+
+* Diccionarios
+
+Un diccionario es una estructura de datos que permite
+el almacenamiento de datos a través de pares llave y
+valor.
+
+#+begin_src python
+diccionario = {'uno':1, 'dos':2, 3:'tres'}
+#+end_src
+
+Se diferencían de las listas y los arreglos por el uso
+de llaves para acceder a los elementos y además que no
+mantienen un orden dentro de sus elementos.
+
+En otros lenguajes de programación se van a conocer a
+los diccionarios por estos nombres:
+
+- HashMap :: Lenguaje *Java*
+- hash :: Lenguaje *Perl*
+- associative array :: Lenguajes *JavaScript* y *PHP*
+- map :: Lenguaje *Clojure*
+
+* Creando diccionarios
+
+Supongamos que necesitamos almacenar las temperaturas
+de tres ciudades: Oslo, Londres y Paris: Para esto
+podemos usar una lista:
+
+#+begin_src python
+temps = [13, 15.4, 17.5]
+#+end_src
+
+*¿Qué problemas hay con esta representación?*
+
+* Creando diccionarios
+
+Usando diccionarios, podemos describir de mejor forma
+la representación anterior:
+
+#+begin_src python
+tmps = {'Oslo':13, 'Londres':15.4, 'Paris':17.5}
+#or
+tmps = dic(Oslo=13, Londres=15.4, Paris=17.5)
+#+end_src
+
+Además podemos agregar nuevos elementos (key-value)
+cuando queramos. Por ejemplo:
+
+#+begin_src python
+tmps['Madrid'] = 26.0
+#+end_src
+
+
+* Operaciones de diccionarios
+
+Usando las llaves, podemos iterar sobre los valores
+almacenados en un diccionario, por ejemplo:
+
+#+begin_src python
+for city in tmps:
+    print("La temperatura de " + city + " es: " + str(tmps[city]))
+#+end_src
+
+Además utilizando la notación *in*, podemos verificar si
+una llave está presente en un diccionario:
+
+#+begin_src python
+if 'Berlín' in tmps:
+    print('Berlín: ' + str(tmps['Berlín']))
+else:
+    print('No hay información de Berlín')
+#+end_src
+
+* Operaciones de diccionarios
+
+Para obtener las llaves de un diccionario podemos usar:
+
+#+begin_src python
+tmps.keys()
+#+end_src
+
+- Nota :: En python 3, la invocación a keys() devuelve
+     un iterador, por lo que hay que hacer el cast a
+     una lista: list(tmps.keys())
+
+De forma similar podemos obtener los valores de un
+diccionario con la siguiente instrucción:
+
+#+begin_src python
+tmps.values()
+#+end_src
+
+Y para eliminar un par (key-value) del diccionario,
+usamos la instrucción *del*:
+
+#+begin_src python
+del tmps['Oslo']
+#+end_src
+
+* Ejemplo: polinomios como diccionarios
+
+Considere el polinomio:
+
+[[file:img/Captura%20de%20pantalla%20de%202016-09-21%2016-32-21.png]]
+
+Los datos asociados con este polinomio puede ser vistos
+como un conjunto de pares *coeficiente-potencia*, donde:
+el coeficiente -1 esta asociado a la potencia 0, el
+coeficiente 1 a la potencia 2 y el coeficiente 3 a la
+potencia 7.
+
+Usando diccionarios podemos modelar el polinomio de la
+siguiente forma:
+
+#+begin_src python
+pol = {0:-1, 2:1, 7:3}
+#+end_src
+
+También podríamos usar una lista:
+
+#+begin_src python
+pol = [-1, 0, 1, 0, 0, 0, 0, 3]
+#+end_src
+
+*¿Qué desventaja tiene usar listas para esta
+ representación?*
+
+* Ejemplo: polinomios como diccionarios
+
+*¿Cómo implementamos una función que evalue un polinomio
+ en un determinado punto /x/?*
+
+
+#+begin_src python
+def poly(data, x):
+    sum = 0.0
+    for power in data:
+        sum += data[power]*x**power
+    return sum
+#+end_src
+
+*¿Como implementamos el ejemplo anterior en una sola
+ linea*?
+
+#+begin_src python
+def poly_1line(data, x):
+    return sum([data[p]**x**p for p in data])
+#+end_src
+
+*¿Como se implementa usando listas?*
+
+* Comprension de diccionarios
+
+Existe un concepto similar a la comprensión de listas
+aplicada a los diccionarios, esto para generar
+rápidamente pares parametrizados de llave-valor usando
+un ciclo *for*, por ejemplo:
+
+#+begin_src python
+from math import factorial
+d = {k: (-1)**k/factorial(k) for k in range(n+1)}
+#+end_src
+
+El diccionario *d*, ahora contiene pares
+*potencia-coeficiente* de un polinomio de Taylor grado *n*
+para e^{-x}.
+
+* Diccionarios con varios por default
+
+Preguntar por llaves que no existen en un diccionario,
+requiere que se le aplique un tratamiento especial.
+
+Consideremos un diccionario polinomial que represente:
+
+[[file:img/ecuacion2.png]]
+
+#+begin_src python
+p1 = {-3:2, -1:-1.5, 2:-2}
+#+end_src
+
+Si intentamos obtener p1[1], esta operación va resultar
+en un KeyError debido a que 1 no es una llave
+registrada en p1.
+
+Para solucionar esto, podemos hacer:
+
+#+begin_src python
+if key in p1:
+   value = p1[key]
+#+end_src
+
+o hacemos:
+
+#+begin_src python
+value = p1.get(key, 0.0)
+#+end_src
+
+donde, si key no está registrado en el diccionario p1,
+nos regresa cero.
+
+* Diccionarios con valores por default
+
+Una tercera opción es usar un diccionario que ya
+permite devolver valores por default:
+
+#+begin_src python
+from collections import defaultdict
+
+def polynomial_coef1_default():
+    return 0.0
+
+p2 = defaultdict(polynomial_coef1_default)
+p2.update(p1)
+#+end_src
+
+El ejemplo anterior es equivalente a:
+
+#+begin_src python
+p2 = defaultdict(lambda: 0.0)
+p2 = defaultdict(float)
+p2.update({2:8})
+p2[1]
+p2[0]
+p2[-2]
+#+end_src
+
+* Ordenando diccionarios
+
+Los valores dentro de un diccionario se encuentran
+desordenados, por ejemplo:
+
+#+begin_src python
+p1 = {-3:2, -1:-1.5, 2:-2}
+print(p1)
+#+end_src
+
+Podemos ordenar las llaves del diccionario usando la
+función sorted, la cuál va a aplicar un ordenamiento
+lexicográfico de las llaves (alfabéticamente para las
+cadenas, orden ascendiente para números).
+
+#+begin_src python
+for key in sorted(p1):
+    print(key, p1[key])
+#+end_src
+
+
+* Ordenando diccionarios
+
+Python también va a proveer una estructura de datos
+para tener diccionarios ordenados de acuerdo a como se
+fueron registrando las llaves:
+
+#+begin_src python
+from collections import OrderedDict
+data = {'Jan 2':33, 'Jan 16':0.1, 'Feb 2':2}
+for date in data:
+    print(date, data[date])
+#+end_src
+
+El orden es importante, por lo que usamos ahora:
+
+#+begin_src python
+data1 = OrderedDict({'Jan 2':33, 'Jan 16':0.1, 'Feb 2':2})
+for date in data1:
+    print(date, data1[date])
+#+end_src
+
+
+* Ejemplo: Datos en diccionarios
+
+*Problema*: El archivo /densities.dat/ contiene una tabla
+de densidades de varias sustancias, las cuáles son
+medidas en g/cm^3.
+Queremos un programa que provee el acceso a dichos
+datos. Un diccionario con el nombre de la sustancia
+como llave y la correspondiente densidad como valor.
+
+*Solucion*:
+
+#+begin_src python
+def read_densities(filename):
+    infile = open(filename, 'r')
+    densities = {}
+    for line in infile:
+        words = line.split()
+        density = float(words[-1])
+        if len(words[:-1]) == 2:
+            substance = words[0] + ' ' + words[1]
+        else:
+            substance = words[0]
+        densities[substance] = density
+    infile.close()
+    return densities
+
+densities = read_densities('densities.dat')
+print(densities)
+#+end_src
+
+* Ejercicio
+
+Dado un archivo con los siguientes valores:
+
+
+      A      B      C      D
+1    11.7  0.035   2017    99.1
+2     9.2  0.037   2019   101.2
+3    12.2    no     no    105.2
+4    10.1  0.031    no    102.1
+5     9.1  0.033   2009   103.3
+6     8.7  0.036   2015   101.9
+
+Almacenar esta en información en diccionarios anidados,
+i.e. si pido data['C'][2], estoy pidiendo el valor de
+la columna *C* en el renglón *2*.
+Imprimir el diccionario.
