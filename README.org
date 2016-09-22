@@ -22,7 +22,7 @@ lineamientos de entrega.
 * Proyectos
 
 - [[file:proyectos/lineamientos.org][Lineamientos de entrega.]]
-- [[file:proyectos/proyecto1.org][Primer proyecto :: Agenda]]
+- [[file:proyectos/proyecto1.org][Primer proyecto: Agenda]]
 
 * Presentaciones
 
