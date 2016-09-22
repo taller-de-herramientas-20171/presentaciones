@@ -1,20 +1,28 @@
-#+title: Presentaciones del taller de herramientas computacionales
+#+title: Taller de herramientas computacionales
 #+author: Miguel Piña, Fernanda Sanchez
 #+date: [2016-08-11 jue 07:52]
 
 Facultad de Ciencias, UNAM.
+
 Licenciatura: Matemáticas aplicadas
+
 Materia: Taller de herramientas computacionales
 
 * Instructores
 
-- Profesora :: Fernanda Sanchez Puig
-- Ayudante :: Miguel Angel Piña Avelino
+- Profesora :: Fernanda Sanchez Puig <fernanda@ciencias.unam.mx>
+- Ayudante :: Miguel Angel Piña Avelino <miguel_pinia@ciencias.unam.mx>
 
 * Introducción
 
 Este repositorio contendrá las presentaciones realizadas en el taller de
-herramientas computacionales.
+herramientas computacionales, así como la descripción de los proyectos y los
+lineamientos de entrega.
+
+* Proyectos
+
+- [[file:proyectos/lineamientos.org][Lineamientos de entrega.]]
+- [[file:proyectos/proyecto1.org][Primer proyecto :: Agenda]]
 
 * Presentaciones
 
