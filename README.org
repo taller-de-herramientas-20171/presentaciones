@@ -25,3 +25,6 @@ herramientas computacionales.
 - [[file:ciclos/listas.org][Listas y for]]
 - [[file:ciclos/listas2.org][Listas y ciclos]]
 - [[file:Funciones/python3-1.org][Funciones]]
+- [[file:Funciones/python3-2.org][Calculando Sumas]]
+- [[file:Funciones/python3-3.org][Condicionales]]
+- [[file:diccionarios/diccionarios.org][Diccionarios]]
