@@ -340,4 +340,5 @@ Dado un archivo con los siguientes valores:
 Almacenar esta en información en diccionarios anidados,
 i.e. si pido data['C'][2], estoy pidiendo el valor de
 la columna *C* en el renglón *2*.
+
 Imprimir el diccionario.
