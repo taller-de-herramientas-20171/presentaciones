@@ -1,0 +1,235 @@
+#+title: Cadenas
+#+author: Miguel Piña
+#+date: [2016-09-26 lun 19:30]
+#+setupfile: ~/proyectos/org-html-themes/setup/theme-bigblow.setup
+
+* Introducción
+
+Varios programas necesitan manipular texto. Por
+ejemplo, el ejercicio anterior (lectura de archivos e
+inserción de datos en un diccionario), requirió hacer
+uso de operaciones de cadenas para manipular las
+lineas.
+
+* Operaciones comunes sobre cadenas
+
+- Especificación de subcadenas
+- Búsqueda de subcadenas
+- Sustitución
+- División de cadenas
+- Transformación a mayúsculas y minúsculas
+- Cadenas como constantes
+- Cadenas con sólo dígitos
+- Espacios en blanco
+- Unión de cadenas
+
+* Operaciones comunes sobre cadenas
+
+- Especificación de subcadenas :: La expresión *s[i:j]*
+     extrae la subcadena que empieza en el caracter con
+     posición i y termina en el caracter j - 1.
+
+#+begin_src python
+s = 'Berlín: 18.4 C at 4 pm'
+s[8:]
+s[8:12]
+s[8:-1]
+s[8:-8]
+#+end_src
+
+* Operaciones comunes sobre cadenas
+
+- Búsqueda de subcadenas :: Para realizar la búsqueda
+     de subcadenas, podemos llamar la función
+     *s.find(s1)*, el cuál regresa un índice indicando
+     donde apareción por primera vez la cadena *s1* en
+     *s*. Si la cadena no se encontró, -1 es regresado.
+
+#+begin_src python
+s.find('Berlín') # Encuentra Berlín en s
+s.find('pm')
+s.find('Oslo')
+#+end_src
+
+
+* Operaciones comunes sobre cadenas
+
+- Busqueda de subcadenas :: Además del caso anterior,
+     es posible usar la sentencia *in* para indicar si
+     una subcadena *s1* está en *s*.
+
+#+begin_src python
+'Berlín' in S
+'Oslo' in s
+
+if 'C' in s:
+    print 'C found'
+else:
+    print 'Not found C'
+#+end_src
+
+* Operaciones comunes sobre cadenas
+
+- Busqueda de subcadenas :: Una tercera operación que
+     podemos aplicar para la búsqueda de subcadenas es
+     verificar si una cadena empieza o termina con una
+     determinada subcadena. Para esto utilizamos las
+     funciones startswith y endswith.
+
+#+begin_src python
+s.startwith('Berlín')
+s.enswith('am')
+#+end_src
+
+* Operaciones comunes sobre cadenas
+
+- Sustitución :: La llamada a la función *s.replace(s1,
+     s2)* permite remplazar la cadena *s1* con la cadena
+     *s2*.
+
+#+begin_src python
+s.remplace(' ', '_')
+s.remplace('Berlín', 'Bonn')
+s.remplace(s[:s.find(':')], 'Bonn')
+#+end_src
+
+* Operaciones comunes sobre cadenas
+
+- División de cadenas :: La función s.split() divide
+     una cadena en subcadenas usando como separador un
+     espacio en blanco (espacio, tabulador o nueva
+     linea).
+
+#+begin_src python
+s.split()
+#+end_src
+
+* Operaciones comunes sobre cadenas
+
+- División por cadena dada :: También es posible
+     separar las cadenas por una cadena particular.
+
+#+begin_src python
+s.split(':')
+#+end_src
+
+- División de cadenas multilinea :: Usando la función
+     s.splitlines(), una cadena multilinea se va a
+     dividir en varias lineas:
+
+#+begin_src python
+t = '1st line\n2nd line\n3rd line'
+print t
+t.splitlines()
+#+end_src
+
+* Operaciones comunes sobre cadenas
+
+- Transformación a mayúsculas y minúsculas :: s.lower()
+     transforma los caracteres de una cadena en
+     minúsculas y s.upper() hace lo equivalente para
+     transformarlas en mayúsculas.
+
+#+begin_src python
+s.lower()
+s.upper()
+#+end_src
+
+* Operaciones comunes sobre cadenas
+
+- Cadenas son constantes :: Una cadena nueca puede ser
+     cambiada, i.e., cualquier cambio siempre resulta
+     en una nueva cadena. El remplazo de caracteres no
+     está permitido.
+
+#+begin_src python
+s[18] = 5
+#+end_src
+
+Si queremos remplazar s[18], debemos de construir una
+nueva cadena:
+
+#+begin_src python
+s[:18] + '5' + s[19:]
+#+end_src
+
+* Operaciones comunes sobre cadenas
+
+- Cadenas con sólo digitos :: Podemos validar sin una
+     cadena contiene sólo digitos o no:
+
+#+begin_src python
+'214'.isdigit()
+'   214'.isdigit()
+'2.14'.isdigit()
+#+end_src
+
+* Operaciones comunes sobre cadenas
+
+- Espacios en blanco :: También podemos verificar si
+     una cadena está compuesta sólo de espacios en
+     blanco (espacio, tabulador, salto de linea),
+     usando la función s.isspace()
+
+#+begin_src python
+'          '.isspace()
+'        \n'.isspace()
+'\t      \t'.isspace()
+#+end_src
+
+* Operaciones comunes sobre cadenas
+
+- Eliminando espacios blancos :: Adicionalmente,
+     podemos quitar los espacios en blanco del
+     principio y el final de una cadena. Esto lo
+     podemos realizar con la función s.strip()
+
+
+#+begin_src python
+line = '        some string   \n'
+line.strip()
+#+end_src
+
+También podemos eliminar espacios en blanco por la
+derecha o por la izquierda:
+
+#+begin_src python
+linea.lstrip()
+linea.rstrip()
+#+end_src
+
+* Operaciones comunes sobre cadenas
+
+- Uniendo cadenas :: Lo opuesto a la división de
+     cadenas es la *unión*, el cuál une elementos de una
+     lista de cadenas con un delimitador especificado.
+
+#+begin_src python
+strings = ['Newton', 'Secant', 'Bisection']
+t = ', '.join(string)
+t
+line = 'This is a line of words separated by space'
+word = line.split()
+line2 = ' '.join(words[:])
+#+end_src
+
+* Ejercicio
+
+- Leyendo coordenadas :: Supongamos que tenemos un
+     archivo con coordenadas /(x, y, z)/ en un espacio
+     tridimensional. El contenido del archivo luce como
+     sigue:
+
+#+begin_src txt
+x=-1.345     y= 0.1112       z= 9.1928
+x=-1.231     y=-0.1251       z= 1001.2
+x= 0.100     y= 1.4344E+6    z=-1.0100
+x= 0.200     y= 0.0012       z=-1.3423E+4
+x= 1.5E+5    y=-0.7666       z=1027
+#+end_src
+
+La meta de este ejercicio es leer este archivo y crear
+una lista de tuplas (x, y, z) para que podamos
+posteriormente usar para hacer cálculos.
+
+*Proveer tres soluciones distintas para este ejercicio.*
