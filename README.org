@@ -36,3 +36,4 @@ lineamientos de entrega.
 - [[file:Funciones/python3-2.org][Calculando Sumas]]
 - [[file:Funciones/python3-3.org][Condicionales]]
 - [[file:diccionarios/diccionarios.org][Diccionarios]]
+- [[file:diccionarios/cadenas.org][Cadenas]]
