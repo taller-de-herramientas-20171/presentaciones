@@ -65,7 +65,7 @@ la representación anterior:
 #+begin_src python
 tmps = {'Oslo':13, 'Londres':15.4, 'Paris':17.5}
 #or
-tmps = dic(Oslo=13, Londres=15.4, Paris=17.5)
+tmps = dict(Oslo=13, Londres=15.4, Paris=17.5)
 #+end_src
 
 Además podemos agregar nuevos elementos (key-value)
@@ -190,8 +190,7 @@ El diccionario *d*, ahora contiene pares
 *potencia-coeficiente* de un polinomio de Taylor grado *n*
 para e^{-x}.
 
-* Diccionarios con varios por default
-
+* Diccionarios con valores por default
 Preguntar por llaves que no existen en un diccionario,
 requiere que se le aplique un tratamiento especial.
 
