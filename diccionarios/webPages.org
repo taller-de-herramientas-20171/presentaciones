@@ -1,0 +1,140 @@
+#+title: Leyendo datos desde páginas web.
+#+author: Miguel Piña
+#+date: [2016-09-28 mié 15:16]
+#+setupfile: ~/proyectos/org-html-themes/setup/theme-bigblow.setup
+
+* Introducción
+
+Python tiene un módulo llamado urllib, el cuál hace
+posible el leer información desde una página web tan
+facil como leemos datos desde un simple archivo. Antes
+de usar esta biblioteca, veamos unos cuantos conceptos
+del mundo del internet que deben ser tocados.
+
+* Sobre las páginas web
+
+- Las páginas web pueden ser vista con un navegador
+  web.
+- Las páginas están asociadas a una URL (Uniform
+  Resource Locator) o URI (Uniform Resource
+  Identifier).
+- Las páginas están escritas en HTML.
+- Los navegadores interpretan HTML para desplegar el
+  contenido de las páginas.
+
+* Curso ultra rápido de HTML
+
+#+begin_src html
+<html>
+  <body bgcolor="orange">
+    <h1>A Very Simple HTML Page</h1> <!-- headline -->
+    Web pages are written in a language called
+    <a href="http://www.w3.org/MarkUp/Guide/">HTML</a>.
+    Ordinary text is written as ordinary text, but when we
+    need links, headlines, lists,
+    <ul>
+      <li><em>emphasized words</em>, or
+        <li> <b>boldface text</b>,
+    </ul>
+    we need to embed the text inside HTML tags. We can also
+    insert GIF or PNG images, taken from other Internet sites,
+    if desired.
+    <hr> <!-- horizontal line -->
+    <img src="http://www.simula.no/simula_logo.gif">
+  </body>
+</html>
+#+end_src
+
+* Curso ultra rápido de HTML
+
+Conceptos generales
+- Está formado por etiquetas <etiqueta></etiqueta>
+- <html> :: indica el tipo del documento
+- <body> :: Indica el contenido
+- <h1> :: Titulo
+- <a> :: Hiperenlaces
+- <ul> :: Listas desordenadas
+- <li> :: Elemento de la lista
+- <hr> :: Linea horizontal
+- <img> :: imagen
+
+* ¿Cómo acceder a las páginas web desde un programa?
+
+*Alternativa 1*: Descargar el archivo HTML y almacenarlo
+con un nombre dado, por ejemplo, webpage.html
+
+#+begin_src python
+import urllib.request
+
+url = 'http://csb.stanford.edu/class/public/pages/sykes_webdesign/05_simple.html'
+urllib.request.urlretrieve(url, filename = "/tmp/foo.html")
+
+urllib.request.
+#+end_src
+
+*Alternativa 2:* Abrir el archivo HTML como un objeto.
+
+#+begin_src python
+infile = urllib.request.urlopen(url) # Tiene los métodos read, readline y readlines
+#+end_src
+
+* Ejemplo: Leyendo archivos de puro texto
+
+Vamos a obtener la información histórica del clima UK a
+través de la siguiente URL:
+
+http://www.metoffice.gov.uk/climate/uk/stationdata/
+
+Si elegimos Oxford, esto nos redirecciona a una como la
+siguiente:
+
+http://www.metoffice.gov.uk/climate/uk/stationdata/oxforddata.txt
+
+* Ejemplo: Leyendo archivos de puro texto
+
+Después de 7 lineas, observamos que los datos están
+compuestos de 8 columnas de números o guiones. Algunos
+números pueden tener añadido * o #, pero eso no
+importa. Las columnas contienen:
+
+- El año.
+- El número del mes.
+- Promedio máximo de temperatura.
+- Promedio mínimo de temperatura.
+- Número total de días con aire frío durante el mes.
+- Total de llueva durante el mes.
+- El total de horas con sol durante el mes.
+
+Esta información puede ser convenientemente almacenada
+en diccionarios con tres llaves principales: place
+(nombre), location (la 2da linea) y los datos. Los
+datos corresponden a un diccionario con dos llaves: año
+y mes.
+
+* Ejercicio: Extrayendo datos desde un HTML
+
+Obtener de la página
+
+http://www.worldclimate.com/cgi-bin/data.pl?ref=N19W099+2100+76679W
+
+
+Los datos contenidos de la tabla de promedios pluviales
+y almacenarlos en un diccionario que tenga la siguiente
+estructura:
+
+#+begin_src python
+dic = {'Jan' : {'mm' : 8.1, 'inches' : 0.3},
+       'Feb' : {'mm' : 5.2, 'inches' : 0.2},
+       ...
+       'YEAR' : {'mm' : 634.3, 'inches' : 25.0}
+       'station' : 'AEROP. INTERNACIONALMEXIC, MEXICO'
+       'location' : '19.43°N 99.00°W'
+       'interval' : '1878 and 1987'}
+#+end_src
+
+Para obtener el archivo deben de utilizar la biblioteca
+*urllib*.
+
+El nombre del archivo a entregar es *diccionario_html.py*
+con el subject de siempre (ajustándolo al número de
+ejercicio actual).
