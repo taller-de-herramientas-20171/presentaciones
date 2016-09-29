@@ -393,3 +393,21 @@ a cero son -60 y 72.
 
 La tarea es escribir un programa que encuentre la suma
 más cercana a cero.
+
+
+* Ejercicio
+
+Solución
+#+begin_src python
+def cercano_a_cero(int_array):
+    cercano_a_cero = [float("inf")]
+    for index, operando1 in enumerate(int_array):
+        for operando2 in list(int_array[index+1:]):
+            suma_ints = [operando1, operando2]
+            if abs(sum(suma_ints)) < abs(sum(cercano_a_cero)):
+                cercano_a_cero = suma_ints
+    return cercano_a_cero
+
+if __name__ == "__main__":
+    print(cercano_a_cero([45, -29, -96, -7, -17, 72, -60]))
+#+end_src
