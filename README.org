@@ -38,3 +38,5 @@ lineamientos de entrega.
 - [[file:diccionarios/diccionarios.org][Diccionarios]]
 - [[file:diccionarios/cadenas.org][Cadenas]]
 - [[file:diccionarios/webPages.org][Páginas web]]
+- [[file:Arreglos/python5-1.org][Graficando curvas]]
+- [[file:Arreglos/python5-2.org][Vectores]]
