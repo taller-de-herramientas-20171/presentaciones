@@ -1,0 +1,402 @@
+#-*- mode: org -*-
+
+* Vectores
+
+- Puntos en el plano: (x,y)
+- Coordenadas en 3 dimensiones: (x,y,z)
+- Colección de n objetos: ("Juan", "Pablo", "Lucia", "Diana")
+
+Decimos que (x_1, x_2, ..., x_n) es un *Vector* de n componentes.
+
+Los vectores son ordenados, importa la posición.
+
+Los vectores en Python:
+#+BEGIN_SRC python
+v1 = [x, y] # list of variables
+v2 = (-1, 2) # tuple of numbers
+v3 = (x1, x2, x3) # tuple of variables
+v4 = [(-i*0.1) for i in range(150)] #150-dimensional
+#+END_SRC
+
+
+#+BEGIN_SRC python
+def f(x):
+    return x**3
+
+n = 5
+dx = 1.0/(n-1)   #espaciado n puntos en [0,1] 
+
+xlist = [i*dx for i in range(n)]
+ylist = [f(x) for x in xlist]
+
+pairs = [[x, y] for x, y in zip(xlist, ylist)]
+#+END_SRC
+
+Las listas serán nuestra elección en lugar de arreglos cuando necesitamos 
+la flexibilidad de agregar o quitar elementos o cuando los elementos 
+pueden ser de diferentes tipos de objetos.
+
+En python los vectores se pueden representar con arreglos.
+
+
+* Arreglos numéricos
+- Homogéneo
+- Eficiencia en memoria, computo y soporte de operaciones.
+- Se debe conocer la dimensión para crear el arreglo.
+- Paquete adicional *NumPy* (Numerical Python).
+- numpy contiene operaciones matemáticas sobre arreglos.
+- Arreglos de mas de una dimensión en lugar de listas de listas.
+
+#+BEGIN_SRC python
+import numpy as np
+a = np.array([1,2,3]) #Convierte una lista en  arreglo.
+a = np.zeros(n) # Crea un arreglo de ceros con longitud n .
+a = np.linspace(p, q, n) # arreglo con n elementos uniformente distribuidos entre p y q.
+#+END_SRC
+
+Los elementos de los arreglos se pueden acceder usando [] igual que las listas.
+
+Tambien se pueden partir como las listas, pero el resultado no es una copia. Son mutables.
+
+a[i:j:s] selecciona los elementos empezando en el índice i hasta antes del j en tamanos s
+
+#+BEGIN_SRC python
+a = [1,2,3,4,5,6,7]
+print a[1:-1:2]
+#+END_SRC
+
+* Vectorización
+Numpy implementa aritmetica para arreglos de cualquier dimensión.
+
+Además de sus propias versiones de funciones matemáticas como sin, cos, etc que
+permiten arreglos como argumentos, lo que lo hace más eficiente.
+
+Operar sobre arreglos directamente se llama *Vectorización*.
+
+Calculando cada elemento del arreglo de manera separada:
+
+#+BEGIN_SRC python
+from math import sin, cos, exp
+import numpy as np
+
+x = np.linspace(0,2,201)
+r = np.zeros(len(x)) 
+
+for i in range(len(x)):
+    r[i] = sin(pi*x[i]) + 2
+
+# Operando arreglos directamente (Vectorizando):
+r = np.sin(np.pi*x) + 2
+#+END_SRC
+
+La Vectorización es muy importante para eficientar los programas en Python
+que realizan cálculos pesados con matrices. 
+
+Da un código más compacto que es más fácil de leer. 
+
+* Vectorización avanzada de Funciones
+Las funciones en Python no pueden trabajar con arreglos, a menos que se le indique de manera explicita.
+
+Para ellos, debemos vectorizar la funcion.
+
+** Vectorización de la función Heaviside
+
+ H(x) = 
+ \begin{cases}
+ 0       & x < 0 \\
+ 1  & x \geq 0 
+  \end{cases}
+
+
+#+BEGIN_SRC python
+def H(x):
+  return (0 if x<0 else 1)
+#+END_SRC
+
+Si intentamos llamar a la función con un arreglo como argumento:
+
+#+BEGIN_SRC python
+import numpy as np
+
+x = np.linspace(-10, 10, 5)
+print(x)
+## array([-10.,  -5.,   0.,   5.,  10.])
+
+print(H(x))
+
+# ValueError: The truth value of an array with more than
+# one element is ambiguous. Use a.any() or a.all()
+#+END_SRC
+
+El problema esta relacionado con la prueba de x < 0, que resulta en un arreglo de valores booleanos,
+
+mientras que la prueba de if requiere un solo valor.
+
+#+BEGIN_SRC python
+b = x < 0
+print(b)
+# array([ True,  True, False, False, False], dtype=bool)
+
+bool(b)  # evaluate b in a boolean context
+# ValueError: The truth value of an array with more than
+# one element is ambiguous. Use a.any() or a.all()
+
+b.any()  # True if any element in b is True
+# True
+b.all()  # True if all elements in b are True
+# False
+#+END_SRC
+
+Los valores de any() y all() no nos sirven ya que queremos tomar los valores uno por uno
+
+dependiendo si x[i] < 0.
+
+Hay varias formas de resolver el problema:
+- Loop explicito.
+- Usar alguna herramienta para vectorizar H(x).
+- Mezclar valores booleanos y puntos flotantes.
+- Vectorizar H(x) de manera manual.
+
+** Usando un loop explícito
+
+#+BEGIN_SRC python
+def H_loop(x):
+    r = np.zeros(len(x))
+    for i in range(len(x)):
+        r[i] = H(x[i])
+    return r
+
+x = np.linspace(-5, 5, 6)
+y = H_loop(x)
+print(y)
+#+END_SRC
+
+
+** Vectorización Automática
+Numpy - Numerical Python contiene métodos para vectorizar de manera automática una función de Python
+que toma valores escalares como argumentos.
+
+#+BEGIN_SRC python
+import numpy as np
+H_vec = np.vectorize(H) 
+#+END_SRC
+
+
+** Mezclando calculos booleanos y flotantes
+Una solución para vectorizar H(x) sería:
+
+#+BEGIN_SRC python
+def H(x):
+   return x >= 0
+#+END_SRC
+
+El valor de retorno es un objeto bool, no un int o float como esperamos.
+
+Sin embargo, el objeto bool funciona bien en operaciones escalares y vectorizados, 
+
+siempre y cuando usemos la salida de H(x) en una expresión aritmética. 
+
+Los valores True y False son interpretados como 1 y 0.
+
+#+BEGIN_SRC python
+x = np.linspace(-1, 1, 5)
+
+print(H(x))
+# array([False, False,  True,  True,  True], dtype=bool)
+
+print(1*H(x))
+# array([0, 0, 1, 1, 1])
+print(H(x) - 2)
+# array([-2, -2, -1, -1, -1])
+
+x = 0.2
+print(H(x))
+# True
+
+print(1*H(x))
+# 1
+
+print(H(x) -2
+# -1
+#+END_SRC
+
+
+** Vectorización Manual
+La vectorización manual se refere a traducir el algoritmo en un conjunto de llamadas a funciones 
+
+en el paquete Numpy de tal manera que no hay loops visibles en el código de Python. 
+
+La última versión de H(x) es una vectorización manual, pero de manera  
+
+más general cuando el resultado no es necesariamente 0 ó 1. 
+
+Hay una receta simple para convertir funciones de la forma:
+
+#+BEGIN_SRC python
+def f(x):
+  if condicion:
+     r = expresion1
+  else:
+     r = expresion2
+  return r
+#+END_SRC
+
+De forma vectorizada:
+
+#+BEGIN_SRC python
+def f_vectorizado(x):
+  x1 = expresion1
+  x2 = expresion2
+  r = np.where(condition, x1, x2) # Regresa un arreglo de la misma longitud que la condición
+  return r
+#+END_SRC
+
+Aplicandolo a la función H(x):
+#+BEGIN_SRC python
+def Hv(x):
+   return np.where(x<0, 0.0, 1.0)
+#+END_SRC
+
+
+** Indexamiento booleano.
+
+La idea es poder indexar un arreglo a, a partir de un arreglo b de valores booleanos.
+
+El resultado es un nuevo arreglo con todos los elementos a[i] donde b[i] es True.
+
+#+BEGIN_SRC python
+a = array([  0. ,   2.5,   5. ,   7.5,  10. ])
+b = a > 5
+print(b)
+# array([False, False, False,  True,  True], dtype=bool)
+print( a[b] ) 
+# array([  7.5,  10. ])
+#+END_SRC
+
+
+** Vectorización de la función Hat
+
+ N(x) = 
+ \begin{cases}
+ 0       & x < 0 \\
+ x      & 0 \leq x < 1 \\
+ 2-x   & 1 \leq x < 2 \\ 
+ 0  & x \geq 2 
+  \end{cases}
+
+
+Su impllementación en Python:
+
+#+BEGIN_SRC python
+def N(x):
+    if x < 0:
+       return 0.0
+    elif 0 <= x < 1:
+       return x
+    elif 1 <= x < 2:
+       return 2 - x
+    elif x >= 2:
+       return 0.0
+#+END_SRC
+
+Esta función no funciona con arreglos como argumentos.
+
+Según lo que vimos, 
+#+BEGIN_SRC python
+N_vec = np.vectorize(N)
+#+END_SRC
+
+Un problema es que se tienen múltiples ramas de ejecución.
+
+Usando la estrategia anterior. 
+Podemos reemplazar:
+
+#+BEGIN_SRC python
+if condition1:
+   r = <expression1>
+elif condition2:
+   r = <expression2>
+elif condition3:
+   r = <expression3>
+else:
+   r = <expression4>
+#+END_SRC
+
+por:
+
+#+BEGIN_SRC python
+x1 = <expression1>
+x2 = <expression2>
+x3 = <expression3>
+x4 = <expression4>
+r = np.where(condition1, x1, x4)  # initialize with "else" expr.
+r = np.where(condition2, x2, r)
+r = np.where(condition3, x3, r)
+#+END_SRC
+
+#+BEGIN_SRC python
+def Nv(x):
+    r = np.where(x < 0,      0.0,  0.0)
+    r = np.where(0 <= x < 1, x,    r)
+    r = np.where(1 <= x < 2, 2-x,  r)
+    r = np.where(x >= 2,     0.0,  r)
+    return r
+#+END_SRC
+
+La condición 0 \leq x < 1 es equivalente a
+0 \leq x *and* x < 1
+
+no funciona porque el opreador *and* no recibe arreglos como argumentos.
+
+Podemos usar la función *logical_and* de numpy.
+
+#+BEGIN_SRC python
+def Nv(x):
+    condition1 = x < 0
+    condition2 = np.logical_and(0 <= x, x < 1)
+    condition3 = np.logical_and(1 <= x, x < 2)
+    condition4 = x >= 2
+    r = np.where(condition1,      0.0,  0.0)
+    r = np.where(condition2, x,    r)
+    r = np.where(condition3, 2-x,  r)
+    r = np.where(condition4,     0.0,  r)
+    return r
+#+END_SRC
+
+
+Usando indexamiento booleano tenemos:
+#+BEGIN_SRC python
+def Nv2(x):
+    condition1 = x < 0
+    condition2 = np.logical_and(0 <= x, x < 1)
+    condition3 = np.logical_and(1 <= x, x < 2)
+    condition4 = x >= 2
+
+    r = np.zeros(len(x))
+    r[condition1] = 0.0
+    r[condition2] = x[condition2]
+    r[condition3] = 2-x[condition3]
+    r[condition4] = 0.0
+return r
+#+END_SRC
+
+Se puede probar usando arreglos muy muy grandes, que el indexamiento booleano es un método más eficiente.
+
+
+
+
+* Ejercicio
+Dada la función Indicador:
+
+
+I(x;L,R) =
+  \begin{cases}
+    1       & x \in [L,R], \\
+    0  & \quad \text{de otra forma }  \\
+  \end{cases}
+
+
+Hacer la implementación vectorizada I_vec(x, datos, xmax) de la función, 
+donde x es una matriz y [L,R] es un intevalo.
+
+

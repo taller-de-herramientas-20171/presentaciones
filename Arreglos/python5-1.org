@@ -1,1 +1,273 @@
+#-*- mode: org -*-
 
+
+
+* Graficando Curvas
+La visualización de una función f(x) se realiza elaborando la curva y = f(x) en un sistema de coordenadas xy. 
+
+Técnicamente, se traza una curva dibujando líneas rectas entre los n puntos de la curva. 
+
+Cuantos más puntos usamos, más suave aparece la curva.
+
+El paquete estandard para graficar curvas en python es *Matplotlib*.
+
+** Ejemplo 
+Vamos a dibujar la curva y = t^2 exp(-t^2) para valores de t entre 0 y 3. 
+
+Primero generamos coordenadas equidistantes de t, digamos 51 valores (50 intervalos). 
+
+Entonces calculamos los valores de y correspondientes a estos puntos, 
+
+y luego llamamos a la función plot(t, y) para dibujar la curva.
+
+#+BEGIN_SRC python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def f(t):
+    return t**2*np.exp(-t**2)
+
+t = np.linspace(0, 3, 51)
+y = np.zeros(len(t))
+
+for i in range(len(t)):
+   y[i] = f(t[i])
+
+plt.plot(t, y)
+plt.show()
+
+input("wait")
+#+END_SRC
+
+
+*** Decorando la gráfica
+Los ejes X e Y en la curva deben tener etiquetas.
+
+Además, la curva debe ser identificado con una leyenda. 
+
+Es posible que queramos controlar la extensión de los ejes.
+
+#+BEGIN_SRC python
+plt.plot(t, y)
+plt.xlabel("t")
+plt.ylabel("y")
+plt.legend(["t^2*exp(-t^2)"])
+plt.axis([0, 3, -0.05, 0.6])   # [tmin, tmax, ymin, ymax]
+plt.title("Mi primer Matplotlib")
+plt.show()
+
+input("wait")
+#+END_SRC
+
+
+*** Graficando múltiples curvas
+Una tarea común es comparar dos o más curvas, lo que requiere que se dibujen múltiples curvas. 
+
+Supongamos que queremos trazar las dos funciones f1(t) = t^2 exp(-t^2) y f2(t) = t^4 exp(-t^2). 
+
+Podemos entonces graficar dos veces, uno para cada función. 
+
+#+BEGIN_SRC python
+def f1(t):
+    return t**2 * math.exp(-t**2)
+
+def f2(t):
+    return t**2*f1(t)
+
+t = np.linspace(0, 3, 51)
+y1 = f1(t)
+y2 = f2(t)
+
+plt.plot(t, y1, "r-") # rojo(r) linea(-)
+plt.plot(t, y2, "bo") # azul(b) circulos(o)
+plt.xlabel("t")
+plt.ylabel("y")
+plt.legend(["t^2*exp(-t^2)", "t^4*exp(-t^2)"])
+plt.title("Graficando dos curvas en la misma gráfica")
+plt.show()
+
+input("wait")
+#+END_SRC
+
+*** Poniendo muchas graficas en una figura
+También podemos poner gráficas  juntas en una sola figura con r filas y c columnas de gráficas. 
+
+#+BEGIN_SRC python
+plt.figure()  # make separate figure
+plt.subplot(2, 1, 1)
+t = np.linspace(0, 3, 51)
+y1 = f1(t)
+y2 = f2(t)
+
+plt.plot(t, y1, "r-", t, y2, "bo")
+plt.xlabel("t")
+plt.ylabel("y")
+plt.axis([t[0], t[-1], min(y2)-0.05, max(y2)+0.5])
+plt.legend(["t^2*exp(-t^2)", "t^4*exp(-t^2)"])
+plt.title("Top figure")
+
+plt.subplot(2, 1, 2)
+t3 = t[::4]
+y3 = f2(t3)
+
+plt.plot(t, y1, "b-", t3, y3, "ys" )
+plt.xlabel("t")
+plt.ylabel("y")
+plt.axis([0, 4, -0.2, 0.6])
+plt.legend(["t^2*exp(-t^2)", "t^4*exp(-t^2)"])
+
+plt.show()
+
+input("wait")
+#+END_SRC
+
+
+* Errores de graficación
+Las técnicas que se muestran pueden fallar al graficar ciertas funciones. 
+- Funciones definidas por intervalos.
+- Funciones que varían rápidamente.
+
+** Funciones definidas por intervalos
+Estas funciones tienen diferentes definiciones en diferentes intervalos a lo largo del eje x. 
+
+La función resultante, puede tener discontinuidades.
+
+Debemos tener  cuidado cuando se grafican tales funciones.
+
+El problema es que el mecanismo de graficación dibuja líneas rectas entre las coordenadas en la curva de la función
+
+y estas líneas rectas no puede producir una visualización correcta de la función. 
+
+
+*** Ejemplo: Función Heaviside
+\[ H(x) = 
+ \begin{cases}
+ 0       & x < 0 \\
+ 1  & x \geq 0 
+  \end{cases}
+\]
+
+#+BEGIN_SRC python
+def H(x):
+  return (0 if x<0 else 1)
+#+END_SRC
+
+Primer intento de graficación:
+#+BEGIN_SRC python
+from matplotlib import pyplot as plt
+import numpy as np
+
+def H(x):
+    return (0 if x<0 else 1)
+
+
+x = np.linspace(-10, 10, 9)
+y = list(map(H,x))
+plt.xlim([x[0],x[-1]])
+plt.ylim([-0.1, 1.1])
+plt.plot(x, y)
+plt.show()
+
+input("wait")
+#+END_SRC
+
+Sin embargo, con pocos puntos en x no podemos describir el salto de 0 a 1 en x = 0.
+
+Usando más puntos, digamos 50 entre -10 y 10, la curva se ve mejor. 
+
+#+BEGIN_SRC python
+x = np.linspace(-10, 10, 50)
+#+END_SRC
+
+Aunque el salto todavía no se ve vertical. Entonces más puntos seguiría mejorando la curva.
+
+Estrictamente hablando, lo mejor es dibujar dos líneas que vayan de (−10, 0) a (0, 0), y de (0, 1) a (10, 1).
+#+BEGIN_SRC python
+plt.plot([-10, 0, 0, 10], [0, 0, 1, 1])
+# puntos explicitos en x
+#+END_SRC
+
+Para evitar la línea vertical, debemos dibujar dos líneas distintas.
+#+BEGIN_SRC python
+plt.plot([-10,0], [0,0], ’r-’, [0,10], [1,1], ’r-’)
+#+END_SRC
+
+Funciones discontinuas se visualizan con líneas verticales en los saltos.
+
+
+* Funciones con rapidas variaciones
+Veamos la función \[f(x) = sin(1/x) ]\ usando 10 y 100 puntos.
+
+#+BEGIN_SRC python
+from matplotlib import pyplot as plt
+import numpy as np
+import math
+
+def f(x):
+    return math.sin(1.0/x)
+
+x1 = np.linspace(-1, 1, 10)
+x2 = np.linspace(-1, 1, 1000)
+y1 = list(map(f, x1))
+y2 = list(map(f, x2))
+plt.plot(x1, y1, 'r', label= str(len(x1)) + " points")
+plt.plot(x2, y2, 'b', label= str(len(x2)) + " points")
+
+plt.show()
+
+input("wait")
+#+END_SRC
+
+
+El uso de sólo 10 puntos da una gráfica equivocada de la función, 
+
+ya que la función oscila cada vez más rápido a medida que se acerca al origen. 
+
+Con 1000 puntos obtenemos una impresión de estas oscilaciones, 
+
+pero la precisión de la gráfica en la cercanía del origen sigue siendo pobre. 
+
+Una gráfica con 100000 puntos tiene una mayor precisión, 
+
+pero las oscilaciones extremadamente rápidas cerca del origen solo daría una gran mancha.
+
+
+Otro problema con la función es que debemos tener cuidado si definimos un  vector x que contiene x = 0, 
+
+pues nos dará una división entre cero, entonces debemos excluir este punto de la definición de la función 
+
+y trabajar en un dominio x \in [-1, \epislon] ∪ [\epsilon, 1], con \epsilon pequeño.
+
+
+
+Se debe analizar la función para asegúrarnos de usar un conjunto apropiado de coordenadas x largo de la curva. 
+
+Un primer paso es duplicar el número de coordenadas x, y comprobar si esto cambia la gráfica. 
+
+Si no es así, es probable que tenga un conjunto adecuado de coordenadas x.
+
+
+
+
+
+
+* Ejercicio
+** Grafica la aproximación polinomial de Taylor al sin(x).
+ 
+La función seno pueden ser aproximadas por un polinomio de acuerdo con la
+
+siguiente fórmula:
+\[
+sin(x) ≈ S(x; n) = \sum_{j=0}^n (-1)^j \frac{ x^{2j+1}}}{(2j + 1)!}
+
+La expresión (2j + 1)! es la función factorial (math.factorial puede calcular esta cantidad). 
+
+El error en la aproximación S(x; n) disminuye a medida que n aumenta y en el límite se aproxima a la función sen(x). 
+
+Visualizar la calidad de distintas aproximaciones S(x; n) cuando n aumenta.
+
+- Escribir una función de Python S(x, n) que calcula S(x; n). 
+
+Utilizar un enfoque directo que calcule cada término tal y como está en la fórmula.
+
+- Graficar sen(x) en el intervalo [0, 4 \pi] junto con las aproximaciones S(x; 1), S(x, 2), S(x, 3), S(x; 6), y S(X; 12) .
