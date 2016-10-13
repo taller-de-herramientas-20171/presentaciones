@@ -40,3 +40,5 @@ lineamientos de entrega.
 - [[file:diccionarios/webPages.org][Páginas web]]
 - [[file:Arreglos/python5-1.org][Graficando curvas]]
 - [[file:Arreglos/python5-2.org][Vectores]]
+- [[file:Arreglos/python5-3.org][Matrices]]
+- [[file:clases/introduccion.org][Clases]]
