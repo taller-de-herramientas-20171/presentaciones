@@ -1,0 +1,100 @@
+#+title: Clases
+#+author: Miguel Piña
+#+date: [2016-10-10 lun 15:25]
+#+setupfile: ~/proyectos/org-html-themes/setup/theme-bigblow.setup
+
+* Introducción
+
+- Permite agregar un conjunto de datos (variables) junto
+  a un conjunto de funciones operando sobre esos datos.
+- La meta es crear código "más modular".
+- Permite modelar cosas del mundo real de forma más
+  sencilla.
+- Modelar el problema usando clases ayuda a entender el
+  problema y simplificar el modelado de las funciones y
+  los datos.
+- Gran parte del código escrito en el mundo está hecho
+  en lenguajes orientado a objetos.
+- Python permite trabajar con clases y objetos de forma
+  sencilla.
+
+* Clases
+
+- Las clases se declaran de la siguiente forma:
+
+#+begin_src python
+class Nombre(clase_padre):
+#+end_src
+
+- Todas las cases "/heredan/" de una clase genérica llamada
+  *object*.
+- Dentro de una clase tenemos *atributos* y *funciones*.
+- Para el nombre de las clases se debe utilizar *CamelCase*.
+
+
+* Clases
+
+Veamos la estructura de una clase dummy:
+
+#+begin_src python
+class Dummy(object):
+
+    def __init__(self, nombre="dummy"):
+        self.nombre = nombre
+
+    def print_dummY(self):
+        print(self.nombre)
+#+end_src
+
+- Hereda de *object*.
+- Tiene una función llamada /__init__/, la cuál es la
+  conocida como constructor de la clase. Esta función
+  se encarga de *inicializar* los atributos de la clase
+  cuando se genera una nueva instancia (objeto).
+- Todas las funciones de una clase, deben llevar como
+  parámetro la palabra reservada *self*.
+- Todos los atributos de la clase están precedidos de
+  la palabra *self*.
+
+* __init__
+
+- La función __init__ es un constructor de la clase,
+  esto quiere decir que en el momento de crear una
+  instancia de la clase, esta función será llamada
+  automáticamente.
+- Permite recibir parámetros que pueden ser utilizados
+  para inicializar los atributos de la clase.
+- Todas las instrucciones definidas en esta función,
+  serán ejecutadas al momento de crear una instancia de
+  clase (o lo que es lo mismo, crear un objeto).
+
+La inicialización de un objeto, se realiza de la
+siguiente forma:
+#+begin_src python
+dummy = Dummy("foo")
+#+end_src
+
+* Self
+
+La palabra *self* es utilizada dentro de las funciones de
+clase para indicar que a través de esta, va a hacer
+referencia a los valores propios de una instancia de
+clase.
+
+Podemos observar esto en el siguiente ejemplo:
+
+#+begin_src python
+class Dummy(object):
+
+    def __init__(self, nombre="dummy"):
+        self.nombre = nombre
+
+    def print_dummY(self):
+        print(self.nombre)
+dummy = Dummy("Foo")
+dummy.print_dummY()
+#+end_src
+
+Algo que hay que notar, es que self ya no es invocado
+en el exterior, i.e., cuando se utiliza con una
+instancia de la clase.
