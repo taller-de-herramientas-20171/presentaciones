@@ -1,0 +1,277 @@
+#+title: Programación orientada a objetos
+#+author: Miguel Piña
+#+date: [2016-10-17 lun 11:19]
+#+setupfile: ~/proyectos/org-html-themes/setup/theme-bigblow.setup
+
+* Introducción
+
+Uno de los conceptos fundamentales al trabajar con
+clases es el de la programación orientada a
+objetos. Este concepto se conoce como paradigma de
+programación en el cuál todo lo que existe dentro del
+lenguaje de programación es un objeto.
+
+Python no es un lenguaje totalmente orientado a
+objetos, ya que provee soporte para otros paradigmas.
+
+* Conceptos fundamentales
+
+Conceptos básicos de la programación orientada a
+objetos:
+
+- Clase :: Definiciones de las propiedades y
+     comportamiento de un tipo de objeto concreto.
+- Atributos :: Características de la clase
+- Métodos :: Algoritmo asociado a una clase cuya
+     ejecución está asociada a una instancia particular
+     de alguna clase.
+- Instanciación :: Lectura de las definiciones de la
+     clase y la creación de un objeto a partir de
+     ella.
+- Objeto :: Entidad provista de un conjunto de
+     propiedades o atributos (datos) y de
+     comportamiento o funcionalidad (métodos).
+
+* Conceptos fundamentales
+
+Hemos visto que en python la declaración de una clase
+se realiza de la siguiente forma:
+
+#+begin_src python
+class Persona(object):
+
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    def imprime_edad(self):
+        print("Edad: {}".format(self.edad))
+
+    def imprime_nombre(self):
+        print("Nombre: {}".format(self.nombre))
+#+end_src
+
+
+* Conceptos fundamentales
+
+Del ejemplo anterior podemos observar lo siguiente:
+
+- Atributos :: La clase Persona tiene dos atributos:
+
+#+begin_src python
+self.nombre
+self.edad
+#+end_src
+
+- Métodos :: La clase Persona tiene tres métodos:
+
+#+begin_src python
+def __init__(self, nombre, edad):
+def imprime_edad(self):
+def imprime_nombre(self):
+#+end_src
+
+* Conceptos fundamentales
+
+La forma de instanciar un objeto la hacíamos de la
+siguiente forma:
+
+#+begin_src python
+persona = Persona('Miguel', 26)
+persona.imprime_edad()
+persona.imprime_nombre()
+#+end_src
+
+* Características de la programación orientada a objetos
+
+Recapitulando, un objeto es una instancia particular de
+una clase que contiene atributos que permiten
+identificarlo y distinguirlo frente a otros objetos
+pertenecientes a la misma o distintas clases.
+
+Además de tener mecanismos de interacción a los cuales
+vamos a llamar métodos que van a favorecer la
+interacción entre los distintos objetos que estén en un
+programa.
+
+
+* Encapsulamiento
+
+Se denomina encapsulamiento al olcutamiento del estado,
+es decir, de los datos asociados de un objeto de manera
+que sólo pueda cambiar mediante las operaciones.
+
+En general tenemos los siguiente tipos de
+encapsulación en python:
+
+- Abierto :: Hace que el miembro de la clase pueda ser
+  accedido desde el exterior de la Clase y cualquier
+  parte del programa.
+- Protegido :: Solo es accesible desde la Clase y las
+  clases que heredan (a cualquier nivel).
+- Cerrado :: Solo es accesible desde la Clase.
+
+* Encapsulamiento abierto
+
+#+begin_src python
+class Persona(object):
+
+    def __init__(self):
+        self.nombre = ""
+
+class Agenda(object):
+
+    def __init__(self):
+        self.lista = []
+
+    def agrega_persona(self, nombre):
+        p = Persona()
+        p.nombre = nombre
+        self.lista.append(p)
+#+end_src
+
+* Herencia
+
+La *herencia* es un mecanismo de la programación
+orientada a objetos que sirve para crear clases nuevas
+a partir de clases preexistentes. Se toman (*heredan*)
+atributos y comportamientos de las clases viejas y se
+los modifica para modelar una nueva situación.
+
+La clase *padre* se llama clase base y la que se
+construye a partir de ella es una clase derivada.
+
+Para indicar el nombre de *la clase base*, se la pone
+entre paréntesis a continuación del nombre de la clase
+(en lugar de la expresión object que poníamos
+anteriormente; en realidad *object* es el nombre de la
+clase base genérica).
+
+* Herencia
+
+#+begin_src python
+class Persona(object):
+    def __init__(self, nombre):
+        self.nombre = nombre
+    def __str__(self):
+        return "Nombre: {}".format(self.nombre)
+
+class Estudiante(Persona):
+    def __init__(self, nombre, no_cuenta):
+        Persona.__init__(self, nombre)
+        self.no_cuenta = no_cuenta
+
+class EstudianteMatematicas(Estudiante):
+    def __init__(self, nombre, no_cuenta, asignatura):
+        Estudiante.__init__(self, nombre, no_cuenta)
+        self.asignatura = asignatura
+    def __str__(self):
+        return "Nombre: {}\nNoCuenta: {}\nAsignatura: {}".format(self.nombre, self.no_cuenta, self.asignatura)
+#+end_src
+
+* Encapsulamiento protegido
+
+- Protegido :: Solo es accesible desde la Clase y las
+  clases que heredan (a cualquier nivel).
+
+En python, el encapsulamiento protegido es una
+convención, en el que los nombres de las
+variables/métodos deben iniciar con un underscore.
+
+#+begin_src python
+class Usuario(object):
+    def __init__(self, usuario, contraseña):
+        self.usuario = usuario
+        self._contraseña = contraseña
+#+end_src
+
+* Encapsulamiento cerrado
+- Cerrado :: Solo es accesible desde la Clase.
+
+En python, el encapsulamiento cerrado es declarado con
+un doble underscore al principio de cada
+variable/método
+
+#+begin_src python
+class Persona(object):
+    def __init__(self, nombre, fecha):
+        self.nombre = nombre
+        self.fecha = fecha
+    def __calcula_edad(self):
+        hoy = datetime.today()
+        return hoy.year - self.fecha_nac.year - \
+            ((hoy.month, hoy.day) < (self.fecha_nac.month, self.fecha_nac.day))
+    def imprime_edad(self):
+        print(self.__calcula_edad())
+#+end_src
+
+
+
+* Polimorfismo
+
+El concepto de *polimorfismo* (del griego *muchas formas*)
+implica que si en una porción de código se invoca un
+determinado método de un objeto, podrán obtenerse
+distintos resultados según la clase del objeto. Esto se
+debe a que distintos objetos pueden tener un método con
+un mismo nombre, pero que realice distintas
+operaciones.
+
+En clases anteriores, varias veces utilizamos las
+posibilidades provistas por el polimorfismo, sin
+haberle puesto este nombre.
+
+Se vio, por ejemplo, que es posible recorrer cualquier
+tipo de secuencia (ya sea una lista, una tupla, un
+diccionario, un archivo o cualquier otro tipo de
+secuencia) utilizando la misma estructura de código
+(for elemento in secuencia).
+
+* Polimorfismo
+
+#+begin_src python
+def frecuencias(secuencia):
+    """ Calcula las frecuencias de aparición de los elementos de
+        la secuencia recibida.
+        Devuelve un diccionario con elementos: {valor: frecuencia}
+    """
+    frec = dict()
+    for elemento in secuencia:
+        frec[elemento] = frec.get(elemento, 0) + 1
+    return frec
+
+frecuencias(["peras", "manzanas", "peras", "manzanas", "uvas"])
+frecuencias((1,3,4,2,3,1))
+frecuencias("Una frase")
+ran = range(3, 10, 2)
+frecuencias(ran)
+frecuencias(4)
+#+end_src
+
+* Ejercicio
+
+*Modelado de vehículos*
+
+Implementa usando clases y herencia las siguientes instrucciones:
+
+- Modelar una clase que represente de forma genérica un
+  vehículo. Esta clase debe de tener métodos y atributos.
+- Crear clases que representen lo siguiente:
+  - Automóvil
+  - Bicicleta
+  - Motocicleta
+  - Velero
+  - Barco
+
+Cada una de las clases anteriores debe tener métodos y
+atributos que representen cada uno de estos
+objetos. Además deben de heredar las propiedades de la
+clase que representa el vehículo.
+
+- Crear un menú que permita llevar un inventario de los
+  vehículos que una persona puede tener, este menú debe
+  de proveer las siguientes operaciones
+  - Crear un vehículo
+  - Imprimir la cantidad de vehículos por tipo
+  - Imprimir una lista con los vehículos en existencia
+  - Eliminar un vehículo
