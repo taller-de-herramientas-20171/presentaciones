@@ -42,3 +42,4 @@ lineamientos de entrega.
 - [[file:Arreglos/python5-2.org][Vectores]]
 - [[file:Arreglos/python5-3.org][Matrices]]
 - [[file:clases/introduccion.org][Clases]]
+- [[file:clases/objetos.org][Objetos y herencia]]
