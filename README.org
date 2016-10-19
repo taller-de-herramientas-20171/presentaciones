@@ -23,6 +23,7 @@ lineamientos de entrega.
 
 - [[file:proyectos/lineamientos.org][Lineamientos de entrega.]]
 - [[file:proyectos/proyecto1.org][Primer proyecto: Agenda]]
+- [[file:proyectos/proyecto2.org][Segundo proyecto: Estadísticas de índice de masa corporal]]
 
 * Presentaciones
 
