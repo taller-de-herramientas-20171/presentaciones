@@ -1,0 +1,93 @@
+#+title: Modelando un videojuego usando clases
+#+author: Miguel Piña
+#+date: [2016-10-19 mié 15:40]
+#+setupfile: ~/proyectos/org-html-themes/setup/theme-bigblow.setup
+
+* Algunas cosas sobre videojuegos
+
+- Software creado para el entretenimiento en general y
+  basado en la interacción entre una o más personas y
+  un aparato que ejecuta dicho videojuego.
+
+- Existen varios tipos de videojuegos: acción,
+  aventuras, drama, terror, deportes, etc.
+
+- En python también es posible desarrollar videojuegos,
+  en 2D existe una biblioteca pygame que facilita la
+  creación de estos, mientras que en 3D es necesario
+  usar otras herramientas como Panda3D o Unity3D.
+
+*¿Qué videojuegos conoces o te gustan más?*
+
+* Desarrollando un videojuego simple en python
+
+Para finalizar la sección de clases y objetos, vamos a
+crear un pequeño juego en Python. El juego a modelar es
+el *Pong*, un juego tan viejo y mítico.
+
+[[file:img/pong.png]]
+
+* Como funciona Pong
+
+En pseudocódigo podemos modelar el funcionamiento del
+Pong.
+
+#+begin_src python
+Inicializar en una dirección aleatoria la pelota
+Mientras el juego no termine hacer:
+   - Actualizar la posición de la pelota
+     Recibir el movimiento de la pala usuario si hubo
+   - Si la pelota choca con alguna de las palas, moverse
+     en dirección contraria
+   - Si la pelota choca contra la pared superior o
+     inferior, moverse en dirección contraria
+   - Si la pelota choca con la pared izquierda o derecha,
+     incrementar el puntaje del jugador contrario
+   - Dejar que la inteligenciá artificial mueva la pala
+     del caracter no controlable
+#+end_src
+
+* Pong
+
+Sabiendo el funcionamiento básico de nuestro juego,
+vamos a modelar las clases que necesita nuestro
+videojuego, ¿cuáles son dichas clases?
+
+- La pala para golpear la pelota
+- La pelota
+- Una arena o cancha
+
+¿Qué métodos tienen cada uno de los objetos anteriores?
+
+* Pong
+** Pala
+*Atributos de pala*
+- Imagen
+- Posición
+- velocidad
+
+*Métodos de pala*
+- mover_pala
+- IA_response
+
+** Pelota
+*Atributos*
+- Imagen
+- Posición
+- Velocidad
+
+*Métodos de pelota*
+- actualizar
+
+* Pong
+
+Con lo anterior vamos a analizar el código del archivo
+Pong, el cuál describe la modelación anterior. Además
+hace uso de la biblioteca *pygame* que es utilizada para
+crear juegos en 2 dimensiones.
+
+Para instalar pygame hay que ejecutar la siguiente
+instrucción:
+#+begin_src sh
+sudo pip3 install pygame
+#+end_src
