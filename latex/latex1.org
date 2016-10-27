@@ -1,0 +1,285 @@
+#-*- mode: org -*-
+
+* Tex
+- TEX es un programa informático creado por Donald E. Knuth. 
+- Dirigido a la composición de texto y fórmulas matemáticas. 
+- Knuth empezó a escribir el motor de TEX en 1977
+- TEX como lo conocemos hoy fue lanzado en 1982.
+- Es extremadamente estable y se puede ejecutar en diferentes de computadoras.
+- El número de versión es TEX converge hacia PI y ahora está en 3.141592653.
+
+* Latex
+- LATEX fue originalmente escrito por Leslie Lamport. 
+- Utiliza TEX como su motor para composición tipográfica
+- Látex se mantiene por Frank Mittelbach.
+
+
+* Filosofía
+- LATEX toma el papel del diseñador de libros y usa TEX usa como máquina de composición. 
+- Se tiene que describir la estructura lógica del escrito.
+- Estética- "Si un documento se ve bien artísticamente, está bien diseñado."
+- Un documento ha de ser leído y no colgado en una galería de imágenes.
+- La legibilidad y comprensibilidad es mucho más importante que el diseno.
+- Ejemplos:
+  - El tamaño de la letra
+  - La estructura de capítulos y secciones deben ser claras.
+  - La longitud de la línea tiene que ser corta
+- LATEX elige la disposición más adecuada.
+
+Hay dos tipos de procesadores de texto:
+- Los que van mostrando el resultado de la edición en la misma pantalla conforme se va escribiendo - Word.
+- Los que funcionan con comandos de control y que ejecutan un programa para formatear el texto - LaTex.
+
+Ventajas y Desventajas:
+- Los primeros son de tipo *intérprete*: Fácil de usar, detección temprana de errores, pero toma decisiones de formato por tí.
+- Los segundos de tipo *compilador*: manejo preciso de formato, requiere un mayor nivel de abstracción.
+
+* Instalación
+En Linux se puede encontrar el paquete *texlive* en la mayoría de los repositorios. 
+
+Después se puede utilizar un editor de texto para escribir y compilar los archivos .tex con pdflatex desde la línea de comandos.
+
+* Ejemplo básico
+#+BEGIN_SRC python
+\documentclass{article}
+\begin{document}
+  Hola!!
+\end{document}
+#+END_SRC
+
+* Ambientes para formato
+Los ambientes definen los márgenes, componentes, renglones, párrafos, etc.
+
+- Reporte: *report* Textos menos formales que un libro o un articulo. No tiene capítulos, agrupa por secciones.
+- Artículo: *article* Usado para entrega de tareas, manuales, etc. Permite escribir en dos columnas.
+- Libro: *book* Infraestructura para libros, capitulos, secciones, etc. Permite formato de impresión por los dos lados.
+- Acetatos: *seminar* Letras grandes.
+- Cartas: *letter* Acomoda el remitente, firma, etc.
+
+Un archivo fuente de texto para LaTex consiste de:
+- Una especificación del ambiente: \documentclass{report}
+- Preámbulo donde se especifican paquetes adicionales: \usepackage[utf8x]{inputenc}, usepackage{amsmath}
+- El documento empieza con: \begin {document} y termina con: \end {document}.
+- Entre estas dos marcas, hay texto o comandos de latex.
+
+
+* Comandos
+Los comandos de LATEX son sensibles a mayúsculas y minúsculas, y toman uno de los dos formatos siguientes:
+- Inician con una barra invertida \ y luego un nombre que consiste solamente de letras. 
+- Se agrega una estrella al nombre del comando.
+
+#+BEGIN_SRC python
+\command[optional parameter]{parameter}
+
+Gordito es \textbf{mejor}!
+
+Quiero una nueva linea aqui. \newline Gracias.
+#+END_SRC
+
+Tipos de comandos:
+- Comandos de ambiente: Delimitan un texto y le aplican reglas. Los que estan entre \begin {...} y \end {...}
+  - \begin {document}, \end {document}
+  - \begin{center}, end{center}
+- Comandos que marcan el inicio y el final de cierto tipo de datos.
+  - $ ... $
+  - \ [ ... \ ]
+- Comandos de Estado: Cambian el ambiente.
+  - \large
+  - {\large Prueba grandota}
+- Comandos que actuan sobre sus parámetros.
+  - \section{Primera}
+- Como abreviaturas o para denotar símbolos especiales.
+  - \ cdot
+  - \ uparrow
+
+
+* Comentarios
+Dos tipos de comentarios:
+- % Comenta una línea.
+- Ambiente de Comentario: \begin {comment} ... \end {comment}. Se debe incluir el paquete \usepackage{comment}.
+
+* Espacios
+- No importa si se escribe uno o varios espacios después de una palabra. Son tratados como un solo espacio en blanco.
+- Una línea vacía inicia un nuevo párrafo.
+
+Comandos para manipular espacios:
+- *~* Produce también un espacio en blanco, pero que el compilador
+no puede usar para cambiar de línea.
+
+- *\\* Cambia de renglón y el siguiente renglón empieza en el margen izquierdo.
+
+\smallskip
+
+\medskip
+
+\bigskip
+
+Permiten el desplazamiento vertical del texto en un cuarto
+del tamaño de la línea base, media línea base y una completa. 
+
+Son saltos relativos al tamaño de letra que estés usando.
+
+*\noindent* Hace que un párrafo o renglón empiece en el margen
+izquierdo de la hoja, en lugar de hacerlo con sangría.
+
+*\indent* Obliga a dejar un espacio horizontal igual al de la sangría de párrafos.
+
+* Documentos
+Todo documento, menos las cartas, deben tener un título, autor(es) y la fecha en que fue impreso. 
+
+Algunas veces se agrega una nota de agradecimiento.
+
+A esto se le llama el título:
+
+\title{Mi primer documento}
+
+\author { El Chapulín Colorado \and Pepe Grillo}
+
+\date { El día más bello del planeta \\
+    \today }
+
+En la fecha puedes poner lo que quieras, aunque se espera una fecha. 
+
+Las dos diagonales inversas \\ sirven para cambiar de renglón.
+
+El comando \today sirve para que LATEX inserte la fecha de hoy.
+
+\thanks { Gracias por asistir a clase}
+
+Agrega, al pie de la página, algún comentario que se desee. 
+
+Este comando deberá aparecer una vez iniciado el documento.
+
+** Articulos
+#+BEGIN_SRC python
+\documentclass{article}
+
+\title{Mi Primer Documento}
+\date{2013-09-01}
+\author{Chucho Perez}
+
+\begin{document}
+  \maketitle
+  \tableofcontents
+  \newpage
+
+  Hola!!
+\end{document}
+#+END_SRC
+
+El comando \maketitle crea automáticamente el titulo de la página.
+
+
+** Cartas
+#+BEGIN_SRC python
+\documentclass{letter}
+\signature{Yo}
+\address{Street \\ City \\ Country}
+
+\begin{document}
+  \begin{letter}{Company name \\ Street\\ City\\ Country}
+    \opening{Estimadisimo:}
+    \dots
+    \closing{Saludos,}
+    \ps{P.S. Postdata.}
+    \encl{Cierre.}
+  \end{letter}
+\end{document}
+#+END_SRC
+
+Se pueden meter varias cartas en el mismo documento y se espera que el remitente y la firma 
+sean los mismos.
+
+- Remitente: Se refiere a lo que normalmente aparece en el tope de la carta y que es la dirección de aquél quien firma la carta:
+
+\address { Dra . Genoveva Bienvista \ \
+Cubículo 003. Edif. de Matemáticas \ \
+Facultad de Ciencias , UNAM}
+
+- Firma: Para la firma se especifica de manera similar al remitente:
+
+\signature{ Dra . Genoveva Bienvista \ \
+Profesor Titular B }
+
+
+Se delimita cada una de las cartas por:
+\begin {letter}
+. . .
+\end {letter}
+
+Dentro de cada carta colocarás los parámetros que se refieren a cada una de ellas.
+
+- Destinatario: 
+\begin { letter} { Distinguido estudiante, generación 2017}
+
+- Introducción: La frase con la que se saluda o inicia la carta.
+\opening {Muy querido estudiante:}
+
+- Despedida: Esta es la frase que aparecerá antes de la firma
+\closing { Quedo de Uds. atentamente, }
+
+- Copias: Muchas veces quieres poner al pie de la carta la lista de las personas a las que
+pretendes entregarle una copia de la carta. 
+\cc { Mis mejores amigos \ \
+Mis estimados colegas \ \
+Primer Ingreso}
+
+* Estructura de un documento
+Es necesario estructurar el documento en unidades lógicas.
+LaTeX utiliza los comandos \section, \subsection y \subsubsection para definir secciones en el documento.
+Las secciones tendrán números sucesivos y aparecen en la tabla de contenidos.
+Los párrafos no están numerados y, por tanto, no aparecen en la tabla de contenido.
+
+
+#+BEGIN_SRC python
+documentclass{article}
+
+\begin{document}
+
+  \section{Seccion}
+     Hola!
+
+     \subsection{Subseccion}
+     Estructuran el documento
+
+          \subsubsection{Subsubseccion}
+           Texto
+
+          \paragraph{Paragraph}
+           Maaaas Texto
+
+                \subparagraph{Subparagraph}
+                 Aun maaaaas texto
+
+   \section{Otra seccion}
+
+   \appendix{Apendice A}
+
+\end{document}
+#+END_SRC
+
+* Paquetes
+Los paquetes permiten incluir funcionalidad
+Deben ser incluidos en el preámbulo del documento.
+
+Formato: \usepackage[opciones]{nombre}
+
+Ejemplos:
+
+\usepackage[spanish]{babel} Utilizar espanol
+
+\usepackage[latin1]{inputenc} Utilizar teclado latino (acentos)
+
+\usepackage{indentfirst} Indentacion de primer linea de parrafos
+
+\usepackage{hyperref} Hiper-enlaces
+
+\usepackage{fancyhdr} Cabeceras
+
+
+* Ejercicio
+carta.tex
+
+Escribe una carta a la directora de la facultad, solicitando una beca 
+para irte a estudiar al extranjero,
+en latex con copia para Miguel y para mí.

@@ -1,0 +1,173 @@
+#-*- mode: org -*-
+
+* Letras
+Para cambiar el tamano de las letras es conveniente escribir el comando entre llaves:
+{ \large esto es grande}
+
+- *tiny*: esta es una muestra diminuta
+- *scriptsize*: un poco menos pequeña
+- *footnotesize*: creciendo un poco
+- *small*: esta es una muestra pequeña
+- *normalsize*: este es el tamaño normal
+- *large*: una muestra agrandada un poco
+- *Large*: Agrandamos la muestra un poco más
+- *LARGE*: Muy grande
+- *huge*: Mucho muy grande
+- *Huge*: ¡Súper extra grande!
+- *HUGE*: ¡Súper dúper extra grande!
+
+
+En el ambiente matemático estos comandos no tendrán efecto.
+
+Tipos de letras:
+- \mdseries \textmd{...} Medium Series, se refiere a tipo normal
+- \bfseries \bf \textbf{...} Boldface Series, se refiere a negritas
+- \rmfamily \rm \textrm{...} Roman Family, un tipo de letra
+- \sffamily \sf \textsf{...} Sans Serif Family, letras simples
+- \ttfamily \tt \texttt{...} Typewriter Family, letra como de máquina de escribir
+- \upshape \textup{...} Letras sin inclinación
+- \itshape \it \textit{...} Texto en itálicas
+- \slshape \sl \textsl{...} Texto ligeramente inclinado
+- \scshape \sc \textsc{...} TEXTO EN MAYÚSCULAS ESCALADAS
+- \normalfont \textnormal{...} Texto normal
+- \em \emph{...} Texto Enfático
+
+
+Puedes combinar dos o más tipos y tamaños de letras. Por ejemplo, puedes
+querer tener negritas de itálicas:
+
+
+{ \bfseries {\itshape Negritas itálicas } } 
+
+Lo mismo sucederá con cualquier combinación que se desee de dos tipos de letras:
+deberás combinar usando una como cambio de estado y la otra como comando con
+argumento.
+
+* Listas
+Para presentar listas de párrafos, ya sean numerados, etiquetados
+o con una marca separándolos entre sí. En general, tienen el siguiente formato:
+
+\ begin { <tipo-de-lista>}
+\ item <párrafo>
+\ item <párrafo>
+\ item . . .
+\ end { <tipo-de-lista>}
+
+Los <tipo de lista> que puedes a manejar son los siguientes:
+#+BEGIN_SRC python
+\begin { enumerate }
+<enumeración de párrafos>
+\end { enumerate }
+
+\begin {itemize}
+<listado de párrafos>
+\end {itemize}
+
+\ begin { description}
+<descripción de párrafos>
+\end {description}
+#+END_SRC
+
+Cada uno de éstos puede aparecer anidado en el otro, o anidado en sí mismo. 
+NO puedes tener más de cuatro anidamientos del mismo tipo de listas.
+
+** Numeraciones
+#+BEGIN_SRC python
+\begin { enumerate }
+  \item Primer parrafo, primer nivel
+  \begin { enumerate }
+    \item Qué pasa al anidar el segundo nivel
+    \begin { enumerate }
+       \item Anidamos una vez más para el tercer nivel
+       \item Otro inciso
+       \begin { enumerate }
+          \item Numeración en el cuarto nivel
+       \end { enumerate }
+    \end { enumerate }
+    \item Otro inciso en el segundo nivel
+  \end { enumerate }
+  \item Otro inciso en el primer nivel
+\end { enumerate }
+#+END_SRC
+
+Se puede personalizar la numeración:
+- Arábigos. El valor por omisión para el primer nivel. [1.]
+- Letras minúsculas. [a−]
+- Letras mayúsculas. [A:]
+- Números romanos en minúscula. [ i .]
+- Números romanos en mayúscula. [ I .]
+
+#+BEGIN_SRC python
+\ begin { enumerate } [ { Nota } 1 . ]
+   \ item Primera nota .
+   \ item Segunda nota .
+\ end { enumerate }
+#+END_SRC
+
+* Items
+#+BEGIN_SRC python
+\begin { itemize }
+  \item Primer parrafo, primer nivel
+  \begin { itemize }
+  \item Qué pasa al anidar el segundo nivel
+  \begin { itemize }
+    \item Anidamos una vez más para el tercer nivel
+    \item Otro inciso 
+    \begin { itemize }
+      \item Numeración en el cuarto nivel
+    \end { itemize }
+  \end { itemize }
+  \item Otro inciso en el segundo nivel
+  \end { itemize }
+\item Otro inciso en el primer nivel
+\end { itemize }
+
+
+\begin { itemize}
+  \item [ −] Primero del primer nivel
+  \begin {itemize}
+    \item [ + ] Primero del segundo nivel
+    \begin {itemize}
+      \item [ : ] Primero del tercer nivel
+      \begin {itemize}
+        \item [ > ] Primero del cuarto nivel
+        \item Segundo del cuerto nivel
+      \end { itemize}
+      \item Segundo del tercer nivel
+    \end { itemize}
+    \item Segundo del segundo nivel
+  \end { itemize}
+  \item Segundo del primer nivel
+\end { itemize}
+#+END_SRC
+
+* Descripciones
+#+BEGIN_SRC python
+\begin {description}
+  \item [ enumerate : ] Cada nivel se va numerando manteniendo un contador para tal efecto.
+  \begin {description}
+    \item [ segundo nivel ] Es una prueba para ver si tiene sentido meter otro nivel mas en descripciones.
+    \begin {description}
+      \item [ tercer nivel ] Otra prueba mas del asunto.
+      \begin {description}
+        \item [ cuarto nivel ] Y aún hay más
+        \begin { description}
+          \item [ quinto nivel ] A ver si en este tipo de listas si se valen más niveles. 
+        \end {description}
+      \end { description}
+    \end { description}
+  \end { description}
+  \item [ itemize: ] Cada parrafo se marca con un caracter, dependiendo del nivel de anidamiento.
+  \item [ description: ] Sirve para poner explicaciones o definiciones.
+\end {description}
+#+END_SRC 
+
+* Ejercicio
+boda.tex
+
+Escribe una carta dirigida al salon de eventos de tu preferencia, donde solicites el servicio de catering 
+para tu boda.
+Anexo a la carta, debes incluir una lista de invitados a la boda, donde separes los invitados de
+los padres del novio, los padres de la novia, los invitados del novio y 
+los invitados de la novia. 
+La lista deberá facilitar sacar el total de invitados a la boda.
