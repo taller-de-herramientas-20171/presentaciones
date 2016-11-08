@@ -1,0 +1,202 @@
+#-*- mode: org -*-
+
+* Tablas
+Una tabla es un conjunto de renglones alineados por columnas. 
+
+Para que LATEX vaya acomodando las columnas le debes dar el número de columnas y el formato
+
+de cada una de ellas. 
+
+El formato general de una tabla de texto es el siguiente:
+
+#+BEGIN_SRC python
+\begin {tabular} [ <pos> ] { <cols> }
+    <renglones>
+\end {tabular}
+#+END_SRC
+
+<pos> si quieres que la tabla este alineada
+- desde arriba [t]
+- desde abajo [b]
+- centrada [c], que es el valor por omisión. 
+
+<cols> se refiere al formato que deberán tener las columnas de la
+
+tabla, y que será aplicado a cada uno de los renglones. 
+
+Debes especificar el formato para cada una de las columnas que deseas tener en la tabla. 
+
+También especificas si se debe colocar algo entre las columnas:
+
+l : Especifica que el contenido de esta columna se colocará pegado a
+la izquierda, y ocupará tanto espacio como requiera para quedar
+contenido en un renglón.
+
+r : Similar al anterior, pero pegado a la derecha.
+
+c : Similar al anterior, pero centrado.
+
+p{<ancho>} : Da un ancho fijo para la columna. LATEX acomodará el texto como
+
+si fuera un párrafo, ocupando tantos renglones como sea necesario.
+
+m{<ancho>} : Igual que p, excepto que si hay columnas que dan un número distinto
+
+de líneas para el mismo renglón, centra verticalmente el contenido de las columna.
+
+Para estas dos opciones, el {<ancho>} deberá estar dado en:
+- in : pulgadas
+- cm : centímetros
+- mm : milímetros
+- pt : puntos
+- em : ancho de carácter
+
+- | : Una línea vertical que separa columnas.
+- || : Dos líneas verticales separando las columnas.
+
+
+Para cambiar de columna, debes insertar un carácter *&* 
+
+Para cambiar de renglón deberás agregar al final del renglón *\\*
+
+Puedes colocar líneas entre cada dos renglones con el comando *\hline*. 
+
+#+BEGIN_SRC python
+\ begin {tabular} [t] {cccc}
+letras y simbols \\
+palabras & oraciones & párrafos & subsecciones \ \
+secciones & capítulos & partes & documento
+\ end {tabular}
+#+END_SRC
+
+** Multicolumnas
+Para que un texto se centre en dos columnas puedes utilizar el comando
+\multicolumn {<núm> } { <cols> } { <texto>}
+
+- {<núm>} es el número de columnas de la tabla original que va a ocupar
+- {<cols>} es la manera de acomodar esa columna, con sus posibles carácteres entre columnas
+- {<texto>} es lo que queremos que aparezca en esa nueva columna. 
+
+#+BEGIN_SRC python
+\begin {tabular} [ t ] { cccc }
+\multicolumn {2} {c} { letras y símbolos } \ \
+palabras & oraciones & párrafos & subsecciones \ \
+secciones & capítulos & partes & documento
+\end {tabular}
+#+END_SRC
+
+Se pueden aprovechar las multicolumnas para poner títulos a la tabla 
+
+o pies de página.
+
+
+** Separación de renglones y columnas
+También puedes tener líneas horizontales
+que separen a los renglones.
+
+#+BEGIN_SRC python
+\begin {tabular} [t] { | l | l | p {8cm } | }
+\hline
+\bf Ambiente & {\large Nombre} & Descripción \\
+\hline \hline
+Reporte & report & Se utilizan para cosas menos formales
+que un libro o un articulo. No
+tiene capitulos, sino que agrupa
+apartir de secciones . \\
+\hline
+Artículo & article & Es el ambiente que más seguido
+utilizaras para la entrega 
+de tareas, elaboración de pequeños
+manuales, etc. Permite escribir en dos 
+columnas facilmente. \\
+\hline
+\end {tabular}
+#+END_SRC
+
+La manera como se asocian las separaciones de columnas son:
+– La primera columna tiene asociadas la línea a su izquierda y a su derecha.
+– A partir de la segunda columna, cada columna debe redefinir su línea derecha
+
+
+** Lineas incompletas verticales y horizontales
+Algunas veces no quieres una línea completa, sino únicamente una que cubra algunas columnas.
+
+Esto se consigue con el comando \cline{ci-cf}
+- ci es el número de la columna inicial
+- cf es el número de la columna final
+
+\cline {2−3}, indica que la línea parcial empieza en la columna 2 y
+termina en la 3.
+
+#+BEGIN_SRC python
+\ begin {tabular} { | c | c | c | | c | }
+\hline
+\multicolumn { 4 } { | c | } { \ bf Verificador \ de \ Paridad } \\ 
+\hline \hline
+& \multicolumn { 2 } { c | | } { \ bf Sigma }
+& \\ 
+\cline {2−3}
+\ bf Q & 0 & 1 & F \\ 
+\hline
+PAR & PAR & NON & 1 \\ 
+\hline
+NON & NON & PAR & 0 \\ 
+\hline
+\end {tabular}
+#+END_SRC
+
+\vline  introduce una línea de separación de columna, que cubre toda la columna.
+
+#+BEGIN_SRC python
+\begin {tabular} { | c | l | }
+\hline
+Esta es & una prueba \ \
+\hline
+Para mostrar \vline \ la
+división & artificial \\ \
+\hline
+\end{tabular}
+#+END_SRC
+
+
+** Espacio entre renglones
+Puedes modificar la distancia dada por el cambio del renglón colocando un argumento a continuación de \\
+con el formato [< num > < medida >]. 
+
+Veamos un ejemplo, en el que agregamos 4 y 10 puntos al cambio de renglón. 
+
+#+BEGIN_SRC python
+\begin {tabular} { | c | l | }
+\hline
+Esta es & una prueba \\[ 4pt ]
+\hline
+Para mostrar \vline \ la
+división &
+artificial \\[ 10pt ]
+\hline
+\end{tabular}
+#+END_SRC
+
+< num > puede ser negativo también, forzando a que haya un “retroceso”.
+
+#+BEGIN_SRC python
+\begin {tabular} { | c | l | }
+\hline
+Esta es & una prueba \\[ 6pt ]
+\hline
+Para mostrar \vline \ la
+división & artificial \\[ 10pt ]
+\hline
+\multicolumn { 2 } { | l | } { Acá mostramos \vline \
+el efecto de subir la raya }\\[ −6 pt ]
+\hline
+\end{tabular}
+#+END_SRC
+
+
+* Ejercicio
+Codifica la siguiente tabla:
+
+http://maksim.sorokin.dk/it/wp-content/uploads/2010/04/latex_table.png
+
+
