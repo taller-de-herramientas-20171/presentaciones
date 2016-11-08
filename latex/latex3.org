@@ -1,11 +1,11 @@
 #-*- mode: org -*-
 
 * Tablas
-Una tabla es un conjunto de renglones alineados por columnas. 
+Una tabla es un conjunto de renglones alineados por columnas.
 
 Para que LATEX vaya acomodando las columnas le debes dar el número de columnas y el formato
 
-de cada una de ellas. 
+de cada una de ellas.
 
 El formato general de una tabla de texto es el siguiente:
 
@@ -18,13 +18,13 @@ El formato general de una tabla de texto es el siguiente:
 <pos> si quieres que la tabla este alineada
 - desde arriba [t]
 - desde abajo [b]
-- centrada [c], que es el valor por omisión. 
+- centrada [c], que es el valor por omisión.
 
 <cols> se refiere al formato que deberán tener las columnas de la
 
-tabla, y que será aplicado a cada uno de los renglones. 
+tabla, y que será aplicado a cada uno de los renglones.
 
-Debes especificar el formato para cada una de las columnas que deseas tener en la tabla. 
+Debes especificar el formato para cada una de las columnas que deseas tener en la tabla.
 
 También especificas si se debe colocar algo entre las columnas:
 
@@ -55,11 +55,11 @@ Para estas dos opciones, el {<ancho>} deberá estar dado en:
 - || : Dos líneas verticales separando las columnas.
 
 
-Para cambiar de columna, debes insertar un carácter *&* 
+Para cambiar de columna, debes insertar un carácter *&*
 
 Para cambiar de renglón deberás agregar al final del renglón *\\*
 
-Puedes colocar líneas entre cada dos renglones con el comando *\hline*. 
+Puedes colocar líneas entre cada dos renglones con el comando *\hline*.
 
 #+BEGIN_SRC python
 \ begin {tabular} [t] {cccc}
@@ -75,7 +75,7 @@ Para que un texto se centre en dos columnas puedes utilizar el comando
 
 - {<núm>} es el número de columnas de la tabla original que va a ocupar
 - {<cols>} es la manera de acomodar esa columna, con sus posibles carácteres entre columnas
-- {<texto>} es lo que queremos que aparezca en esa nueva columna. 
+- {<texto>} es lo que queremos que aparezca en esa nueva columna.
 
 #+BEGIN_SRC python
 \begin {tabular} [ t ] { cccc }
@@ -85,7 +85,7 @@ secciones & capítulos & partes & documento
 \end {tabular}
 #+END_SRC
 
-Se pueden aprovechar las multicolumnas para poner títulos a la tabla 
+Se pueden aprovechar las multicolumnas para poner títulos a la tabla
 
 o pies de página.
 
@@ -105,9 +105,9 @@ tiene capitulos, sino que agrupa
 apartir de secciones . \\
 \hline
 Artículo & article & Es el ambiente que más seguido
-utilizaras para la entrega 
+utilizaras para la entrega
 de tareas, elaboración de pequeños
-manuales, etc. Permite escribir en dos 
+manuales, etc. Permite escribir en dos
 columnas facilmente. \\
 \hline
 \end {tabular}
@@ -131,16 +131,16 @@ termina en la 3.
 #+BEGIN_SRC python
 \ begin {tabular} { | c | c | c | | c | }
 \hline
-\multicolumn { 4 } { | c | } { \ bf Verificador \ de \ Paridad } \\ 
+\multicolumn { 4 } { | c | } { \ bf Verificador \ de \ Paridad } \\
 \hline \hline
 & \multicolumn { 2 } { c | | } { \ bf Sigma }
-& \\ 
+& \\
 \cline {2−3}
-\ bf Q & 0 & 1 & F \\ 
+\ bf Q & 0 & 1 & F \\
 \hline
-PAR & PAR & NON & 1 \\ 
+PAR & PAR & NON & 1 \\
 \hline
-NON & NON & PAR & 0 \\ 
+NON & NON & PAR & 0 \\
 \hline
 \end {tabular}
 #+END_SRC
@@ -161,9 +161,9 @@ división & artificial \\ \
 
 ** Espacio entre renglones
 Puedes modificar la distancia dada por el cambio del renglón colocando un argumento a continuación de \\
-con el formato [< num > < medida >]. 
+con el formato [< num > < medida >].
 
-Veamos un ejemplo, en el que agregamos 4 y 10 puntos al cambio de renglón. 
+Veamos un ejemplo, en el que agregamos 4 y 10 puntos al cambio de renglón.
 
 #+BEGIN_SRC python
 \begin {tabular} { | c | l | }
@@ -198,5 +198,3 @@ el efecto de subir la raya }\\[ −6 pt ]
 Codifica la siguiente tabla:
 
 http://maksim.sorokin.dk/it/wp-content/uploads/2010/04/latex_table.png
-
-
