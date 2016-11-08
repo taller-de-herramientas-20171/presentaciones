@@ -1,0 +1,55 @@
+#+title: Tarea 1 y 2: Escritura de artículos
+#+author: Miguel Piña
+#+date: [2016-11-04 vie 15:08]
+
+* Fecha de entrega
+
+24 de noviembre
+
+* Entregables
+
+Deberán entregar un archivo con extensión .tex con la redacción de su artículo
+(No olviden incluir sus datos, fecha de entrega, número de tarea y comentarios).
+
+* Redacción de artículos en LaTeX
+
+La tarea consiste en realizar la investigación de un tema de su preferencia en
+el área de Matemáticas o Ciencias de la Computación de tal forma que redacten un
+artículo sobre dicho tema.
+
+El artículo deberá ser escrito usando LaTeX y debe incluir las siguientes
+secciones:
+
+- Resumen
+- Introducción
+- Estado del Arte*
+- Implementación/Materiales/Métodos
+- Resultados
+- Discusión
+- Trabajo a futuro*
+- Bibliografía
+
+Donde las secciones marcadas con asterisco son opcionales (van a depender del
+contenido de su artículo). Si bien este es un esqueleto de un artículo, cada una
+de las secciones puede tener tantas subsecciones como sea necesario.
+
+Su tema de su elección debe usar entornos matemáticos o entornos especiales para
+representar código/pseudocódigo si es el caso. Además de incluir figuras para
+tener una parte visual del contenido de su artículo.
+
+El número mínimo de páginas debe ser de 8 y debe contener ser obtenido a partir
+de una amplia bibliografía que deben de elegir para su tema (les recomiendo usar
+Google Scholar o la biblioteca de la ACM).
+
+*Nota*: Antes de empezar a escribir su artículo, deben enviar un correo a Fernanda
+para que apruebe el tema de su artículo. Sin este paso, *SU TRABAJO NO SERÁ
+TOMADO EN CUENTA*.
+
+* Exposición
+
+Además de la redacción de su artículo, van a exponer el tema de su artículo en
+una presentación de 10 minutos si es entrega individual o 20 minutos si es
+entrega por parejas. Consideren que las presentaciones también son hechas en
+LaTeX y representarían una segunda tarea.
+
+Preparen bien sus tiempos y escojan bien sus temas. Buena suerte :-).
