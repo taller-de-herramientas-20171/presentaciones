@@ -4,7 +4,7 @@
 
 Cuando quieres escribir fórmulas matemáticas, éstas contienen símbolos
 que obligan al compilador a realizar un formato también vertical, no nada más en el
-renglón correspondiente. 
+renglón correspondiente.
 
 Para lograrlo deberás introducir un “ambiente” matemático.
 
@@ -20,10 +20,10 @@ Esto se logra, de cualquiera de las siguientes maneras:
 
 \begin{math}
    \alpha_i = 2 \cdot \beta^3
-\end{math} 
+\end{math}
 #+END_EXAMPLE
 
-2. En un “recuadro” que contiene a la fórmula matemática. 
+2. En un “recuadro” que contiene a la fórmula matemática.
 Introduces un ambiente que dejará espacio en blanco entre el párrafo anterior y el siguiente.
 Dentro de ese párrafo puedes escribir las fórmulas.
 
@@ -43,7 +43,7 @@ En modo matemático no hay espacios en blanco y las letras aprecerán en italica
 
 ** Principales Funciones
 
-- Exponentes: ^   $a^m b^n c^{n+m}$ 
+- Exponentes: ^   $a^m b^n c^{n+m}$
 - Subíndices: _   $a_m b_n c_{n+m}$
 - Fracciones: \frac{}{}   $\frac {1}{ n+1}$
 - Raices: \sqrt[n]{}  \ frac {x+y}{1+\sqrt[n ]{\ frac {y }{z+1}}}
@@ -52,7 +52,7 @@ https://www.andy-roberts.net/res/writing/latex/symbols.pdf
 
 
 ** Insertar texto
-Se usa el comando \text{...} poniendo entre llaves el texto que deseas aparezca. 
+Se usa el comando \text{...} poniendo entre llaves el texto que deseas aparezca.
 También puedes utilizar, en general, cualquiera de los comandos \textxx que vimos al inicio de esta
 sección para modificar tipo de texto (bf, it, etc)
 
@@ -65,8 +65,9 @@ sección para modificar tipo de texto (bf, it, etc)
 ** Tablas de fórmulas
 Hay dos maneras de organizar varias fórmulas en una tabla:
 1. Usando tabular y colocando en cada celda el modo matemático en línea ($ \(... $\)).
-2. Declarando un ambiente de línea o recuadro y colocando allí un arreglo matemático, 
-    \begin {pmatrix}...\end {pmatrix}. 
+2. Declarando un ambiente de línea o recuadro y colocando allí un arreglo matemático,
+    \begin {pmatrix}...\end {pmatrix}. (Hay que usar el paquete *mathtools* para
+    trabajar con las matrices y los puntos)
 
 #+BEGIN_EXAMPLE
 \[
@@ -74,7 +75,7 @@ Hay dos maneras de organizar varias fórmulas en una tabla:
   a_{1,1} & a_{1,2} & \cdots & a_{1,n} \\
   a_{2,1} & a_{2,2} & \cdots & a_{2,n} \\
   \vdots  & \vdots  & \ddots & \vdots  \\
-  a_{m,1} & a_{m,2} & \cdots & a_{m,n} 
+  a_{m,1} & a_{m,2} & \cdots & a_{m,n}
  \end{pmatrix}
  \]
 #+END_EXAMPLE
@@ -87,7 +88,7 @@ respectivamente, y poniendo el símbolo que quieras.
 
 #+BEGIN_EXAMPLE
 \[
-\left [ 
+\left [
 \begin{array} { l l c l }
  a_{11} & a_{12} & \ldots & a_{1m} \\
  a_{21} & a_{22} & \ldots & \ldots \\
@@ -117,7 +118,7 @@ Funciones "por casos" se pueden escribir usando un ambiente de casos:
 Si deseas numerar las ecuaciones o algo por el estilo, debes usar el ambiente equation.
 
 #+BEGIN_EXAMPLE
-\begin{equation} 
+\begin{equation}
  R = \frac{1}{M} \sum_{k=1}^M R_k
 \end{equation}
 #+END_EXAMPLE
@@ -140,5 +141,3 @@ ambiente de arreglos de ecuaciones \eqnarray.
 * Ejercicio
 Codifica la siguiente tabla:
 http://www.scielo.org.co/img/revistas/iei/v27n3/3a19t2.gif
-
-
