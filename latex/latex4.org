@@ -1,0 +1,144 @@
+#-*- mode: org -*-
+
+* Funciones matemáticas
+
+Cuando quieres escribir fórmulas matemáticas, éstas contienen símbolos
+que obligan al compilador a realizar un formato también vertical, no nada más en el
+renglón correspondiente. 
+
+Para lograrlo deberás introducir un “ambiente” matemático.
+
+Tienes dos tipos de ambientes matemáticos:
+
+1. En la línea, donde lo que buscas es poder intercalar una fórmula o un carácter
+              α = 2 · β^3
+
+Esto se logra, de cualquiera de las siguientes maneras:
+
+#+BEGIN_EXAMPLE
+\( \alpha_i = 2 \cdot \beta^3 \)
+
+\begin{math}
+   \alpha_i = 2 \cdot \beta^3
+\end{math} 
+#+END_EXAMPLE
+
+2. En un “recuadro” que contiene a la fórmula matemática. 
+Introduces un ambiente que dejará espacio en blanco entre el párrafo anterior y el siguiente.
+Dentro de ese párrafo puedes escribir las fórmulas.
+
+#+BEGIN_EXAMPLE
+\[ \alpha = 2 \cdot \beta^3 \]
+
+\begin{displaymath }
+  \alpha_i = 2 \cdot \beta^3
+\end{displaymath }
+#+END_EXAMPLE
+
+La diferencia fundamental entre el modo de despliegue (párrafo) y el de línea es el
+tamaño de los términos. Mientras que en el modo de línea se ajusta el tamaño a la altura
+normal de una línea, en el modo de párrafo ocupa tanto espacio vertical como requiera.
+
+En modo matemático no hay espacios en blanco y las letras aprecerán en italicas.
+
+** Principales Funciones
+
+- Exponentes: ^   $a^m b^n c^{n+m}$ 
+- Subíndices: _   $a_m b_n c_{n+m}$
+- Fracciones: \frac{}{}   $\frac {1}{ n+1}$
+- Raices: \sqrt[n]{}  \ frac {x+y}{1+\sqrt[n ]{\ frac {y }{z+1}}}
+
+https://www.andy-roberts.net/res/writing/latex/symbols.pdf
+
+
+** Insertar texto
+Se usa el comando \text{...} poniendo entre llaves el texto que deseas aparezca. 
+También puedes utilizar, en general, cualquiera de los comandos \textxx que vimos al inicio de esta
+sección para modificar tipo de texto (bf, it, etc)
+
+#+BEGIN_EXAMPLE
+\[ x = \frac{−b \pm \sqrt{ b^2−4ac } } { 2a } \\
+\text {Da la solución de una ecuación cuadrática } \]
+#+END_EXAMPLE
+
+
+** Tablas de fórmulas
+Hay dos maneras de organizar varias fórmulas en una tabla:
+1. Usando tabular y colocando en cada celda el modo matemático en línea ($ \(... $\)).
+2. Declarando un ambiente de línea o recuadro y colocando allí un arreglo matemático, 
+    \begin {pmatrix}...\end {pmatrix}. 
+
+#+BEGIN_EXAMPLE
+\[
+\begin{pmatrix}
+  a_{1,1} & a_{1,2} & \cdots & a_{1,n} \\
+  a_{2,1} & a_{2,2} & \cdots & a_{2,n} \\
+  \vdots  & \vdots  & \ddots & \vdots  \\
+  a_{m,1} & a_{m,2} & \cdots & a_{m,n} 
+ \end{pmatrix}
+ \]
+#+END_EXAMPLE
+
+
+Siempre que tienes una fórmula que ocupa más de un renglón, puedes ponerle algún
+carácter a la izquierda y otro a la derecha que crezcan tanto como la fórmula en
+cuestión. Esto lo haces marcando la fórmula con \left y \right a su izquierda y derecha
+respectivamente, y poniendo el símbolo que quieras.
+
+#+BEGIN_EXAMPLE
+\[
+\left [ 
+\begin{array} { l l c l }
+ a_{11} & a_{12} & \ldots & a_{1m} \\
+ a_{21} & a_{22} & \ldots & \ldots \\
+ \cdots & \cdots & \ldots & \ldots \\
+ a_{n1} & a_{n2} & \cdots & a_{nm}
+\end{array}
+\right ]
+\]
+#+END_EXAMPLE
+
+
+** Matrices
+Funciones "por casos" se pueden escribir usando un ambiente de casos:
+
+#+BEGIN_EXAMPLE
+\[ P_{ r-j } =
+ \begin{cases}
+   0 & \text{ si r-j es impar }, \\
+   r! (−1) ^ { ( r-j ) / 2 }
+   & \text{ si r-j es par } .
+ \end{cases}
+\]
+#+END_EXAMPLE
+
+
+** Arreglos de fórmulas
+Si deseas numerar las ecuaciones o algo por el estilo, debes usar el ambiente equation.
+
+#+BEGIN_EXAMPLE
+\begin{equation} 
+ R = \frac{1}{M} \sum_{k=1}^M R_k
+\end{equation}
+#+END_EXAMPLE
+
+El contador de ecuaciones se va incrementando progresivamente dentro del capítulo.
+
+Si quieres colocar varias fórmulas alineadas, tienes que usar el
+ambiente de arreglos de ecuaciones \eqnarray.
+
+#+BEGIN_EXAMPLE
+\begin { eqnarray }
+ x_1 = \sum_{k=1}^n a_k y^k
+ & \text{ Primer valor } \\
+ x_2 = \sum_{k=1}^n b_k y^k
+ & \text{ segundo valor }
+\end { eqnarray }
+#+END_EXAMPLE
+
+
+* Ejercicio
+Codifica la siguiente tabla:
+http://www.scielo.org.co/img/revistas/iei/v27n3/3a19t2.gif
+
+
