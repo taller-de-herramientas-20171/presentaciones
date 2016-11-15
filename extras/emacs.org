@@ -1,0 +1,265 @@
+#+title: Personalizando emacs
+#+author: Miguel Piña
+#+date: [2016-11-11 vie 20:01]
+
+* Objetivos
+
+- Conocer un poco sobre el lenguaje emacs-lisp
+- Conocer como personalizar nuestro emacs
+- Hacer que el editor se adapte a nosotros y no nosotros a el
+
+* Emacs Lisp
+
+- *Emacs lisp* es un lenguaje de programación derivado de lisp
+- Está orientado para construir funciones dentro de emacs para extender sus
+  capacidades.
+- Con *Emacs Lisp* podemos hacer que emacs haga lo que nosotros queramos que
+  haga. A diferencia de otros editores o IDEs que hacen lo que otros les
+  programaron hacer.
+
+* Un poco de historia
+
+- Lisp fue desarrollado a finales de 1950 en el MIT para realizar investigación
+  en inteligencia artificial.
+- El gran poder del lenguaje Lisp lo hizo superior para otros propósitos, tales
+  como escribir comandos de edición y definir entornos integrados.
+- GNU Emacs Lisp fue altamente inspirado por Maclisp, el cuál fue escrito en el MIT
+  en 1960s.
+- También está un poco inspirado en Common Lisp, el cuál se convirtió en un
+  estandar en la decada de 1980.
+- Sin embargo, Emacs Lisp es mucho más simple que Common Lisp.
+- GNU Emacs contiene extensiones opcionales (/cl.el/) que agrega varias
+  características de Common Lisp a Emacs Lisp.
+
+* Cómo empezar a consumir Lisp
+
+En lisp, todo está construido con listas. Una lista en lisp luce de la siguiente
+manera:
+
+#+BEGIN_SRC lisp
+'(rose violet daisy buttercup)
+#+END_SRC
+
+Eso define una lista de datos, observemos la apóstrofe antes del primer
+paréntesis. Eso va definir una lista de flores en inglés.
+
+Para realizar operaciones dentro de lisp, generalmente se define dentro de una
+lista sin apóstrofe la función y los argumentos, tal y como se usa en notación
+polaca.
+
+#+BEGIN_SRC lisp
+(+ 3 4 5 6)
+(print "hola")
+#+END_SRC
+
+Para evaluar una expresión dentro de emacs, es necesario presionar *C-x
+C-e*. Generalmente la evaluación de una expresión (*s-expression* a partir de este
+momento) de lisp se evalua de forma global.
+
+* Creando el archivo .emacs.d/init.el
+
+Generalmente cuando uno necesita extender el poder de emacs, lo que se hace es
+crear un archivo de inicio que contenga todas las funciones que necesitamos para
+usar nuestro emacs. Así como configuración de colores y temas.
+
+En versiones anteriores de emacs esto se hacía mediante la invocación automática
+de un archivo conocido como *.emacs*. Pero ahora lo que se busca para tener mayor
+modularidad en la configuración, es tener una carpeta llamada *.emacs.d* con un
+archivo nombrado *init.el* el cuál es lanzado automáticamente cada vez que emacs
+inicia.
+
+* Editando el archivo .emacs.d/init.el (válido para emacs > 24.1)
+
+En la actualidad hay muchos paquetes en la red que proveen nuevas
+características a emacs además de las muchas que ya trae por defecto. La mayoría
+de estas herramientas son desarrolladas por usuarios avanzados de *emacs lisp* que
+deciden compartir con el resto del mundo sus creaciones.
+
+Estos paquetes generalmente proveen características para facilitar el desarrollo
+en varios lenguajes de programación, así como herramientas para facilitar el
+trabajo con LaTeX e incluso realizar chequeos de ortografía.
+
+Para hacer uso de estos paquetes, emacs tiene por defecto un repositorio en la
+siguiente dirección:
+
+https://elpa.gnu.org/
+
+** Recuperando paquetes desde elpa.gnu.org y otros repositorios.
+
+Para comenzar a recuperar paquetes desde elpa.gnu.org, hay que agregar al
+archivo /.emacs.d/init.el/ la siguiente linea de código:
+
+#+begin_src emacs-lisp
+(package-initialize)
+#+end_src
+
+Y después presionar M-x =list-packages=, el cuál nos dará una lista de paquetes
+disponibles para comenzar a instalar. Algo que hay que notar es que esos
+paquetes muuuuuuuyyyy estables para emacs, lo cuál quiere decir que ha pasado
+mucho tiempo desde que fueron publicados y aún están en espera de ser
+actualizados cuando las nuevas versiones hayan sido totalmente verificadas.
+
+Pero como hay mucha gente que implementa nuevos paquetes y están en continuo
+desarrollo, existen otros repositorios de paquetes además de elpa.gnu.org que
+proveen nuevas características.
+
+Los repositorios que listo a continuación son los más activos que existen dentro
+de la comunidad /emacs/:
+
+- Marmalade :: http://marmalade-repo.org/packages/
+- Tromey :: http://tromey.com/elpa/
+- Melpa :: https://melpa.org/pacakges/
+- Melpa-stable :: https::/stable.melpa.org/packages/
+- Org :: http:://orgmode.org/elpa
+
+** Agrega repositorios a .emacs.d/init.el
+
+Para hacer uso de los repositorios anteriores, vamos a agregar las siguientes
+lineas de código a init.el:
+
+#+begin_src emacs-lisp
+(setq user-full-name "Miguel Piña"
+      user-mail-address "miguel_pinia@ciencias.unam.mx"
+      package-archives '(("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("tromey" . "http://tromey.com/elpa/")
+                         ("melpa-stable" . "https://stable.melpa.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")
+                         ("org" . "http://orgmode.org/elpa/")
+                         ("gnu" . "https://elpa.gnu.org/packages/")))
+#+end_src
+
+La cuál agrega un nivel de configuración mayor a nuestro emacs al establecer con
+la función *setq* el nombre de usuario, el correo y los repositorios de
+paquetes. Para evaluar el código anterior bastaria con ejecutar =M-x eval-buffer=
+sobre el buffer donde está =init.el= con este código. Este código debe ir antes de
+*package-initialize*.
+
+** Configuraciones mínimas de emacs
+
+Antes de comenzar a instalar paquetes vamos a revisar un poco sobre
+configuración de emacs para poder activar ciertas características por defecto.
+
+*** Cargando un tema por defecto
+
+Por lo general, el tema por defecto de emacs está basado en un color blanco,
+pero a través de la configuración podemos cambiar el tema por alguno de los
+siguientes:
+
+- adwaita
+- deeper-blue
+- dichromacy
+- leuven
+- light-blue
+- manoj-dark
+- misterioso
+- tango
+- tango-dark
+
+entre otros...
+
+Para poder activarlo en la configuración de init.el basta con poner la siguiente
+linea de código:
+
+#+begin_src emacs-lisp
+(load-theme 'adwaita t)
+#+end_src
+
+O presionar M-x customize-themes
+
+*** Establecer una fuente agradable para emacs (monoespaciada)
+
+Antes de ver el código para elegir la fuente ¿Por qué tiene que ser
+monoespaciada?
+
+- Las cadenas del mismo tamaño van a parecer similares
+- Es fácil ver signos de puntuación como : () {}
+- Es más fácil identificar la diferencia en símbolos como 1lIoO0
+- El código es más fácil de leer
+
+Para activar hay que invocar a la función *set-frame-font* con una cadena con el
+nombre de la fuente y el tamaño.
+
+#+BEGIN_SRC emacs-lisp
+(set-frame-font "hack 14")
+#+END_SRC
+
+*** Configuraciones menores pero útiles
+
+#+begin_src emacs-lisp
+(global-hl-line-mode 1)
+(blink-cursor-mode 0)
+(show-paren-mode 1)
+(linum-mode 1)
+(setq-default auto-save-defaul nil ;; Evitar generar archivos de la forma #archivo#
+              save-place t ;; Guarda la línea en que estabas cuando cierras el archivo
+              create-lockfiles nil ;; Evita crear candados para la edición de archivos
+              inhibit-startup-message t ;; Evita el mensaje de emacs.
+              indent-tabs-mode nil ;; Evita ingresar tabs "duros"
+              tab-width 4 ;; Tamaño de espacios para un tabulador
+              x-select-enable-clipboard t
+              x-select-enable-primary t
+              save-interprogram-paste-before-kill t
+              apropos-do-all t
+              mouse-yank-at-point t)
+;; Actualizamos los keybindings para las búsquedas
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
+(global-set-key (kbd "C-M-s") 'isearch-forward)
+(global-set-key (kbd "C-M-r") 'isearch-backward)
+;; Muestra los espacios en blanco después de un último caracter
+(defun trailing-whitespaces ()
+    "Muestra los espacios en blanco al final de cada linea."
+    (interactive)
+    (setq show-trailing-whitespace t))
+(add-hook 'prog-mode-hook 'trailing-whitespaces)
+(add-hook 'LaTeX-mode-hook 'trailing-whitespaces)
+(add-hook 'prog-mode-hook  (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)));; Eliminar espacios en blanco después de un último caracter
+(add-hook 'LaTeX-mode-hook (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
+(global-set-key (kbd "C-,") 'comment-region);; Comentar rápidamente una linea
+(global-set-key (kbd "C-;") 'uncomment-region)
+(fset 'yes-or-no-p 'y-or-n-p)
+#+end_src
+
+** Instalando paquetes.
+
+Ahora que ya tenemos una configuración mínima para emacs, ahora ya podemos
+comenzar a instalar paquetes desde los repositorios que configuramos antes.
+
+Para listar los repositorios hay que ejecutar la siguiente función:
+
+*package-list-packages*
+
+Y revisar los paquetes que hay.
+
+** Paquetes recomendados
+
+Los siguientes paquetes son recomendados para proveer un mejor entorno dentro de
+emacs. Estos paquetes son herramientas generales para facilitar la vida de
+cualquier persona al escribir código en cualquier lenguaje.
+
+- [[https://github.com/emacs-helm/helm][helm]] :: Provee herramientas para la búsqueda de archivos y autocompletado de
+     funciones.
+- [[https://github.com/Fanael/rainbow-delimiters][rainbow-delimiters]] :: Colorea parentesis, llaves y corchetes.
+- [[https://github.com/auto-complete/auto-complete][auto-complete]] :: Auto-completado de palabras
+- [[https://github.com/joaotavora/yasnippet][yasnippet]] :: Snippets de código.
+- [[https://github.com/Fuco1/smartparens][smartparens]] :: Auto-completado de paréntesis, llaves y corchetes de forma
+     inteligente.
+- [[https://github.com/flycheck/flycheck][flycheck]] :: Validación en tiempo real.
+- [[https://www.emacswiki.org/emacs/FlySpell][flyspell]] :: Validación y corrección de palabras.
+- [[https://github.com/magit/magit][magit]] :: Interfaz de porcelana para git
+- [[https://github.com/bbatsov/projectile][projectile]] :: Gestión de proyectos. También existe una interfaz de helm para
+     trabajar con projectile.
+
+** Paquetes para python
+
+- python :: Paquete para trabajar con archivos python
+- [[https://github.com/paetzke/py-autopep8.el][py-autopep8]] :: Aplica las reglas del pep8 de forma automática
+- [[https://github.com/tkf/emacs-jedi][jedi]] :: Autocompletado inteligente
+
+** Paquetes para latex
+
+- tex :: Trabajo con latex
+- [[https://www.gnu.org/software/auctex/][auctex]] :: Paquete para ayudar con la redacción de documentos en latex.
+- auto-complete-auctex :: Auto completado para auctex.
+- ac-math :: Auto completado para símbolos matemáticos.
+- cdlatex :: Atajos para símbolos matemáticos.
