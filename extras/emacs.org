@@ -269,3 +269,12 @@ cualquier persona al escribir código en cualquier lenguaje.
 - auto-complete-auctex :: Auto completado para auctex.
 - ac-math :: Auto completado para símbolos matemáticos.
 - cdlatex :: Atajos para símbolos matemáticos.
+
+* Donde conseguir más información
+
+- [[https://emacswiki.org/][emacswiki]]
+- [[http://wikemacs.org/wiki/Main_Page][wikemacs]]
+- [[https://www.reddit.com/r/emacs/][Reddit de emacs]]
+- [[https://www.reddit.com/r/orgmode/][Reddit de orgmode]]
+- [[http://sachachua.com/blog/][Blog de Sacha Chua]]
+- [[http://planet.emacsen.org/][Planet emacsen]]
