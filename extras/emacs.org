@@ -47,9 +47,15 @@ Para realizar operaciones dentro de lisp, generalmente se define dentro de una
 lista sin apóstrofe la función y los argumentos, tal y como se usa en notación
 polaca.
 
-#+BEGIN_SRC lisp
+#+BEGIN_SRC emacs-lisp
 (+ 3 4 5 6)
 (print "hola")
+(defun fact (n)
+  (cond
+   ((= n 1) 1)
+   (t (* n (fact (1- n))))))
+
+(factorial 10)
 #+END_SRC
 
 Para evaluar una expresión dentro de emacs, es necesario presionar *C-x
