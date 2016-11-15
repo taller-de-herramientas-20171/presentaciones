@@ -115,8 +115,8 @@ de la comunidad /emacs/:
 - Marmalade :: http://marmalade-repo.org/packages/
 - Tromey :: http://tromey.com/elpa/
 - Melpa :: https://melpa.org/pacakges/
-- Melpa-stable :: https::/stable.melpa.org/packages/
-- Org :: http:://orgmode.org/elpa
+- Melpa-stable :: https://stable.melpa.org/packages/
+- Org :: http://orgmode.org/elpa
 
 ** Agrega repositorios a .emacs.d/init.el
 
