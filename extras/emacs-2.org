@@ -1,0 +1,580 @@
+#+title: Algunos tips extras para trabajar con emacs.
+#+author: Miguel Piña
+#+date: [2016-11-21 lun 18:47]
+
+
+* Introducción
+
+Después de haber configurado nuestro emacs con algunos paquetes, lo que vamos a
+ver ahora, son algunos trucos que permiten mejorar nuestro flujo de trabajo con
+emacs, ya sea desarrollando software, escribiendo texto o incluso llevando un
+control y registro de nuestras actividades diarias.
+
+* Cómo reemplazar texto en emacs
+
+Usando <M-%> (query-replace), emacs va preguntar sobre la cadena que quieres
+reemplazar en el buffer actual. Una vez que la emacs la haya encontrado, puedes
+presionar *y* para reemplazar, *n* para saltar o *!* para reemplazar sin preguntar.
+
+Si tuviste un error puedes presionar <C-g> para cancelar el reemplazo. Si
+quieres revertir la búsqueda y el reemplazo, puedes presionar <C-_>.
+
+
+* Como seleccionar partes de un texto
+
+En este caso nos vamos a referir como seleccionar ciertas columnas de un texto
+cualquiera, por ejemplo, la columna 10 del texto actual.
+
+Para ello vamos a invocar la función rectangle-mark-mode (que por defecto está
+asociada a la combinación <C-x SPC>. Seleccionamos lo que queremos usando las
+teclas de navegación o con <C-f> <C-b> <C-n> <C-p>.
+
+Una vez seleccionado el texto, podemos copiarlo con <M-w> o Cortarlo con <C-w>,
+ya sea para pegarlo en otro buffer con <C-y>
+
+* Documentación en la punta de tus dedos
+
+En algún momento vimos que emacs nos muestra la documentación de cada una de las
+funciones y variables que usa presionando <C-h f>, pero no está de más recordar
+cuales son las combinaciones de teclado que nos permiten acceder a distintos
+tipos de ayuda:
+
+- C-h C-h :: Ayuda sobre la ayuda
+- C-h f :: Ayuda para la función actual
+- C-h k :: Ayuda sobre una combinación de teclas especifica
+- C-h v :: Ayuda sobre alguna variable
+
+* Una de las cosas más poderosas de emacs, los macros de teclado
+
+Hay ocasiones que necesitamos modificar de forma repetitiva algún texto, pero
+eso implicar tener que repetir un montón de veces alguna combinación de
+teclas.
+
+Para evitar esto, Emacs va a proveer una herramienta llamada *Macros*, los cuáles
+lo único que van a hacer es guardar la secuencia de teclas que hayas presionado
+para poder usarla mientras continuas editando texto.
+
+Para grabar un macro, hay que presionar <C-x (>, usar la combinación de teclas
+deseada y después terminarla con <C-x )>. Una vez grabado, sólo se invoca
+presionando la tecla <F4>.
+
+- Ejercicio :: Marcar con negritas todas las combinaciones de teclas de este
+     texto.
+
+* Ediff
+
+Ediff es una herramienta que permite comparar las diferencias entre dos archivos
+similares. La forma más común de activarlo es usándolo de la siguiente manera:
+*M-x ediff-buffers*. Con lo cuál, emacs se va a encargar de resaltar las secciones
+con diferencias entre ellas. Además de que permite copiar las diferencias de un
+archivo a otro de forma sencilla.
+
+* Moviéndose más rápido dentro de emacs
+
+Una de las herramientas más potentes que tiene emacs es la búsqueda de textos
+dentro de los buffers. En la clase anterior vimos como agregar keybindings a las
+funciones de búsqueda (*isearch**), pero también podemos agregar una nueva
+característica de búsqueda y edición con *helm*. Para ello vamos a utilizar el
+paquete helm-swoop y nos va a permitir:
+
+- Realizar búsquedas como isearch
+- Editar sólo las lineas que nosotros queramos.
+- Realizar búsquedas dentro de buffers que usen el mismo modo.
+- Realizar búsquedas sobre todos los modos.
+
+Este modo lo podemos encontrar en la siguiente [[https://github.com/ShingoFukuyama/helm-swoop][dirección]] o podemos copiar en
+nuestro =.emacs.d/init.el= lo siguiente:
+
+#+begin_src emacs-lisp
+(require 'helm)
+(require 'helm-swoop)
+(global-set-key (kbd "M-i") 'helm-swoop)
+(global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
+(global-set-key (kbd "C-c M-i") 'helm-multi-swoop)
+(global-set-key (kbd "C-x M-i") 'helm-multi-swoop-all)
+(define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
+(define-key helm-swoop-map (kbd "M-i") 'helm-multi-swoop-all-from-helm-swoop)
+(define-key helm-swoop-map (kbd "M-m") 'helm-multi-swoop-current-mode-from-helm-swoop)
+(define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
+(define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
+(define-key helm-multi-swoop-map (kbd "C-r") 'helm-previous-line)
+(define-key helm-multi-swoop-map (kbd "C-s") 'helm-next-line)
+(setq helm-multi-swoop-edit-save t)
+(setq helm-swoop-split-with-multiple-windows nil)
+(setq helm-swoop-split-direction 'split-window-vertically)
+(setq helm-swoop-speed-or-color nil)
+(setq helm-swoop-move-to-line-cycle t)
+(setq helm-swoop-use-line-number-face t)
+(setq helm-swoop-use-fuzzy-match t)
+#+end_src
+
+
+* Abrir el buffer previo al dividir el buffer actual
+
+Otra característica que podemos agregar a nuestro emacs, es que al momento de
+dividir nuestra pantalla horizontalmente o verticalmente, el nuevo buffer nos
+muestre el último buffer que hayamos visitado.
+
+#+BEGIN_SRC emacs-lisp
+(defun vsplit-last-buffer ()
+  (interactive)
+  (split-window-vertically)
+  (other-window 1 nil)
+  (switch-to-next-buffer))
+
+(defun hsplit-last-buffer ()
+  (interactive)
+  (split-window-horizontally)
+  (other-window 1 nil)
+  (switch-to-next-buffer))
+
+(global-set-key (kbd "C-x 2") 'vsplit-last-buffer)
+(global-set-key (kbd "C-x 3") 'hsplit-last-buffer)
+#+END_SRC
+
+* Editando LaTeX en Emacs.
+
+Emacs contiene un conjunto importante de herramientas para escribir textos en
+LaTeX, los cuáles buscan facilitar la vida del escritor de documentos.
+
+Por lo general, en la mayoría de las implementaciones de emacs en Linux,
+permiten compilar los archivos de LaTeX desde el mismo buffer en el que se está
+trabajando, así como proveer miniaturas de las funciones e imágenes insertadas
+en el archivo.
+
+Podemos probar las siguientes combinaciones:
+
+- C-c C-c :: Compila el documento actual
+- C-c C-p C-d :: Compila las fórmulas matemáticas y las muestra en el documento
+     actual. Aplica también para títulos de secciones y subsecciones.
+- C-c C-p C-b :: Igual que el anterior, pero sólo para el buffer actual.
+- C-c C-p C-c C-d :: Inhabilita las imágenes y títulos para el documento actual.
+- C-c C-p C-c C-b :: Igual que el anterior, pero sólo para el buffer actual.
+
+Además de tener combinaciones de teclas para cambiar los estilos de fuente
+
+- C-c C-f C-b :: Inserta negritas
+- C-c C-f C-i :: Cursivas
+- C-c C-f C-r :: Mete fuente romana
+- C-c C-f C-e :: Enfásis
+- C-c C-f C-t :: Modo máquina de escribir
+- C-c C-f C-s :: Versión obliqua de la fuente romana
+- C-C C-f C-c :: Small Caps
+- C-c C-f C-d :: Elimina la fuente
+
+* Texto de ejemplo para LaTeX
+
+#+begin_src latex :exports both
+\documentclass[20pt,a4paper]{extarticle}
+\usepackage[a4paper,margin=6mm]{geometry}
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+\title{\LaTeX\ Mathematics Examples}
+\author{Prof Tony Roberts}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Delimiters}
+
+See how the delimiters are of reasonable size in these examples
+\[\left(a+b\right)\left[1-\frac{b}{a+b}\right]=a\,,\]
+
+\[\sqrt{|xy|}\leq\left|\frac{x+y}{2}\right|,\]
+even when there is no matching delimiter
+
+\[
+	\int_a^bu\frac{d^2v}{dx^2}\,dx
+	=\left.u\frac{dv}{dx}\right|_a^b
+	-\int_a^b\frac{du}{dx}\frac{dv}{dx}\,dx.
+\]
+
+\section{Spacing}
+
+Differentials often need a bit of help with their spacing as in
+\[
+	\iint xy^2\,dx\,dy
+	=\frac{1}{6}x^2y^3,
+\]
+whereas vector problems often lead to statements such as
+\[
+	u=\frac{-y}{x^2+y^2}\,,\quad
+	v=\frac{x}{x^2+y^2}\,,\quad\text{and}\quad
+	w=0\,.
+\]
+Occasionally one gets horrible line breaks when using a list in mathematics such as listing the first twelve primes  \(2,3,5,7,11,13,17,19,23,29,31,37\)\,.
+In such cases, perhaps include \verb|\mathcode`\,="213B| inside the inline maths environment so that the list breaks: \(\mathcode`\,="213B 2,3,5,7,11,13,17,19,23,29,31,37\)\,.
+Be discerning about when to do this as the spacing is different.
+
+\section{Arrays}
+
+Arrays of mathematics are typeset using one of the matrix environments as
+in
+\[
+	\begin{bmatrix}
+		1 & x & 0 \\
+		0 & 1 & -1
+	\end{bmatrix}\begin{bmatrix}
+		1  \\
+		y  \\
+		1
+	\end{bmatrix}
+	=\begin{bmatrix}
+		1+xy  \\
+		y-1
+	\end{bmatrix}.
+\]
+Case statements use cases:
+\[
+	|x|=\begin{cases}
+		x, & \text{if }x\geq 0\,,  \\
+		-x, & \text{if }x< 0\,.
+	\end{cases}
+  \]
+
+Many arrays have lots of dots all over the place as in
+\[
+	\begin{matrix}
+		-2 & 1 & 0 & 0 & \cdots & 0  \\
+		1 & -2 & 1 & 0 & \cdots & 0  \\
+		0 & 1 & -2 & 1 & \cdots & 0  \\
+		0 & 0 & 1 & -2 & \ddots & \vdots \\
+		\vdots & \vdots & \vdots & \ddots & \ddots & 1  \\
+		0 & 0 & 0 & \cdots & 1 & -2
+	\end{matrix}
+\]
+
+\section{Equation arrays}
+
+In the flow of a fluid film we may report
+\begin{eqnarray}
+	u_\alpha & = & \epsilon^2 \kappa_{xxx}
+	\left( y-\frac{1}{2}y^2 \right),
+	\label{equ}  \\
+	v & = & \epsilon^3 \kappa_{xxx} y\,,
+	\label{eqv}  \\
+	p & = & \epsilon \kappa_{xx}\,.
+	\label{eqp}
+\end{eqnarray}
+Alternatively, the curl of a vector field $(u,v,w)$ may be written
+with only one equation number:
+\begin{eqnarray}
+	\omega_1 & = &
+	\frac{\partial w}{\partial y}-\frac{\partial v}{\partial z}\,,
+	\nonumber  \\
+	\omega_2 & = &
+	\frac{\partial u}{\partial z}-\frac{\partial w}{\partial x}\,,
+	\label{eqcurl}  \\
+	\omega_3 & = &
+	\frac{\partial v}{\partial x}-\frac{\partial u}{\partial y}\,.
+	\nonumber
+\end{eqnarray}
+Whereas a derivation may look like
+\begin{eqnarray*}
+	(p\wedge q)\vee(p\wedge\neg q) & = & p\wedge(q\vee\neg q)
+	\quad\text{by distributive law}  \\
+	 & = & p\wedge T \quad\text{by excluded middle}  \\
+	 & = & p \quad\text{by identity}
+\end{eqnarray*}
+
+\section{Functions}
+
+Observe that trigonometric and other elementary functions are typeset
+properly, even to the extent of providing a thin space if followed by
+a single letter argument:
+\[
+	\exp(i\theta)=\cos\theta +i\sin\theta\,,\quad
+	\sinh(\log x)=\frac{1}{2}\left( x-\frac{1}{x} \right).
+\]
+With sub- and super-scripts placed properly on more complicated
+functions,
+\[
+	\lim_{q\to\infty}\|f(x)\|_q
+	=\max_{x}|f(x)|,
+\]
+and large operators, such as integrals and
+\begin{eqnarray*}
+	e^x & = & \sum_{n=0}^\infty \frac{x^n}{n!}
+	\quad\text{where }n!=\prod_{i=1}^n i\,,  \\
+	\overline{U_\alpha} & = & \bigcap_\alpha U_\alpha\,.
+\end{eqnarray*}
+In inline mathematics the scripts are correctly placed to the side in
+order to conserve vertical space, as in
+\(
+	1/(1-x)=\sum_{n=0}^\infty x^n.
+\)
+
+\section{Accents}
+
+Mathematical accents are performed by a short command with one
+argument, such as
+\[
+	\tilde f(\omega)=\frac{1}{2\pi}
+	\int_{-\infty}^\infty f(x)e^{-i\omega x}\,dx\,,
+\]
+or
+\[
+	\dot{\vec \omega}=\vec r\times\vec I\,.
+\]
+
+\section{Command definition}
+
+\newcommand{\Ai}{\operatorname{Ai}}
+The Airy function, $\Ai(x)$, may be incorrectly defined as this
+integral
+\[
+	\Ai(x)=\int\exp(s^3+isx)\,ds\,.
+\]
+
+\newcommand{\D}[2]{\frac{\partial #2}{\partial #1}}
+\newcommand{\DD}[2]{\frac{\partial^2 #2}{\partial #1^2}}
+\renewcommand{\vec}[1]{\text{\boldmath$#1$}}
+
+This vector identity serves nicely to illustrate two of the new
+commands:
+\[
+	\vec\nabla\times\vec q
+	=\vec i\left(\D yw-\D zv\right)
+	+\vec j\left(\D zu-\D xw\right)
+	+\vec k\left(\D xv-\D yu\right).
+\]
+
+\section{Theorems et al.}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+
+\begin{definition}[right-angled triangles] \label{def:tri}
+A \emph{right-angled triangle} is a triangle whose sides of length~\(a\), \(b\) and~\(c\), in some permutation of order, satisfies \(a^2+b^2=c^2\).
+\end{definition}
+
+\begin{lemma}
+The triangle with sides of length~\(3\), \(4\) and~\(5\) is right-angled.
+\end{lemma}
+
+This lemma follows from the Definition~\ref{def:tri} as \(3^2+4^2=9+16=25=5^2\).
+
+\begin{theorem}[Pythagorean triplets] \label{thm:py}
+Triangles with sides of length \(a=p^2-q^2\), \(b=2pq\) and \(c=p^2+q^2\) are right-angled triangles.
+\end{theorem}
+
+Prove this Theorem~\ref{thm:py} by the algebra \(a^2+b^2 =(p^2-q^2)^2+(2pq)^2
+=p^4-2p^2q^2+q^4+4p^2q^2
+=p^4+2p^2q^2+q^4
+=(p^2+q^2)^2 =c^2\).
+
+\end{document}
+#+end_src
+
+#+RESULTS:
+#+BEGIN_EXPORT latex
+\documentclass[20pt,a4paper]{extarticle}
+\usepackage[a4paper,margin=6mm]{geometry}
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+\title{\LaTeX\ Mathematics Examples}
+\author{Prof Tony Roberts}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Delimiters}
+
+See how the delimiters are of reasonable size in these examples
+\[\left(a+b\right)\left[1-\frac{b}{a+b}\right]=a\,,\]
+
+\[\sqrt{|xy|}\leq\left|\frac{x+y}{2}\right|,\]
+even when there is no matching delimiter
+
+\[
+	\int_a^bu\frac{d^2v}{dx^2}\,dx
+	=\left.u\frac{dv}{dx}\right|_a^b
+	-\int_a^b\frac{du}{dx}\frac{dv}{dx}\,dx.
+\]
+
+\section{Spacing}
+
+Differentials often need a bit of help with their spacing as in
+\[
+	\iint xy^2\,dx\,dy
+	=\frac{1}{6}x^2y^3,
+\]
+whereas vector problems often lead to statements such as
+\[
+	u=\frac{-y}{x^2+y^2}\,,\quad
+	v=\frac{x}{x^2+y^2}\,,\quad\text{and}\quad
+	w=0\,.
+\]
+Occasionally one gets horrible line breaks when using a list in mathematics such as listing the first twelve primes  \(2,3,5,7,11,13,17,19,23,29,31,37\)\,.
+In such cases, perhaps include \verb|\mathcode`\,="213B| inside the inline maths environment so that the list breaks: \(\mathcode`\,="213B 2,3,5,7,11,13,17,19,23,29,31,37\)\,.
+Be discerning about when to do this as the spacing is different.
+
+\section{Arrays}
+
+Arrays of mathematics are typeset using one of the matrix environments as
+in
+\[
+	\begin{bmatrix}
+		1 & x & 0 \\
+		0 & 1 & -1
+	\end{bmatrix}\begin{bmatrix}
+		1  \\
+		y  \\
+		1
+	\end{bmatrix}
+	=\begin{bmatrix}
+		1+xy  \\
+		y-1
+	\end{bmatrix}.
+\]
+Case statements use cases:
+\[
+	|x|=\begin{cases}
+		x, & \text{if }x\geq 0\,,  \\
+		-x, & \text{if }x< 0\,.
+	\end{cases}
+  \]
+
+Many arrays have lots of dots all over the place as in
+\[
+	\begin{matrix}
+		-2 & 1 & 0 & 0 & \cdots & 0  \\
+		1 & -2 & 1 & 0 & \cdots & 0  \\
+		0 & 1 & -2 & 1 & \cdots & 0  \\
+		0 & 0 & 1 & -2 & \ddots & \vdots \\
+		\vdots & \vdots & \vdots & \ddots & \ddots & 1  \\
+		0 & 0 & 0 & \cdots & 1 & -2
+	\end{matrix}
+\]
+
+\section{Equation arrays}
+
+In the flow of a fluid film we may report
+\begin{eqnarray}
+	u_\alpha & = & \epsilon^2 \kappa_{xxx}
+	\left( y-\frac{1}{2}y^2 \right),
+	\label{equ}  \\
+	v & = & \epsilon^3 \kappa_{xxx} y\,,
+	\label{eqv}  \\
+	p & = & \epsilon \kappa_{xx}\,.
+	\label{eqp}
+\end{eqnarray}
+Alternatively, the curl of a vector field $(u,v,w)$ may be written
+with only one equation number:
+\begin{eqnarray}
+	\omega_1 & = &
+	\frac{\partial w}{\partial y}-\frac{\partial v}{\partial z}\,,
+	\nonumber  \\
+	\omega_2 & = &
+	\frac{\partial u}{\partial z}-\frac{\partial w}{\partial x}\,,
+	\label{eqcurl}  \\
+	\omega_3 & = &
+	\frac{\partial v}{\partial x}-\frac{\partial u}{\partial y}\,.
+	\nonumber
+\end{eqnarray}
+Whereas a derivation may look like
+\begin{eqnarray*}
+	(p\wedge q)\vee(p\wedge\neg q) & = & p\wedge(q\vee\neg q)
+	\quad\text{by distributive law}  \\
+	 & = & p\wedge T \quad\text{by excluded middle}  \\
+	 & = & p \quad\text{by identity}
+\end{eqnarray*}
+
+\section{Functions}
+
+Observe that trigonometric and other elementary functions are typeset
+properly, even to the extent of providing a thin space if followed by
+a single letter argument:
+\[
+	\exp(i\theta)=\cos\theta +i\sin\theta\,,\quad
+	\sinh(\log x)=\frac{1}{2}\left( x-\frac{1}{x} \right).
+\]
+With sub- and super-scripts placed properly on more complicated
+functions,
+\[
+	\lim_{q\to\infty}\|f(x)\|_q
+	=\max_{x}|f(x)|,
+\]
+and large operators, such as integrals and
+\begin{eqnarray*}
+	e^x & = & \sum_{n=0}^\infty \frac{x^n}{n!}
+	\quad\text{where }n!=\prod_{i=1}^n i\,,  \\
+	\overline{U_\alpha} & = & \bigcap_\alpha U_\alpha\,.
+\end{eqnarray*}
+In inline mathematics the scripts are correctly placed to the side in
+order to conserve vertical space, as in
+\(
+	1/(1-x)=\sum_{n=0}^\infty x^n.
+\)
+
+\section{Accents}
+
+Mathematical accents are performed by a short command with one
+argument, such as
+\[
+	\tilde f(\omega)=\frac{1}{2\pi}
+	\int_{-\infty}^\infty f(x)e^{-i\omega x}\,dx\,,
+\]
+or
+\[
+	\dot{\vec \omega}=\vec r\times\vec I\,.
+\]
+
+\section{Command definition}
+
+\newcommand{\Ai}{\operatorname{Ai}}
+The Airy function, $\Ai(x)$, may be incorrectly defined as this
+integral
+\[
+	\Ai(x)=\int\exp(s^3+isx)\,ds\,.
+\]
+
+\newcommand{\D}[2]{\frac{\partial #2}{\partial #1}}
+\newcommand{\DD}[2]{\frac{\partial^2 #2}{\partial #1^2}}
+\renewcommand{\vec}[1]{\text{\boldmath$#1$}}
+
+This vector identity serves nicely to illustrate two of the new
+commands:
+\[
+	\vec\nabla\times\vec q
+	=\vec i\left(\D yw-\D zv\right)
+	+\vec j\left(\D zu-\D xw\right)
+	+\vec k\left(\D xv-\D yu\right).
+\]
+
+\section{Theorems et al.}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+
+\begin{definition}[right-angled triangles] \label{def:tri}
+A \emph{right-angled triangle} is a triangle whose sides of length~\(a\), \(b\) and~\(c\), in some permutation of order, satisfies \(a^2+b^2=c^2\).
+\end{definition}
+
+\begin{lemma}
+The triangle with sides of length~\(3\), \(4\) and~\(5\) is right-angled.
+\end{lemma}
+
+This lemma follows from the Definition~\ref{def:tri} as \(3^2+4^2=9+16=25=5^2\).
+
+\begin{theorem}[Pythagorean triplets] \label{thm:py}
+Triangles with sides of length \(a=p^2-q^2\), \(b=2pq\) and \(c=p^2+q^2\) are right-angled triangles.
+\end{theorem}
+
+Prove this Theorem~\ref{thm:py} by the algebra \(a^2+b^2 =(p^2-q^2)^2+(2pq)^2
+=p^4-2p^2q^2+q^4+4p^2q^2
+=p^4+2p^2q^2+q^4
+=(p^2+q^2)^2 =c^2\).
+
+\end{document}
+#+END_EXPORT
