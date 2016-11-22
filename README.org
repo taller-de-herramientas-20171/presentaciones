@@ -50,5 +50,8 @@ lineamientos de entrega.
 - [[file:latex/latex2.org][LaTeX 2]]
 - [[file:latex/latex3.org][LaTeX 3]]
 - [[file:latex/latex4.org][LaTeX 4]]
+- [[file:extras/emacs.org][Emacs 1]]
+- [[file:extras/emacs-2.org][Emacs 2]]
+
 * Calificaciones
 - [[https://docs.google.com/spreadsheets/d/1s97Wv9IiAgMbf8zdYPMIkXiufSebjk_NXz3Di9sknP0/edit#gid=0][Calificaciones]]
