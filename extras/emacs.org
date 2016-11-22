@@ -8,6 +8,10 @@
 - Conocer como personalizar nuestro emacs
 - Hacer que el editor se adapte a nosotros y no nosotros a el
 
+1 + 1 <- Infija
++ 1 1 <- Prefija <- Lisp
+1 1 + <- Posfija
+
 * Emacs Lisp
 
 - *Emacs lisp* es un lenguaje de programación derivado de lisp
@@ -36,6 +40,7 @@
 En lisp, todo está construido con listas. Una lista en lisp luce de la siguiente
 manera:
 
+
 #+BEGIN_SRC lisp
 '(rose violet daisy buttercup)
 #+END_SRC
@@ -53,9 +58,9 @@ polaca.
 (defun fact (n)
   (cond
    ((= n 1) 1)
-   (t (* n (fact (1- n))))))
+   (t (* n (fact (- n 1))))))
 
-(factorial 10)
+(fact 10)
 #+END_SRC
 
 Para evaluar una expresión dentro de emacs, es necesario presionar *C-x
@@ -196,7 +201,7 @@ nombre de la fuente y el tamaño.
 (blink-cursor-mode 0)
 (show-paren-mode 1)
 (linum-mode 1)
-(setq-default auto-save-defaul nil ;; Evitar generar archivos de la forma #archivo#
+(setq-default auto-save-default nil ;; Evitar generar archivos de la forma #archivo#
               save-place t ;; Guarda la línea en que estabas cuando cierras el archivo
               create-lockfiles nil ;; Evita crear candados para la edición de archivos
               inhibit-startup-message t ;; Evita el mensaje de emacs.
