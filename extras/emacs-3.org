@@ -1,0 +1,73 @@
+#+title: Expresiones regulares
+#+author: Miguel Piña
+#+date: [2016-06-06 lun 11:13]
+
+* Expresiones regulares
+
+- Caracteres alfanuméricos y de puntuación "a-z"
+- Caracteres especiales "."
+- Delimitadores "[ ]"
+
+Negación en expresiones regulares: ^ - circumflejo
+
+** Métodos de búsqueda
+
+- Ctrl-S :: Búsqueda hacia "adelante"
+            Se detiene en la primer ocurrencia
+            Recomienza una búsqueda anterior
+- Ctrl-R :: Búsqueda hacia "atrás"
+            Se detiene en la primera ocurrencia
+            Recomienza una búsqueda
+
+- replace-string ::  Sustituye una cadena de características por otra. Sustituye
+     a partir del "cursor" hasta el fin del archivo.
+
+- query-replace-string :: Sustituye de manera interactiva una cadena de
+     caracteres por otra. Sustituye a partir del "cursor" hasta el fin del
+     archivo.Presionando la tecla n omite la ocurrencia actual, presionando
+     <espacio> o 'y' acepta la sustitución de la cadena actual
+
+- Esc-Ctrl-S :: Búsqueda hacia "adelante" con regex
+
+- Esc-Ctrl-R :: Búsqueda hacia "atrás" con regex
+
+** Expresiones regulares
+
+- a :: Un caracter
+- . :: Cualquier caracter.
+- [a-z] :: Conjunto de caracteres.
+- \sw :: Cualquier caracter de palabras (a, b, e, á, ó).
+- \s. :: Cualquier caracter de puntuacion.
+- \s- :: Cualquier caracter que representa un espacio en blanco <espacio>,
+     <tabulador>, <salto del linea> y <salto de página>
+
+** Cuantificadores
+
+- ? :: Uno o cero ocurrencias
+- * :: Cero o más ocurrencias
+- + :: Una o más ocurrencias
+- \(m, n\) :: Al menos m ocurrencias y a los más n ocurrencias. En ausencia de
+     n, busca cadenas de al menos m ocurrencias, con solo n se buscan
+     exactamente n ocurrencias \(2\).
+
+** Caracteres especiales
+
+- ^ :: Inicio de una línea, representa el complemento de un conjunto si va al
+     inicio, ejemplo: [^a-zA-Z0-9] representa cualquier caracter que no sea un
+     número o una letra.
+- $ :: Final de una linea
+- \ :: Constructor de secuencias especiales
+
+** Secuencias especiales
+
+- \b :: Cadena vacía al inicio o al final de una palabra, por lo regular es
+     usada para denotar la frontera de una palabra. Por ejemplo: \bpalabra\b.
+- \| :: Separador de expresiones.
+- \(....\) :: Agrupa construcciones. Útil para buscar o sustituir varias
+     expresiones. Útil para buscar o sustituir expresiones complejas. Útil para
+     "recordar" expresiones y usarlas posteriormente en sustituciones.
+- \1 ... \9 :: Las expresiones agrupadas y reconocidas con las construcciones \(
+     y \) son almacenadas temporalmente y accesibles en las sustituciones a
+     través de las referencias \1 a la \9
+- \, () :: Construccion para introducir código emacs-lisp dentro de la
+     sustitución.
