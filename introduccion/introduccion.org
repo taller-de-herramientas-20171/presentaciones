@@ -110,36 +110,36 @@ Licencia pública general de GNU a partir de la versión
 
 - [[http://mvdirona.com/jrh/talksandpapers/GuidoVanRossum_21_Years_of_Python.pdf][Más información, presentación de los 21 años de python.]]
 
-* Filosofía de python
+* Filosofía de Python
 
 La filosofía de python se basó
 
 - Tomar ideas prestadas de otros lugares siempre que
   tuviera sentido.
-- “Las cosas deben ser tan simples como sea posible, pero
-  no más simples.” (Einstein)
-- Haz una cosa bien (la “filosofía de Unix”).
-- No preocuparse mucho sobre la performance; planea
-  optimizar luego, cuando sea necesario.
+- "Las cosas deben ser tan simples como sea posible, pero
+  no más simples." (Einstein)
+- Haz una cosa bien (la "filosofía de Unix").
+- No preocuparse mucho sobre la performance; planea primero,
+  optimizar luego, siempre y cuando sea necesario.
 - No pelear con el entorno y seguir la corriente.
-- No intentar la perfección porque “suficientemente
-  bueno” es a menudo eso.
+- No intentar la perfección por qué "suficientemente
+  bueno" es a menudo eso (sic. Suficientemente bueno).
 - (Corolario) Está bien tomar atajos a veces,
-  especialmente si se puede hacer bien luego.
+  especialmente si después se pueden hacer bien.
 
-* Filosofía de python
+* Filosofía de Python
 
 A pesar de lo anterior.
 
 - La implementación de Python no debe estar atada a una
   plataforma en particular. Está bien si algunas
   funcionalidades no están siempre disponibles, pero el
-  núcleo debe correr en todo lugar.
+  núcleo debe correr en cualquier lugar.
 
 - No molestar a los usuarios con detalles de los que la
-  máquina se puede encargar (no siempre seguí esta regla
-  y algunas de las desastrosas consecuencias se describen
-  en las siguientes secciones).
+  máquina se puede encargar (no siempre se debe seguir
+  esta regla y algunas de las desastrosas consecuencias
+  se describen en las siguientes secciones).
 
 - Soportar y animar a que el código de los usuarios sea
   independiente de la plataforma, pero no evitar el
@@ -151,11 +151,11 @@ A pesar de lo anterior.
   los usuarios, sofisticados o no, de ayudarse a sí
   mismos.
 
-* Filosofía de python
+* Filosofía de Python
 
 - Los errores no deben ser fatales. Esto significa que el
   código de los usuarios debe ser capaz de recuperarse de
-  condiciones de error mientras que la máquina virtual
+  condiciones de error mientras que la máquina (virtual)
   siga funcionando.
 
 - Al mismo tiempo, los errores no deben pasar
@@ -185,6 +185,7 @@ en lo que llamó "*Zen de Python*"
 - Lo práctico gana a lo puro.
 
 * Zen de python
+
 - Los errores nunca deberían dejarse pasar
   silenciosamente.
 - A menos que hayan sido silenciados explícitamente.
@@ -217,8 +218,3 @@ que el siguiente comando invoca a python 3
 #+begin_src sh
 python3
 #+end_src
-
-# python.jpg http://miguelpinia.files.wordpress.com/2016/06/python.jpg
-# guido.jpg http://miguelpinia.files.wordpress.com/2016/06/guido.jpg
-# amiga500.jpg http://miguelpinia.files.wordpress.com/2016/06/amiga500.jpg
-# language.jpg http://miguelpinia.files.wordpress.com/2016/06/language.jpg
