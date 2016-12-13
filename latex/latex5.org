@@ -1,0 +1,140 @@
+-*- mode: org -*-
+
+* Imagenes y figuras
+Las figuras y tablas pueden ser *flotantes*, lo que significa que podemos o no decirle al compilador 
+
+que las acomoda donde aparecen o en la primera página en la que
+
+no ocasionen que se deje un espacio en blanco innecesario.
+
+Tienen que ver con dónde se acomodan los objetos.
+
+#+BEGIN_SRC EXAMPLE
+Para figuras:
+\begin{figure} [posicionador]
+  Contenido
+ \caption {Título de la figura }
+\end{figure}
+
+
+Para tablas (o cuadros):
+\begin{table} [posicionador]
+  Contenido
+ \caption {Título de la tabla }
+\end{table}
+#+END_SRC
+
+Posiciones posibles para los flotantes:
+- t top: Lo coloca en la parte superior de la primera página disponible.
+- b bottom: Lo coloca en la parte inferior de la primera página donde quepa.
+- p page: Lo coloca en una página de flotantes, la primera que pueda.
+- h here: Lo coloca, si es que puede, en el punto donde aparece.
+- H Here: Incondicionalmente donde aparece. Si es necesario, porque la figura no quepa en esa página, deja página en blanco y lo coloca en la siguiente página.
+- ! Try harder: Intenta de manera más firme acomodar la figura o tabla donde se especifica con los posicionadores que siguen a !.
+
+
+Para incluir imágenes o figuras generadas desde fuera y que estén codificadas en postscript o imágenes .png
+
+se utiliza el comando *\includegraphics {...}* que toma como argumento un archivo
+
+en el que se encuentre la imagen o figura que se desea incluir.
+
+Tenemos que incluir el uso del paquete graphicx en el preámbulo del documento: \usepackage{graphicx}.
+#+BEGIN_SRC EXAMPLE
+\begin{figure}[h!]
+  \centering
+  \label{fig:1}
+  \caption{Grafico introducido con \texttt{includegraphics} }
+  \includegraphics[scale=0.7, angle=45]{eriabractescens.jpg}
+\end{figure}
+#+END_SRC 
+
+* Referencias 
+  
+** Referencias Bibliográficas
+La solución al problema de las listas de bibliografías está basado en LATEX y su programa hermano BIBTEX.
+
+La estructura básica de una entrada BIBTEX tienes tres partes básicas:
+1. El tipo de la entrada (book, article, inproceedings y otros). 
+2. Una llave elegida por el usuario que identifica la publicación. Esta llave es la que debe
+usarse como parámetro para el comando \cite.
+3. Una serie de campos separados entre sí por comas, donde cada campo consiste de un
+identificador de campo y sus datos entre comillas o llaves, por ejemplo:
+author ="Fulanito Labrador " ,
+journal = " Las bicicletas " ,
+title = { Los paseos por la ciudad }
+
+Debemos crear un archivo .bib que contiene la información bibliográfica.
+#+BEGIN_SRC EXAMPLE
+@BOOK{DUMMY:1,
+ AUTHOR="Krispin",
+ TITLE="El libro sin titulo",
+ PUBLISHER="Dummy Publisher",
+ YEAR="2100",
+}
+#+END_SRC
+
+A nuestro archivo latex debemos incluirle la base de datos bibliográfica 
+y el estilo de ficha bibliográfica que deseamos.
+
+#+BEGIN_SRC EXAMPLE
+\documentclass{article}
+
+\begin{document}
+
+Una cita cualquiera \cite{DUMMY:1} dentro del texto.
+
+\newpage
+
+\bibliographystyle{plain}
+\bibliography{biblio} 
+
+\end{document}
+#+END_SRC
+
+
+Algunos estilos son:
+- plain: El estilo estándar de BIBTEX. Las entradas son ordenadas alfabéticamente con etiquetas numéricas.
+- unsrt: Similar al anterior, pero las entradas son impresas en el orden en que fueron citadas en
+el documento. Utiliza etiquetas numéricas.
+- alpha: Similar a plain, pero las etiquetas de las entradas son formadas a partir del nombre del
+autor y del año de publicación.
+- abbrv: Similar a plain, pero las entradas son más compactas, dado que los nombres de pila, los
+meses y los nombres de las revistas son abreviados.
+- acm: Usado para las publicaciones de la Association for Computing Machinery. Tiene el nombre
+del autor (apellido y luego nombre) en mayúsculas pequeñas y usa números como etiquetas.
+
+Primero corres el comando latex con el archivo fuente como argumento; después corres el
+
+comando bibtex con el mismo argumento y luego deberás ejecutar latex dos veces para
+
+que LATEX pueda resolver todas las referencias.
+
+
+* Referencias
+En LaTeX puedes hacer referencia casi cualquier cosa que se numere (secciones, figuras, fórmulas), 
+
+y LaTeX se hará cargo de numeración, actualizándolo siempre que sea necesario. 
+
+Los comandos que se utilizan no dependen de lo que está haciendo referencia, y son:
+
+- \label{marcador} le das el objeto que desea hacer referencia a un marcador, se puede ver como un nombre.
+- \ref{marca} se puede hacer referencia al objeto que haya marcado antes. 
+- \pageref{marca} Se imprimirá el número de la página donde está el objeto.
+
+LaTeX calculará la numeración correcta para los objetos en el documento.
+
+Se debe compilar dos veces el documento para obtener las referencias correctas.
+
+#+BEGIN_SRC EXAMPLE
+\section{Agradeciemientos}
+\label{sec:greetings}
+
+Hola!!
+
+\section{Referencias}
+
+En la sección \ref{sec:greetings} doy agradecimientos.
+#+END_SRC
+
+Se pueden etiquetar lo que sea: imagenes, tablas, ecuaciones, secciones, etc.
