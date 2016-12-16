@@ -21,21 +21,22 @@ correspondiente valor Fahrenheit en la segunda.
 
 La tabla debería verse algo como lo siguiente:
 
-|   C |    F |
-|-----+------|
-| -20 | -4.0 |
-| -15 |  5.0 |
-| -10 | 14.0 |
-|  -5 | 23.0 |
-|   0 | 32.0 |
-|   5 | 41.0 |
-|  10 | 50.0 |
-|  15 | 59.0 |
-|  20 | 68.0 |
-|  25 | 77.0 |
-|  30 | 86.0 |
-|  35 | 95.0 |
-|  40 | 1040 |
+|   C |     F |
+|-----+-------|
+| -20 |  -4.0 |
+| -15 |   5.0 |
+| -10 |  14.0 |
+|  -5 |  23.0 |
+|   0 |  32.0 |
+|   5 |  41.0 |
+|  10 |  50.0 |
+|  15 |  59.0 |
+|  20 |  68.0 |
+|  25 |  77.0 |
+|  30 |  86.0 |
+|  35 |  95.0 |
+|  40 | 104.0 |
+
 
 *¿Cómo lo implementamos en python?*
 
@@ -88,9 +89,9 @@ C =  40; F = 9.0/5*C + 32; print C, F
 En computación se entiende como ciclo a una setencia
 que se realiza repetidas veces en un trozo aislado de
 código, hasta que se cumpla cierta condición que
-indique el término de repetición de la secuencia
+indique el término de repetición de la secuencia.
 #+end_center
-.
+
 ** Ciclos en python
 
 En python hay dos tipos de ciclos:
@@ -208,7 +209,10 @@ x >= 0 and y < 1
 x >= 0 or y < 1
 x > 0 or y > 1
 x > 0 or not x > 1
--1 < x <= 0 ; -1 < x and x <= 0
+
+-1 < x <= 0
+-1 < x and x <= 0
+
 not (x > 0 or y > 0)
 #+END_SRC
 
@@ -240,11 +244,11 @@ bool(s)
 
 Dado:
 
-$sin(x) \approx x - \frac{x^{3}}{3!} + \frac{x^{5}}{!} - \frac{x^{7}}{7!} \ldots + \frac{x^{N}}{N!}$
+$sin(x) \approx x - \frac{x^{3}}{3!} + \frac{x^{5}}{5!} - \frac{x^{7}}{7!} \ldots + \frac{x^{N}}{N!}$
 
 [[file:ltxpng/introduccion_a9bef005df374fa9af56f417e2ff7027b86d2fc3.png]]
 
-donde 3! = 3*2*1, 5! = 5*4*3*2*, etc, son expresiones
+donde 3! = 3*2*1, 5! = 5*4*3*2*1, etc, son expresiones
 factoriales y son calculadas por math.factorial(x).
 Vamos a calcular esta aproximación para N = 25 usando el ciclo while.
 
