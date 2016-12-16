@@ -31,6 +31,8 @@ lineamientos de entrega.
 - [[file:introduccion/introduccion.org][Introducción a Python]]
 - [[file:git/git.org][Un breve paseo por GIT]]
 - [[file:python/python1.org][Primera sesión de python]]
+- [[file:python/python2.org][Enunciados y expresiones]]
+- [[file:python/python3.org][Tipos]]
 - [[file:ciclos/introduccion.org][Introducción a ciclos]]
 - [[file:ciclos/listas.org][Listas y for]]
 - [[file:ciclos/listas2.org][Listas y ciclos]]
