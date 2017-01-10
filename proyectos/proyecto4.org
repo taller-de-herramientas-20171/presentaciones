@@ -1,0 +1,197 @@
+* Proyecto Herramientas Computacionales
+
+** Fecha de Entrega:
+   12 de enero de 2017
+
+** Entregables
+
+Deberán entregar un archivo ejecutable con extensión .py con el código fuente de
+su solución. (No olviden incluir sus datos, fecha de entrega, número de proyecto
+y comentarios).
+
+Su práctica se entrega estrictamente por parejas.
+
+
+* Trasfondo
+
+El cifrado de César es nombrado después que Julio César utilizó este tipo de
+cifrado para mantener sus comunicaciones militares en secreto. Un cifrado de
+César reemplaza cada letra de un texto plano por una que esta a número fijo de
+lugares en el alfabeto.
+
+El texto sin formato es el mensaje original; el texto cifrado es el mensaje
+cifrado.
+
+El ejemplo que se muestra a continuación es un desplazamiento de tres lugares
+para que "B" en el texto plano se convierta en "E" en el texto cifrado, la "C"
+se convierte en "F", y así sucesivamente.
+
+El mapeo da la vuelta de modo que "X" se mapea en "A" y así sucesivamente.
+
+Aquí está la cartografía completa para un cambio de tres:
+
+*Texto Plano*: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+*Texto Cifrado*: DEFGHIJKLMNOPQRSTUVWXYZABC
+
+Para cifrar un mensaje basta con sustituir las letras de texto sin formato por
+el texto cifrado correspondiente.  Por ejemplo, usando nuestro cifrado de
+tres-desplazamiento:
+
+*Texto Plano*: the quick brown fox jumps over the lazy dog
+
+*Texto Cifrado*: WKH TXLFN EURZQ IRA MXPSV RYHU WKH ODCB GRJ
+
+Para descifrar el mensaje simplemente se invierte el proceso.
+
+El cifrado también se puede representar usando aritmética modular después de
+transformar primero las letras en números según el esquema: A = 0, B = 1,
+etc. (que es el índice del alfabeto si está en una cadena o una lista). Un
+cifrado de tres-desplazamiento tomará el número de cada letra y suma 3 (el
+desplazamiento) y luego encuentra el resto después de dividir entre 26 para
+obtener el texto cifrado.
+
+#+begin_src python
+CipherTextChar = (plainTextChar + 3)% 26
+#+end_src
+
+* Especificaciones del Programa
+
+Escribir un programa que pueda cifrar y descifrar un mensaje que ha sido
+codificado usando un cifrado de César.
+
+Es necesario encontrar el "desplazamiento" para el cifrado. Una vez que tengas el
+desplazamiento, entonces conoces la asignación para poder descifrar el mensaje.
+
+
+* Caesar Cipher Cracking
+
+Para encontrar el "desplazamiento", necesitas saber acerca de craquear cifrados
+ de César utilizando una técnica que tiene más de mil años.
+
+Cualquier idioma como el español tiene una distribución de letras conocida para
+cada letra.
+
+Por ejemplo, la letra "E" es la letra más común en espanol que compone 13% de
+las letras en promedio (ignorando mayusculas). La letra "A" es la siguiente
+(12%), seguida por "O" (8,17%), y así sucesivamente. El orden "E" - "A" - "O" es
+lo que importa, no el porcentaje.
+
+El procedimiento comienza encontrando la letra más común. Puedes suponer que el
+más común es la letra "E". Luego puedes encontrar el "desplazamiento" de la
+letra más común en el texto cifrado a la letra "E" más comúnmente esperada.
+
+Por ejemplo, si la letra más común en el texto cifrado es "H", sabes que el
+desplazamiento de "E" a "H" es 3.  Debes comprobar que el desplazameinto para la
+siguiente letra más común "A", y la tercera letra más común "O" también es 3.
+
+Una vez que conoces el desplazamiento, puedes aplicar el desplazamiento a todas
+las letras en el texto cifrado y obtener el texto original.
+
+¿Qué pasa con los espacios entre las palabras y la puntuación? En el texto
+cifrado del mundo real no hay espacios o puntuación porque son pistas útiles
+para descifrar.  Para este proyecto no hay puntuación, pero hemos dejado
+espacios en el texto cifrado porque serán útiles para que reconocer que si
+descifrado es correcto o no.
+
+Deberás ignorar espacios al contar los desplazamientos.
+
+El algoritmo de alto nivel es:
+1. Lee el texto cifrado
+2. Obtenga un recuento de cada carácter en todo el texto cifrado (ignorar espacios)
+3. Buscar el carácter más común
+4. Encuentre el desplazamiento de "E" a ese carácter más común.
+5. Compruebe que el desplazamiento también funcione para el siguiente más común.
+6. Usando el desplazamiento, decodifica cada carácter del texto cifrado e imprime el resultado.
+
+
+* Entregables
+
+Debes entregar un archivo llamado proy1.py - este es tu código fuente con la
+solución; debe contener el nombre de los participantes, el número del proyecto y
+los comentarios que describen su código.
+
+Por favor asegúrese de usar el nombre de archivo especificado.
+
+
+* Notas de asignación
+1. Lectura del archivo de texto cifrado.
+
+2. La función ord() que genera el valor entero ASCII de un
+   caracter. Por ejemplo, ord('a') devolverá el entero 97. Si crea una lista de
+   conteos (un conteo para cada letra) se puede utilizar ord() para indexar esa
+   lista.
+
+   Por ejemplo, si letter = 'c' puede encontrar su índice usando indice =
+   ord(letter) - ord ('a').  El índice para 'a' será 0, para 'b' será 1, para 'c'
+   será 2, y así sucesivamente. La función inversa a ord() es la función chr().
+
+3. La función ord() también es útil para aplicar el cambio a las letras.
+   Por ejemplo, usando la fórmula de arriba para un cambio de "desplazamiento"
+   comienza con plainTextChar como anumber.
+
+   #+begin_src python
+     cipherTextChar = (plainTextChar + shift)% 26
+
+     plainTextChar = (cipherTextChar + shift)% 26
+   #+end_src
+
+4. La función max(lista) encuentra el valor máximo en una lista.
+   El método List.index(value) devolverá el índice del valor en la Lista.
+
+   Por ejemplo:
+
+   #+begin_src python
+     List = [4, 2, 12, 5]
+     value = max(List)
+     index = List.index(value)
+    #+end_src
+
+   Si List tenía 26 valores, uno para cada letra, puede usar la función ord() para
+   encontrar la letra asociada con un índice en particular.
+
+5. Haga los pasos del Algoritmo por separado:
+
+   Pruebe el paso 1 para leer por separado.
+
+   Una vez que tienes las cosas en una cadena, puedes escribir un pequeño ciclo
+   que cuente las occurrencias de cada carácter.
+
+   Puedes probar la indexación en los contadores usando la función ord().
+
+   Utiliza la función max() para encontrar el carácter con el recuento
+   máximo. Utilice la función ord() y alguna aritmética para calcular el
+   desplazameinto de "E" .
+
+   Utilice el desplazamiento y la fórmula para el cifrado/descifrado para
+   decodificar/codificar cada carácter.
+
+
+* Tabla de Frecuencias
+Letra Porcentaje
+A 12,53
+B 1,42
+C 4,68
+D 5,86
+E 13,68
+F 0,69
+G 1,01
+H 0,70
+I 6,25
+J 0,44
+K 0,01
+L 4,97
+M 3,15
+N 6,71
+O 8,68
+P 2,51
+Q 0,88
+R 6,87
+S 7,98
+T 4,63
+U 3,93
+V 0,90
+W 0,02
+X 0,22
+Y 0,90
+Z 0,52
