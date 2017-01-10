@@ -1,4 +1,14 @@
-#-*- mode: org -*-
+#+title: Funciones
+#+author: Miguel Piña
+#+date: [2017-01-09 lun 20:49]
+#+setupfile: ~/proyectos/org-html-themes/setup/theme-bigblow.setup
+
+* Introducción
+
+En esta sesión veremos:
+
+- Cómo calcular una suma usando ciclos.
+- Argumentos por defecto de una función
 
 * Calculando sumas
 Para calcular la suma en un programa, usamos un ciclo y una variable de acumulación.
@@ -30,7 +40,7 @@ for fruit in ["banana", "apple", "quince"]:
   print "I like to eat " + fruit + "s!"
 #+END_SRC
 
-Una sumatoria \[\sum_{i=1}^n i^2 \] se implementa:
+Una suma [[file:images/funcion1.png]] se implementa:
 
 #+BEGIN_SRC python
 s = 0
@@ -39,7 +49,8 @@ for i in range(1, n+1):
 print s
 #+END_SRC
 
-Es natural hacer el calculo de una suma dentro de una función:
+Es natural hacer el calculo de una suma dentro de una
+función:
 
 #+BEGIN_SRC python
 def suma(x, n):
@@ -49,17 +60,19 @@ def suma(x, n):
   return s
 #+END_SRC
 
-
-
 * Argumentos por defecto
-Algunos argumentos de la función se les puede dar un valor por defecto para que podamos omitrlos en la llamada.
+
+Algunos argumentos de la función se les puede dar un
+valor por defecto para que podamos omitrlos en la
+llamada.
 
 #+BEGIN_SRC python
 def somefunc(arg1, arg2, kwarg1=True, kwarg2=0):
   print arg1, arg2, kwarg1, kwarg2
 #+END_SRC
 
-Los argumentos por defecto deben ser listados despues de los argumentos posicionales.
+Los argumentos por defecto deben ser listados después
+de los argumentos posicionales.
 
 #+BEGIN_SRC python
 somefunc(’Hello’, [1,2])
@@ -79,11 +92,15 @@ somefunc(kwarg2=’Hello’, arg1=’Hi’, kwarg1=6, arg2=[1,2])
 #+END_SRC
 
 ** Ejemplo
-La variable independiente t, es un argumento posicional ordinario, 
 
-y los parámetros A, a, y w son argumentos por defecto con valores adecuados.
+La variable independiente t, es un argumento posicional
+ordinario,
 
-\[ f(t, A, a, w) = Ae^{-at} \sin(wt) \] 
+y los parámetros A, a, y w son argumentos por defecto
+con valores adecuados.
+
+[[file:images/funcion2.png]]
+
 
 #+BEGIN_SRC python
 from math import pi, exp, sin
@@ -97,9 +114,13 @@ f(0.2, omega=1)
 
 
 * Documentación
-Por convención, en Python para se escribe una cadena de documentación después de la definición de la función. 
 
-La cadena de documentación, debe contener una breve descripción del propósito de la función y explicar los argumentos y valores de retorno.
+Por convención, en Python para se escribe una cadena de
+documentación después de la definición de la función.
+
+La cadena de documentación, debe contener una breve
+descripción del propósito de la función y explicar los
+argumentos y valores de retorno.
 
 Las cadenas de documentación se insertan entre *'''*.
 
@@ -111,15 +132,17 @@ def C2F(C):
 
 
 * Funciones como argumentos
-Frecuentemente el cálculo de una función requiere de otra función como argumento.
+
+Frecuentemente el cálculo de una función requiere de
+otra función como argumento.
 
 #+BEGIN_SRC python
 def greet(name):
-   return "Hello " + name 
+   return "Hello " + name
 
 def call_func(func):
     other_name = "John"
-    return func(other_name)  
+    return func(other_name)
 
 print(call_func(greet))
 
@@ -127,12 +150,13 @@ print(call_func(greet))
 #+END_SRC
 
 * Funciones dentro de otras funciones
+
 #+BEGIN_SRC python
 def greet(name):
     def get_message():
         return "Hello "
 
-    result = get_message()+name
+    result = get_message() + name
     return result
 
 print(greet("John"))
@@ -155,10 +179,15 @@ print(compose_greet_func())
 #+END_SRC
 
 * Programa principal
-Para hacer un programa reutilizable es recomendable poner todo el código en funciones y métodos y designar una función como la principal __main__, 
-y hacer la llamada a la función principal cuando __name__ llame a  __main__. 
+Para hacer un programa reutilizable es recomendable
+poner todo el código en funciones y métodos y designar
+una función como la principal __main__, y hacer la
+llamada a la función principal cuando __name__ llame a
+__main__.
 
-El propósito de hacerlo es que el código de la función principal no es llamado cuando el programa se importa como un módulo.
+El propósito de hacerlo es que el código de la función
+principal no es llamado cuando el programa se importa
+como un módulo.
 
 #+BEGIN_SRC python
 def suma(x, y):
@@ -175,25 +204,29 @@ if __name__ == '__main__':
 * Funciones lambda
 Podemos crear funciones anonimas.
 
-Las funciones lambda no tienen enunciado return, siempre regresan una expresion.
+Las funciones lambda no tienen enunciado return,
+siempre regresan una expresion.
+
 #+BEGIN_SRC python
 f = lambda x, y: x**2 + y
 
 # Equivalent to:
 
 def f(x, y):
-return(x**2 + y)
+  return(x**2 + y)
 #+END_SRC
 
-Las funciones lambda se utilizan normalmente para definir de manera rapida una función como argumento de otra función.
+Las funciones lambda se utilizan normalmente para
+definir de manera rapida una función como argumento de
+otra función.
 
 #+BEGIN_SRC python
-def make_incrementor(n): 
+def make_incrementor(n):
    return lambda x: x + n * 2
 
 f = make_incrementor(2)
 g = make_incrementor(6)
- 
+
 print(f(42), g(42))
 # 46 54
 
@@ -203,17 +236,16 @@ print(make_incrementor(22)(33))
 #+END_SRC
 
 * Pruebas de Verificación
-Podemos hacer pruebas de verificación. 
 
-Hacemos una nueva función que calcula en primer lugar una respuesta correcta a un problema de conteo 
+Podemos hacer pruebas de verificación.
 
-y luego llama a las otras funciones para comprobar que cada llamada tiene el resultado correcto.
+Hacemos una nueva función que calcula en primer lugar
+una respuesta correcta a un problema de conteo
 
+y luego llama a las otras funciones para comprobar que
+cada llamada tiene el resultado correcto.
 
 Algunas convenciones para la función de prueba son:
 - Tener un nombre que empieza con test.
 - No tienen argumentos.
 - Mostrar una variable booleana que diga si pasó la prueba o no.
-
-
-
