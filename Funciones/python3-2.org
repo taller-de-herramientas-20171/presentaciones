@@ -249,3 +249,20 @@ Algunas convenciones para la función de prueba son:
 - Tener un nombre que empieza con test.
 - No tienen argumentos.
 - Mostrar una variable booleana que diga si pasó la prueba o no.
+
+#+begin_src python
+def suma_geometrica(n):
+    valor = 0
+    for i in range(1, n + 1):
+        valor += 1 / 2 ** i
+    return valor
+
+def test_suma_geometrica():
+    for i in range(1, 1001):
+        if suma_geometrica(i) > 1:
+            print("El valor fallo en: " + str(i))
+            return False
+    return True
+
+print("Función correcta " + str(test_suma_geometrica()))
+#+end_src
