@@ -21,11 +21,6 @@ lineamientos de entrega.
 
 * Proyectos
 
-- [[file:proyectos/lineamientos.org][Lineamientos de entrega.]]
-- [[file:proyectos/proyecto1.org][Primer proyecto: Agenda]]
-- [[file:proyectos/proyecto2.org][Segundo proyecto: Estadísticas de índice de masa corporal]]
-- [[file:proyectos/proyecto3.org][Tarea 1 y 2: Redacción de un artículo científico.]]
-
 * Presentaciones
 
 - [[file:introduccion/introduccion.org][Introducción a Python]]
