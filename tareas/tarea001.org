@@ -40,12 +40,12 @@ A continuación se muestra una tabla de los triángulos y números cuadrados.
 |    10 |         55 |      100 |
 
 La relación de los números cuadrados debería ser bastante obvia. Es literalmente
-$n^2$. Es decir, para encontrar el n-ésimo número cuadrado, simplemente
-multiplique $n * n$.
+*n^2*. Es decir, para encontrar el n-ésimo número cuadrado, simplemente
+multiplique *n * n*.
 
 Para los números triangulares es un poco menos obvio, pero la fórmula para el
-número n triangular resulta ser $\frac{n^2 + n}{2}$. Así, el quinto número
-triangular es $\frac{5^2 + 5}{2}$ que es 15.
+número n triangular resulta ser (n^2 + n)/2. Así, el quinto número
+triangular es (5^2 + 5)/2 que es 15.
 
 Sorprendentemente, algunos números son números triangulares y cuadrados.
 
