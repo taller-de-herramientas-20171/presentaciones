@@ -1,0 +1,105 @@
+#+title: Tarea 1
+#+author: Miguel Piña
+#+date: [2017-09-26 mar 16:18]
+
+* Descripción
+
+El objetivo es determinar los dos números triangulares que, cuando se suman, dan
+un número cuadrado.
+
+* Trasfondo
+
+Los antiguos griegos estaban fascinados con los números, especialmente
+enteros. Ellos particularmente estaban interesados ​​en la relación entre los
+números y su realización física. Esto es, los números eran muy concretos para
+los griegos, ya que a menudo hablaban y representaban en términos físicos.
+
+Considera la relación entre números y figuras bidimensionales, llamadas
+números poligonales. Los griegos organizaban los números en capas sucesivas,
+llamadas gnomons, para generar un nuevo número relacionado con un polígono
+particular.
+
+Un número poligonal es aquel que puede ser representado como puntos dispuestos
+en forma de polígono regular, empezando por el 1. Los primeros números
+poligonales son los números triangulares, estos se forman a partir de
+triángulos. Los siguientes son los números cuadrangulares y asi sucesivamente.
+
+A continuación se muestra una tabla de los triángulos y números cuadrados.
+
+| Rango | Triangular | Cuadrado |
+|-------+------------+----------|
+|     1 |          1 |        1 |
+|     2 |          3 |        4 |
+|     3 |          6 |        9 |
+|     4 |         10 |       16 |
+|     5 |         15 |       25 |
+|     6 |         21 |       36 |
+|     7 |         28 |       49 |
+|     8 |         36 |       64 |
+|     9 |         45 |       81 |
+|    10 |         55 |      100 |
+
+La relación de los números cuadrados debería ser bastante obvia. Es literalmente
+$n^2$. Es decir, para encontrar el n-ésimo número cuadrado, simplemente
+multiplique $n * n$.
+
+Para los números triangulares es un poco menos obvio, pero la fórmula para el
+número n triangular resulta ser $\frac{n^2 + n}{2}$. Así, el quinto número
+triangular es $\frac{5^2 + 5}{2}$ que es 15.
+
+Sorprendentemente, algunos números son números triangulares y cuadrados.
+
+Una relación particularmente interesante es que cualquier número cuadrado se
+puede escribir como la suma de dos números triangulares.
+
+Ten en cuenta que todos estos son  números enteros. Los griegos estaban
+interesados ​​en números enteros porque así podían trabajar con ellos como si
+representaran objetos físicos reales.
+
+Finalmente, hay muchos tipos de números poligonales. Los siguientes serian los
+números pentagonales(añade un pentágono), números hexagonales, y así
+sucesivamente.
+
+* Especificaciones del Programa
+
+El problema es este: ¿Cuáles son los dos números triangulares que, sumados, dan
+un número cuadrado?
+
+1. Genera de manera aleatoria un número entero.
+2. Si el número generado no es un cuadrado (un número que tiene una raíz
+   cuadrada entera), informe el error y genera otro.
+3. Si el número es un cuadrado, entonces encuentra los dos números triangulares
+   que suman al número cuadrado (recuerda que existe una prueba de que cada
+   número cuadrado es la suma de dos números triangulares).
+4. Imprime los dos números triangulares y el número cuadrado original.
+
+* Entregables
+- poligonales.py :: el código fuente (recuerda incluir nombres, numero de cuenta,
+                    nombre del proyecto y comentarios).
+
+1. Asegúrate de utilizar el nombre de archivo especificado, es decir,
+   "poligonales.py"
+2. Enviar al correo fernanda@ciencias.unam.mx y miguel_pinia@ciencias.unam.mx
+   una copia del archivo.
+3. La fecha de entrega es el *día 9 de octubre del 2017*.
+
+
+* Notas
+Hay dos maneras de averiguar la relación entre la que los números triangulares
+suman a números cuadrados.
+
+1. Busca el patrón. Mira la tabla de números triangulares y cuadrados e intenta
+   encontrar una relación entre los números cuadrados y los números triangulares.
+2. Dibuja una imagen. Los griegos pensaban en estos números como figuras. Dibuja
+   una figura de número cuadrado. ¿Cómo puedes dividir la figura cuadrada en dos
+   figuras triangulares?
+3. Otras cosas en que pensar:
+   a. ¿Cómo puedes averiguar si un número es realmente un número cuadrado? Como
+      dijimos, la raíz cuadrada debe ser un entero. La función raíz cuadrada es
+      parte del módulo de matemáticas Necesitas importarlo y luego usar
+      math.sqrt(). Piensa en cómo determinarías si el resultado de math.sqrt()
+      es realmente un entero. math.sqrt() devuelve siempre un flotante.
+
+   b. ¿Cómo determinas qué cuadrado es un número cuadrado? Es decir, es 64 el
+      cuarto  número cuadrado (no), el 7º número cuadrado (no) o el 8º número
+      cuadrado (sí).
