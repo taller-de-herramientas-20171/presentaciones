@@ -82,7 +82,7 @@ un número cuadrado?
 2. Enviar al correo fernanda@ciencias.unam.mx y miguel_pinia@ciencias.unam.mx
    una copia del archivo.
 3. La fecha de entrega es el *día 9 de octubre del 2017*.
-
+4. La tarea puede ser realizada en parejas.
 
 * Notas
 Hay dos maneras de averiguar la relación entre la que los números triangulares
