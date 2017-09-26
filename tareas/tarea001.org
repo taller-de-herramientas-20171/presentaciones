@@ -94,6 +94,7 @@ suman a números cuadrados.
    una figura de número cuadrado. ¿Cómo puedes dividir la figura cuadrada en dos
    figuras triangulares?
 3. Otras cosas en que pensar:
+
    a. ¿Cómo puedes averiguar si un número es realmente un número cuadrado? Como
       dijimos, la raíz cuadrada debe ser un entero. La función raíz cuadrada es
       parte del módulo de matemáticas Necesitas importarlo y luego usar
