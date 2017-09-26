@@ -49,3 +49,7 @@ lineamientos de entrega.
 - [[file:latex/latex4.org][LaTeX 4]]
 - [[file:extras/emacs.org][Emacs 1]]
 - [[file:extras/emacs-2.org][Emacs 2]]
+
+* Tareas
+
+- [[file:tareas/tarea001.org][Tarea 1]]
