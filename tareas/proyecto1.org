@@ -1,0 +1,59 @@
+#+title: Proyecto 1
+#+author: Miguel Piña
+#+date: [2017-09-17 dom 19:12]
+
+Un amigo tuyo acaba de comprar una computadora nueva. Antes de esta, la más
+poderosa máquina que el había utilizado era una pequeña calculadora. El está un
+poco triste por que le gustaba más el display LCD de su calculadora que la
+pantalla 4K de su nueva computadora. Para hacerlo feliz, escribe que imprima los
+números en el mismo estilo que el display LCD.
+
+* Entrada
+
+Tu programa debe de leer de la consola el tamaño del dígito (s) y el dígito a
+representar (n). El número *n* a desplegar va a estar en el rango 0 y 99,999,999,
+mientras que el tamaño *s* del dígito va a estar entre 0 y 10.
+
+* Salida
+
+Tu programa debe imprimir el número especificado en el tamaño dado usando el
+formato del display LCD, usando el signo '-' para crear los segmentos
+horizontales y el signo '|' para los segmentos verticales. Cada digíto ocupa
+exactamente s + 2 columnas y 2 * s + 3 renglones. Asegurate de llenar con
+espacios en blanco donde no haya símbolos. Debe existir una columna en blanco
+entre dígitos.
+
+** Ejemplo de salida
+
+Tamaño = 2
+Número = 12345
+
+     --  --      --
+   |   |   ||  ||
+   |   |   ||  ||
+     --  --  --  --
+   ||      |   |   |
+   ||      |   |   |
+     --  --      --
+
+Tamaño = 3
+Número = 67890
+
+ ---  ---  ---  ---  ---
+|        ||   ||   ||   |
+|        ||   ||   ||   |
+|        ||   ||   ||   |
+ ---       ---  ---
+|   |    ||   |    ||   |
+|   |    ||   |    ||   |
+|   |    ||   |    ||   |
+ ---       ---       ---
+
+* Entrega
+
+Entregar en un archivo comprimido (zip, tar.gz, rar) el código fuente de su
+programa y un archivo README con su nombre, número de cuenta y la descripción de
+funcionamiento del proyecto. La entrega se hace el día 28 de octubre del 2017
+hasta las 23:59 horas y se envía al correo miguel_pinia@ciencias.unam.mx y
+fernanda@ciencias.unam.mx. El subject debe contener la frase "Taller de
+Herramientas Computacionales".
