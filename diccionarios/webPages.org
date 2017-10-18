@@ -86,8 +86,7 @@ https://www.metoffice.gov.uk/public/weather/climate-historic/#?tab=climateHistor
 Si elegimos Oxford, esto nos redirecciona a una como la
 siguiente:
 
-http://www.metoffice.gov.uk/climate/uk/stationdata/oxforddata.txt
-
+https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/oxforddata.txt
 * Ejemplo: Leyendo archivos de puro texto
 
 Después de 7 lineas, observamos que los datos están
