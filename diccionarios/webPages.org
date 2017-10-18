@@ -66,10 +66,8 @@ con un nombre dado, por ejemplo, webpage.html
 #+begin_src python
 import urllib.request
 
-url = 'http://csb.stanford.edu/class/public/pages/sykes_webdesign/05_simple.html'
+url = 'http://help.websiteos.com/websiteos/example_of_a_simple_html_page.htm'
 urllib.request.urlretrieve(url, filename = "/tmp/foo.html")
-
-urllib.request.
 #+end_src
 
 *Alternativa 2:* Abrir el archivo HTML como un objeto.
@@ -83,7 +81,7 @@ infile = urllib.request.urlopen(url) # Tiene los métodos read, readline y readl
 Vamos a obtener la información histórica del clima UK a
 través de la siguiente URL:
 
-http://www.metoffice.gov.uk/climate/uk/stationdata/
+https://www.metoffice.gov.uk/public/weather/climate-historic/#?tab=climateHistoric
 
 Si elegimos Oxford, esto nos redirecciona a una como la
 siguiente:
