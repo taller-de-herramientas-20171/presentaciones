@@ -28,6 +28,7 @@ entre dígitos.
 Tamaño = 2
 Número = 12345
 
+#+begin_src txt
      --  --      --
    |   |   ||  ||
    |   |   ||  ||
@@ -35,10 +36,13 @@ Número = 12345
    ||      |   |   |
    ||      |   |   |
      --  --      --
+#+end_src
+
 
 Tamaño = 3
 Número = 67890
 
+#+begin_src txt
  ---  ---  ---  ---  ---
 |        ||   ||   ||   |
 |        ||   ||   ||   |
@@ -48,6 +52,9 @@ Número = 67890
 |   |    ||   |    ||   |
 |   |    ||   |    ||   |
  ---       ---       ---
+#+end_src
+
+
 
 * Entrega
 
