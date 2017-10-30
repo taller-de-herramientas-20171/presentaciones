@@ -1,0 +1,232 @@
+#-*- mode: org -*-
+
+* Introducción a Linux
+** Características de UNIX
+- Sistema operativo potente, flexible y versátil.
+- Características: portabilidad, adaptabilidad y simplicidad, naturaleza multiusuario y multitarea.
+- Disponibilidad de código fuente.
+- Implementado casi íntegramente en C (lenguaje de alto nivel).
+
+** GNU/Linux
+- Sistema operativo libre, de código abierto, multitarea y multiusuario, similar a Unix.
+- Código fuente con licencia GPL (General Public License).
+- Portable, disponible para un gran número y variedad de sistemas: supercomputadores, servidores, sobremesas, portátiles, PDAs, móviles,...
+- Escrito por Linus Torvals en la Universidad de Helsinki.
+
+** Diferencias entre Unix y Linux
+- Linux es libre y de código abierto, el Unix original no es (pero algunos de sus derivados son). 
+- Linux es un “clon” del Unix original, pero que no contiene su código. 
+- Linux es sólo el núcleo, mientras que Unix es un sistema operativo completo. 
+- Linux fue desarrollado para ordenadores personales, mientras que Unix fue principalmente para las grandes estaciones de trabajo y servidores.
+
+** GPL (GNU General Public License)
+- El software puede ser copiado y modificado.
+- Las modificaciones deben hacerse públicas bajo GPL.
+- Se impide que el código se mezcle con código propietario.
+
+
+* Historia de Linux
+- Multics: proyecto de Bell Labs (AT&T), General Electrics y el MIT (1969) para el sistema GE 645, demasiado ambicioso para la época (pobre rendimiento).
+- Thompson y Ritchie (Bell) empiezan del desarrollo de un SO para el PDP-7 --> Surge UNIX.
+- En 1970, UNIX se instala en una PDP-11.
+- En 1971 se edita el primer UNIX Programmer's Manual.
+- En 1973 UNIX se reprograma en C.
+- En 1974 UNIX v6 se difunde fuera de los laboratorios Bell y llega a las universidades.
+  - Los investigadores tienen acceso al código fuente del UNIX de AT&T.
+- En 1977 la Universidad de Berkeley licencia UNIX BSD (Berkeley Software Distribution).
+- AT&T limita la distribución del código de UNIX a partir de la v7.
+  - Se dificulta el acceso al código fuente.
+  - System III: primera versión comercial de UNIX (1982).
+- Dos líneas principales: System V y BSD.
+
+** BSD
+1. Aviso de copyright original. 
+2. Dos restricciones simples: 
+ - No hay que afirmar que escribieron el software si no lo escriben.
+ - No demandar al creador si el software no funciona como se esperaba o como se desee.
+3. Exención de responsabilidad. 
+
+
+** Ubuntu 
+- Distribución enfocada a computadoras de escritorio, aunque existe la versión para servidores.
+ - Basada en Debian, Ubuntu concentra su objetivo en la usabilidad, actualizaciones regulares y facilidad en la instalación.
+ - Patrocinado por Canonical Ltd., una empresa privada fundada y financiada por el empresario sudafricano Mark Shuttleworth.
+
+
+* Línea de Comandos
+** El interprete de comandos (shell)
+
+El shell proporciona:
+- Un interprete de comandos.
+- Un entorno de programación.
+
+El shell  permite ejecutar:
+- Comandos externos, por ejemplo: ls, cat, mkdir, etc.
+ - son programas ajenos al shell.
+ - cuando se lanzan inician un nuevo proceso.
+
+- Comandos internos (builtin commands), por ejemplo: cd, bg, alias, eval, exec, pwd, etc.
+ - Se ejecutan en el mismo proceso del shell, sin lanzar un nuevo proceso.
+ - ver el manual del shell para más información.
+
+En bash: para saber si un comando es externo o interno usar el comando interno type:
+
+$ type cd 
+
+cd is a shell built-in 
+
+$ type cat 
+
+cat is /bin/cat
+
+
+El shell nos permite enviar comandos al sistema.
+
+Los comandos usualmente constan de 3 componentes:
+- El nombre del comando (con la ruta absoluta, si no está en el PATH)
+- Lista de opciones, usualmente precedidas por uno o dos guiones (-)
+- Lista de argumentos (o parámetros).
+
+Ejemplo: comando ls (lista ficheros y directorios)
+$ ls (lista los archivos del directorio actual) 
+
+$ ls -l (lista los archivos en formato detallado) 
+
+$ ls -la /tmp (lista todos los archivos del directorio /tmp)
+
+En algunos casos no es necesario usar guión con las opciones, ya que el comando espera por lo menos uno:
+
+$ tar cf miarchivo.tar arch1 arch2 arch3
+
+Pueden indicarse varios argumentos, separados por espacios en blanco
+
+$ echo hola amigo
+
+Comando --> echo
+
+Argumento 1 --> hola
+
+Argumento 2 --> amigo
+
+Varios espacios en blanco se interpretan como uno solo
+
+$ echo hola                        amigo
+
+Para que interprete todos los espacios usar comillas simples o dobles
+
+$ echo 'hola                        amigo'
+
+Comando --> echo
+
+Argumento 1 --> hola                        amigo
+
+
+* Sistema de Archivos 
+Forma de organizar la información.
+
+** Clases de Archivos
+- Regulares: contienen información.
+- Directorios: conjunto de archivos.
+ - Los directorios son tipos particulares de archivos.
+- Archivos especiales: proveen acceso a dispositivos.
+
+La jerarquía de directorios esta organizada como un árbol.
+
+Un directorio especial *root*, raíz de la jerarquía.
+
+Un archivo es una sucesión de bytes, es responsabilidad del programa identificar su estructura interna.
+
+Los archivos cuyo nombre inicia con punto *.* son archivos de configuración.
+
+[[file:Linux_Tree.png ]]
+
+
+* Rutas absolutas y relativas
+
+** Rutas Absolutas
+Cuando se hace referencia a un archivo a partir del directorio raíz.
+
+*/home/fulanito/tareas/Tarea1*
+
+** Rutas Relativas
+Cuando se hace referencia a un archivo a partir del directorio de trabajo.
+
+*../tareas/Tarea1*
+
+*/home/fulanito/tareas/Tarea1  == ~/tareas/Tarea1*
+
+** Comandos útiles
+- man, info, help : información de comandos
+- pwd : print working directory
+- cd [ruta] : change directory
+- ls [parámetros] [archivos] : lista contenido de un directorio
+
+** Actividad
+- Pide una lista breve de archivos que se encuentran en /usr/local
+- Pide una lista extensa de archivos que se encuentran en /bin
+
+
+* Permisos de archivos
+
+Quién puede hacer qué a un archivo.
+
+** Comandos
+- ls -l : muestra los permisos de un archivo
+- chmod : cambia los permisos
+
+** Operaciones
+- r : read
+- w : write
+- x : execute
+
+** A quién
+- u : user
+- g : group
+- o : others
+
+** Operadores
+- + : agrega permisos
+- - : elimina permisos
+- = : habilita exactamente estos permisos
+
+** Construcción de permisos
+rw-rw-rw- (666 en octal) para archivos de datos
+rwxrwxrwx (777 en octal) para archivos ejecutables
+
+
+* Redireccionamiento
+Unix lee la entrada de un comando de la *entrada estándar* y escribe su salida en la *salida estandar* 
+
+** Simbolos útiles
+- | : pipe, entubamiento
+- > : redireccionamiento de la salida
+- < : redireccionamiento de la entrada
+- >> : concatenación de la salida
+
+** Ejemplos
+- ls /bin/bash /kaka
+- ls -l > lista.ficheros 
+ - Crea el fichero lista.ficheros conteniendo la salida de ls -l
+- ls -l /etc >> lista.ficheros 
+ - Añade a lista.ficheros el contenido del directorio /etc
+- cat < lista.ficheros | more 
+ - Muestra el contenido de lista.ficheros página a página (equivale a more lista.ficheros)
+
+  
+* Ejercicios
+- Escribe la ruta absoluta para referirte a todos los archivos que inician
+ con "s" y terminan con ".log" en el directorio 
+"/var/log/"
+- Escribe la ruta relativa para referirte los mismos archivos desde los
+ directorios /,  /usr/share, /facultad/calculo/ayudantia/ y /usr/local/bin
+- Crea un directorio llamado miPractica que contenga dos subdirectorios llamados usuarios y archivo 
+   y que esten en el directorio base.
+- Crea un archivo llamado raizArchivos.dat en el subdirectorio archivos del directorio miPractica 
+    que contenga el listado de los archivos y directorios del directorio. Redirecciona la salida de ls.
+- A todos los directorios que haz creado asignales permisos de lectura y escritura para ti y solo 
+    lectura para los demas.
+- A todos los directorios que haz creado asignales permisos de lectura y escritura para ti y ningun 
+     permiso para los demas.
+- Crea una copia del directorio miPractica y todo su contenido llamale ejercicios.
+- Elimina el directorio miPractica y todo su contenido.
+

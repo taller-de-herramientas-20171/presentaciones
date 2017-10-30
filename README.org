@@ -23,6 +23,7 @@ lineamientos de entrega.
 
 * Presentaciones
 
+- [[file:introduccion/linux.org][Introducción a Linux]]
 - [[file:introduccion/introduccion.org][Introducción a Python]]
 - [[file:git/git.org][Un breve paseo por GIT]]
 - [[file:python/python1.org][Primera sesión de python]]
