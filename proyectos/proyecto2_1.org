@@ -1,0 +1,117 @@
+#-*- mode: org -*-
+
+* Proyecto 2 Herramientas Computacionales
+
+** Fecha de Entrega:
+   24 de noviembre de 2017
+
+** Entregables
+Deberán entregar un archivo ejecutable con extensión .py con el código fuente de su solución. (No olviden incluir 
+sus datos, fecha de entrega, número de proyecto y comentarios).
+Deberán seguir los lineamientos de entrega establecidos.
+ 
+** Estadística en el Indice de Masa Corporal
+Obtener y almacenar de la página
+
+http://ww2.amstat.org/publications/jse/datasets/body.dat.txt
+
+los datos dentro de la tabla.
+
+Para obtener el archivo deben de utilizar la biblioteca urllib.
+
+Dentro de la tabla, solo utilizarán las siguientes columnas:
+- Altura: Columnas 122-126 (dada en metros)
+- Peso: Columnas 116-120 (dada en kg)
+- Género: Columna 128 (1-hombres, 0-mujeres)
+- Edad: Columna 111-114
+- Circunferencia del tobillo: Columna 101-14
+- Circunferencia de la muneca: Columna 106-109
+- Diametro toracico: Columna 11-14
+- Profundidad del pecho: Columna16-19
+- Diametro del pecho: Columna 21-24
+
+Dado un conjunto de datos de 507 individuos y sus atributos físicos (peso, altura, etc.),
+deberán crear dos modelos de regresión lineal y su correlación:
+1) Entre el índice de masa corporal de una persona y su edad.
+2) Entre el peso de una pesona y una combinación de atributos físicos, usando la fórmula:
+    -110 + 1.34(Diametro del pecho) + 1.54(Profundidad del pecho) + 1.20(Diametro toracico) + 1.11(Circunferencia de la muneca) 
+    + 1.15(circunferencia del tobillo) + 0.177(altura)
+
+Además, deberán graficar la relación entre edad y peso de una persona comparando por género.
+
+
+
+** Trasfondo
+El IMC (Indice de Masa Corporal), es una medida basada en el peso y la estatura de una persona.
+Se utiliza como un estimador del peso corporal saludable.
+
+La regresión lineal es una forma de análisis de regresión en el cual, la relación entre una o varias
+variables independientes y otra variable, llamados la variable dependiente, es modelada por una
+función de mínimos cuadrados, llamada una ecuación de regresión lineal. 
+
+Una ecuación de regresión lineal con una variable independiente representa una línea recta 
+cuando el valor predicho (es decir, la variable dependiente a partir de la ecuación de regresión) 
+se traza contra la variable independiente: esto se llama una *regresión lineal simple*. 
+
+Por ejemplo, supongamos que una línea recta ajusta para los puntos (yi, xi), donde i = 1, ..., n;
+*y* se llama la variable dependiente y *x* se llama la variable independiente, y queremos predecir *y*
+a partir de *x*.
+
+
+*** Mínimos cuadrados y Correlación
+El método que vamos a utilizar se llama el método de mínimos cuadrados. 
+Toma una lista de los valores *x* e *y* (el mismo número de cada uno) y calcula la pendiente y la intersección de la línea que mejor se adapte
+esos valores. Ver http://easycalculation.com/statistics/learn-regression.php 
+
+Para calcular la recta de mínimos cuadrados, tenemos que calcular los siguientes valores de los datos:
+- sumX y sumY: la suma de todos los valores de X y la suma de todos los valores de Y
+- sumXY: la suma de todos los productos de cada par (X, Y) correspondientes.
+- sumXSquared y sumYSquared: la suma de los cuadrados de cada valor de X y la suma de
+el cuadrado de cada valor de Y
+- N: el número de pares
+
+El cálculo es entonces:
+- pendiente = (N * sumXY - (sumX * SumY)) / (N * sumXSquared - (sumX)*2)
+- intersección = (sumY - (pendiente * sumX)) / N
+
+También vamos a calcular el coeficiente de correlación, que indica qué tan buena es nuestra aproximación lineal.
+Este cálculo es:
+- corr = (N * sumXY - (sumX * sumY)) /
+           sqrt ((N * sumXSquared - (sumX) 2) * (N * sumYSquared - 2*(sumY) ))
+
+
+El valor de correlación oscila entre -1 y 1. Un valor negativo significa una correlación inversa, un
+valor positivo indica una correlación positiva. 
+Los valores cercanos a -1 o 1 son "buenas" correlaciones, los valores son cercanos a 0 son
+"malas" correlaciones. Ver http://easycalculation.com/statistics/learn-correlation.php
+
+
+** Programa
+- El cálculo del IMC debe hacerse con una función.
+   - El IMC no es un valor que se encuentra en los datos. Tienen que calcularlo usando la fórmula:
+     IMC = peso(en kg) / altura(en metros)^2
+   - Utilicen las unidades correctas cuando calculen el índice de masa corporal
+
+- Calcular la regresión lineal entre el IMC y la edad. La edad serán los valores de x, IMC los valores de y.
+- Imprimir los dos valores para ambas medidas. 
+
+- Calcular la correlación entre los datos del eje (x, y) para dichas medidas. Imprimir la correlación.
+
+- Graficar las entradas individuales utilizando matplotlib para ambas medidas.
+- Graficar las líneas de regresión calculados por los datos. Dentro de la misma gráfica.
+- Graficar la relación peso - edad entre géneros.
+
+
+** Notas y sugerencias:
+- No intenten abordar este proyecto todo a la vez. Completen una función (o parte de una función) y la prueban afuera.
+- Prueben su función de mínimos cuadrados con datos conocidos para asegurarse de que funciona.
+- Prueben las funciones antes de usarlos en el programa. Hagan listas chicas de algunos 
+valores conocidos de x e y, por ejemplo, [1,2,3,4,5] para x e y. La pendiente y la intersección de eso
+debería ser obvia, al igual que la correlación. 
+- Hagan un pequeño archivo de datos con sólo dos o tres entradas y prueben que pueden analizarlo correctamente. 
+Para las gráficas, recuerden:
+  - importar pylab
+  - importar pylab.plot
+  - pylab.show() mostrará la gráfica.
+
+
