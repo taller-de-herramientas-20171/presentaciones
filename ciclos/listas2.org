@@ -24,7 +24,7 @@ for i in range(len(somelist)):
 
 * Ciclos for con índices
 
-*Ejemplo:* usando índices, generar dos arreglos con los
+*Ejemplo:* usando índices, generar dos listas con los
 grados Celsius y los grados Fahrenheit y después con un
 sólo ciclo imprimir la tabla de conversión desde -10
 hasta 40 grados Celsius con intervalos de 2.5
