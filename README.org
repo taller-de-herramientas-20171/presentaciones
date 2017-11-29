@@ -50,6 +50,7 @@ lineamientos de entrega.
 - [[file:latex/latex2.org][LaTeX 2]]
 - [[file:latex/latex3.org][LaTeX 3]]
 - [[file:latex/latex4.org][LaTeX 4]]
+- [[file:latex/latex5.org][Imágenes y figuras en LaTeX]]
 - [[file:extras/emacs.org][Emacs 1]]
 - [[file:extras/emacs-2.org][Emacs 2]]
 
