@@ -1,0 +1,64 @@
+-*- mode: org -*-
+
+* Presentaciones
+Latex utiliza el paquete Beamer para crear presentaciones.
+
+\documentclass{beamer}
+
+El ambiente frame crea una nueva diapositiva.
+El comando frametitle especifica el título.
+
+#+BEGIN_SRC python
+\begin{document}
+  \begin{frame}
+    \frametitle{Primer diapositiva}
+    Contenido aquí
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Segunda diapositiva}
+    \framesubtitle{Subtitulo}
+    Maaas Contenido aquí.
+  \end{frame}
+\end{document}
+#+END_SRC 
+
+Dentro de una diapositiva puedes usar cualquier tipo de ambientes: itemize, equation, etc.
+
+** Temas
+Existen temas ya creados, puedes especificar cual quieres usar (todos tienen nombre de ciudades):
+
+\usetheme{Warsaw}
+
+Algunos temas son:
+- Berkeley
+- Berlin
+- Copenhagen
+- Dresden
+- Frankfurt
+- Hannover
+- Madrid
+- Montpellier
+- PaloAlto
+- Pittsburgh
+- Rochester
+- Singapore
+- CambridgeUS
+
+Los colores de los temas son nombres de animales, generalmente:
+
+\usecolortheme{beaver}
+
+Algunos colores de temas son:
+- default
+- albatross
+- beetle
+- dolphin
+- lily
+- orchid
+- seagull
+- seahorse
+- whale
+- wolverine
+
+Ohhh, puedes personalizarlos tu.
