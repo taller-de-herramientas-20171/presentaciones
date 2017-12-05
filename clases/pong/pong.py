@@ -46,30 +46,14 @@ def texto(texto, posicion_x, posicion_y, color=(255, 255, 255)):
 
 
 class Pala(Sprite):
-    """
-    Clase Pala: hereda atributos directamente de la clase Sprite,
-    que se encuentra en el paquete pygame.sprite. Permite modelar la
-    pala de un jugador (usuario o NPC).
-    """
 
-    def __init__(self, centerx):
-        """
-        Constructor, inicializa los siguientes atributos:
-
-        - Imagen de la pala.
-        - Posición, la cuál es representada a través de un rectangulo
-          invisible.
-        - Velocidad por defecto de la pala.
-
-        El parámetro CENTERX permite determinar la posición inicial de
-        la pala.
-        """
-        Sprite.__init__(self)
-        self.image = cargar_imagen("images/pala.png")
+    def __init__(self, centerx, speed = 1, imagen = "images/pala.png"):
+        super().__init__()
+        self.image = cargar_imagen(imagen)
         self.rect = self.image.get_rect()
         self.rect.centerx = centerx
         self.rect.centery = ALTO / 2
-        self.speed = 1
+        self.speed = speed
 
     def mover(self, time, keys):
         """Determina la posición de la pala en el tiempo TIME siempre y
@@ -87,7 +71,7 @@ class Pala(Sprite):
         realizar su movimiento para contrarrestar el envio del
         oponente. El parámetro TIME cual es la cantidad de pixeles que
         se debe mover."""
-        if ball.speed[0] >= 0 and ball.rect.centerx >= ANCHO / 2:
+        if ball.speed[0] >= 0 and ball.rect.centerx >= 0:
             if self.rect.centery < ball.rect.centery:
                 self.rect.centery += self.speed * time
             if self.rect.centery > ball.rect.centery:
@@ -159,11 +143,13 @@ def game_loop():
     set_caption("Pong <3")
     fondo = cargar_imagen('images/fondo_pong.png')
     bola = Bola()
-    pala = Pala(30)
-    pala_cpu = Pala(ANCHO - 30)
+    pala = Pala(30, imagen = "images/amlo.jpg")
+    pala_cpu = Pala(ANCHO - 30, 0.3, "images/trump.jpg")
     clock = Clock()
     puntos = [0, 0]
-    while True:
+    sonido = Sound('audios/Tetris.ogg')
+    sonido.play()
+    while puntos[0] < 30 and puntos[1] < 30:
         time = clock.tick(60)
         keys = get_pressed()
         for eventos in get():
