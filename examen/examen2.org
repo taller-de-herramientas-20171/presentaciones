@@ -1,0 +1,93 @@
+#-*- mode: org -*-
+
+* Examen2 Herramientas Computacionales - Cifrado César
+
+En criptografía, el cifrado César, también conocido como cifrado por 
+desplazamiento, código de César o desplazamiento de César, 
+es una de las técnicas de codificación más simples y más usadas. 
+
+Es un tipo de cifrado por sustitución en el que una letra en el 
+texto original es reemplazada por otra letra que se encuentra un 
+número fijo de posiciones más adelante en el alfabeto. 
+
+Por ejemplo, con un desplazamiento de 3, 
+la A sería sustituida por la D (situada 3 lugares a la derecha de la A ), 
+la B sería reemplazada por la E, etc.
+
+** Se pide:
+- Una función que dado un texto cifrado encuentre el desplazamiento n del texto.
+- Una funcion que realice el descifrado del texto para un n dado.
+
+Ejemplo para un desplazamiento n=3;
+Texto original: 
+"Todo lo que se preguntaba eran las mismas respuestas que buscamos el 
+resto de nosotros. De dónde vengo, A dónde voy, Cuánto tiempo tengo. 
+Todo lo que pude hacer fue sentarme y ver como moría."
+
+Texto codificado: 
+"wrgr or txh vh suhjxqwded hudq odv plvpdv uhvsxhvwdv txh exvfdprv ho 
+uhvwr gh qrvrwurv. gh góqgh yhqjr, d góqgh yrb, fxáqwr wlhpsr whqjr. 
+wrgr or txh sxgh kdfhu ixh vhqwduph b yhu frpr pruíd."
+
+NOTAS: 
+- Los caracteres especiales (puntos, comas...) no se encriptan
+- Los espacios no se encriptan
+- Vamos a usar solo caracteres en mayuscula, no caracteres especiales 
+ni acentuados.
+- El mapeo da la vuelta de modo que "X" se mapea en "A" y así sucesivamente.
+- Deberás ignorar espacios al contar los desplazamientos.
+
+Para descifrar el mensaje simplemente se invierte el proceso.
+
+
+* Especificaciones del Programa
+Escribir un programa que pueda descifrar un archivo que ha sido
+codificado usando un cifrado de César.
+
+Es necesario encontrar el "desplazamiento" para el cifrado. 
+Una vez que tengas el desplazamiento, 
+entonces conoces la asignación para poder descifrar el mensaje.
+
+
+* Caesar Cipher Cracking
+Cualquier idioma como tiene una distribución de letras conocida para cada letra.
+
+Por ejemplo, la letra "E" es la letra más común en espanol que compone 13% de
+las letras en promedio (ignorando mayusculas). La letra "A" es la siguiente
+(12%), seguida por "O" (8,17%), y así sucesivamente. El orden "E" - "A" - "O" es
+lo que importa, no el porcentaje.
+
+El procedimiento comienza encontrando la letra más común. Puedes suponer que el
+más común es la letra "E". Luego puedes encontrar el "desplazamiento" de la
+letra más común en el texto cifrado a la letra "E" más comúnmente esperada.
+
+Por ejemplo, si la letra más común en el texto cifrado es "H", sabes que el
+desplazamiento de "E" a "H" es 3.  
+Debes comprobar que el desplazameinto para la siguiente letra más 
+común "A", y la tercera letra más común "O" también es 3.
+
+Una vez que conoces el desplazamiento, puedes aplicar el desplazamiento a todas
+las letras en el texto cifrado y obtener el texto original.
+
+El algoritmo de alto nivel es:
+0. Leer y guardar el archivo con la tabla de frecuencias. 
+1. Leer el texto cifrado
+2. Obten un recuento de cada carácter en todo el texto cifrado(ignorar espacios)
+3. Buscar el carácter más común
+4. Encuentre el desplazamiento de "E" a ese carácter más común.
+5. Compruebe que el desplazamiento también funcione para el siguiente más común.
+6. Usando el desplazamiento, decodifica cada carácter del texto cifrado e imprime el resultado.
+
+
+* Entregables
+Debes entregar un archivo llamado examen2.py - este es tu código fuente con la
+solución; debe contener el nombre de los participantes, el número del examen y
+los comentarios que describen su código.
+
+Se entrega en equipos de a lo mas dos personas.
+
+Envien su examen a miguel_pinia@ciencias.unam.mx 
+con subject: Herramientas Computacionales Examen2
+
+
+
