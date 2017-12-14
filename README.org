@@ -20,7 +20,7 @@ herramientas computacionales, así como la descripción de los proyectos y los
 lineamientos de entrega.
 
 * Proyectos
-- [[file:proyectos/proyecto1.org][Proyecto 1]]
+- [[file:tareas/proyecto1.org][Proyecto 1]]
 - [[file:proyectos/proyecto2_1.org][Proyecto 2]]
 
 * Presentaciones
