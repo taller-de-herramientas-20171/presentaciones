@@ -1,0 +1,75 @@
+#+title: Examen final
+#+author: Miguel Piña
+#+date: [2018-01-11 jue 07:16]
+
+
+* Problema
+
+Los problemas en ciencias de la computación son clasificados de acuerdo a cierto
+tipo de problemas (por ejemplo, NP, Sin Solución, Recursivos). En este problema,
+vas a analizar una propiedad de una algoritmo cuya clasificación no es conocida
+para todas sus posibles entradas:
+
+Considere el siguiente algoritmo:
+
+#+begin_src txt
+entrada n
+imprime n
+si n == 1 entonces PARA
+si n es impar entonces n = 3n + 1
+si no n = n / 2
+#+end_src
+
+Dada la entrada 22, la siguiente secuencia de números va a ser impresa.
+
+#+begin_src txt
+22 11 34 17 52 26 13 40 20 10 5 16 8 4 2 1
+#+end_src
+
+Se conjetura que el algoritmo superior va terminar (cuando un 1 es impreso) para
+cualquier entero. Dada la simplicidad de este algoritmo, se desconoce si esta
+conjetura es cierta. Se ha verificado para todos los enteros n tal que 0 < n <
+1,000,000 (y de hecho para varios números mayores que el).
+
+Dada una entrada n, es posible determinar el número de números impresos hasta el
+uno. Para un n determinado se dice que tiene una longitud de ciclo k. En el
+ejemplo anterior, la longitud del ciclo de 22 es 16.
+
+Para cualesquiera dos números i y j, tienes que determinar la longitud de ciclo
+máxima de todos los números entre i y j, incluyéndolos.
+
+* Entrada
+
+La entrada va a consistir de una serie de pares de enteros i y j, con un par por
+linea. Todos los enteros van a ser menores a 10000 y mayores a 0.
+Debe procesar todos los pares de números enteros y para cada par determinar la
+longitud máxima del ciclo sobre todos los enteros entre i y j, incluyendo i y j.
+
+** Ejemplo de entrada
+
+#+begin_src txt
+1 10
+100 200
+201 210
+900 1000
+#+end_src
+
+* Salida
+
+Para cada par de enteros de entrada i y j, debe dar salida a i, j, y la longitud
+máxima del ciclo para dichos enteros entre i y j e incluyendo i y j. Estos tres
+números deben estar separados por al menos un espacio con los tres números en
+una línea y con una línea de salida para cada línea de entrada.
+
+Los enteros i y j deben aparecer en el resultado en el mismo orden en que
+aparecieron en la entrada y debe ser seguido por la longitud máxima del ciclo
+(en la misma línea).
+
+** Ejemplo de salida
+
+#+begin_src txt
+1 10 20
+100 200 125
+201 210 89
+900 1000 174
+#+end_src
