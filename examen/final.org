@@ -18,6 +18,7 @@ imprime n
 si n == 1 entonces PARA
 si n es impar entonces n = 3n + 1
 si no n = n / 2
+regresar al paso 2
 #+end_src
 
 Dada la entrada 22, la siguiente secuencia de números va a ser impresa.
