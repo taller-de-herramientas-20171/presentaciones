@@ -20,8 +20,8 @@ herramientas computacionales, así como la descripción de los proyectos y los
 lineamientos de entrega.
 
 * Proyectos
-- [[file:tareas/proyecto1.org][Proyecto 1]]
-- [[file:proyectos/proyecto2_1.org][Proyecto 2]]
+#- [[file:tareas/proyecto1.org][Proyecto 1]]
+#- [[file:proyectos/proyecto2_1.org][Proyecto 2]]
 
 * Presentaciones
 
@@ -55,6 +55,6 @@ lineamientos de entrega.
 - [[file:extras/emacs.org][Emacs 1]]
 - [[file:extras/emacs-2.org][Emacs 2]]
 
-* Tareas
+#* Tareas
 
-- [[file:tareas/tarea001.org][Tarea 1]]
+#- [[file:tareas/tarea001.org][Tarea 1]]
