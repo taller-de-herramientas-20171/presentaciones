@@ -20,7 +20,7 @@ Las computadoras son quisqillosas con la sintaxis!
 
 #+BEGIN_SRC python
 myvar = 5.2
-prinnt Myvar
+print (myvar)
 #+END_SRC
 
 
@@ -42,19 +42,19 @@ minute/60
 
 #+BEGIN_SRC python
 minute = 59
-print minute/60
+print(minute//60)
 #+END_SRC
 
 Dos tipos de división:
-- Entera (/)
+- Entera (//)
 
-- Flotante (//)
+- Flotante (/)
 
 #+BEGIN_SRC python
-print minute//60
-print float(minute)/60
-print (minute*1.0)/60
-print minute/60.0
+print(minute/60)
+print(float(minute)//60)
+print((minute*1.0)//60)
+print(minute//60.0)
 #+END_SRC
 
 * Precedencia de Operadores
@@ -107,7 +107,7 @@ yc = 0.2
 
 t1 = (v0 - math.sqrt(v0**2 - 2*g*yc))/g
 t2 = (v0 + math.sqrt(v0**2 - 2*g*yc))/g
-print ’At t=%g s and %g s, the height is %g m.’ % (t1, t2, yc) 
+print('At t=%g s and %g s, the height is %g m.' % (t1, t2, yc)) 
 #+END_SRC
 
 
@@ -126,13 +126,13 @@ x = 2*pi
 r1 = sinh(x)
 r2 = 0.5*(exp(x) - exp(-x))
 r3 = 0.5*(e**x - e**(-x))
-print r1, r2, r3
+print(r1, r2, r3)
 #+END_SRC
 
 
 El resultado con 16 decimales:
 #+BEGIN_SRC python
-print ’%.16f %.16f %.16f’ % (r1,r2,r3)
+print ('%.16f %.16f %.16f' % (r1,r2,r3))
 # 267.7448940410164369 267.7448940410164369 267.7448940410163232
 #+END_SRC
 

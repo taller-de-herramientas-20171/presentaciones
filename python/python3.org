@@ -2,7 +2,7 @@
 
 * Tipos
 #+BEGIN_SRC python
-type(’Hello, World!’)
+type('Hello, World!')
 # <type ’str’>
 
 type(17)
@@ -11,7 +11,7 @@ type(17)
 type(3.2)
 # <type ’float’>
 
-type(’3.2’)
+type('3.2')
 # <type ’str’>
 
 c = float(17)
@@ -199,7 +199,7 @@ y.subs(t, roots[1])
 Hay herramientas para expandir y simplificar una expresión:
 
 #+BEGIN_SRC python
-from sympy import simplify, expand
+from sympy import symbols,simplify, expand, sin, cos
 x, y = symbols("x y")
 f = -sin(x)*sin(y) + cos(x)*cos(y)
 
